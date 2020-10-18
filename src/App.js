@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import createStore from './store/store';
+import { loadUser } from './actions/auth';
+import ProtectedRoute from './routing/ProtectedRoute';
+import './scss/_custom.scss';
+import TheHeader from "./containers/TheHeader";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const loading = () => (
+    <div className='animated fadeIn pt-3 text-center'>
+        <div className='sk-spinner sk-spinner-pulse'></div>
     </div>
-  );
-}
+);
+
+const store = createStore;
+
+const Login = React.lazy(() => import('./views/Pages/Login/Login'));
+const HomePage = React.lazy(() => import('./views/Pages/Dashboard'));
+// const Register = React.lazy(() => import('./views/Pages/Register/Register'));
+const DefaultLayout = React.lazy(() => import('./containers/TheLayout'));
+
+const App = () => {
+    useEffect(() => {
+        store.dispatch(loadUser());
+    }, []);
+
+    return (
+        <Provider store={store}>
+            <BrowserRouter>
+                <React.Suspense fallback={loading()}>
+                    <TheHeader />
+                    <Switch>
+                    <Route exact path='/' component={HomePage} />
+                        <Route exact path='/login' component={Login} />
+                        <Route exact path='/homepage' component={HomePage} />
+                        <ProtectedRoute path='/' component={DefaultLayout} />
+                    </Switch>
+                </React.Suspense>
+            </BrowserRouter>
+        </Provider>
+    );
+};
 
 export default App;
