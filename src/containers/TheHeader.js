@@ -2,11 +2,10 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../actions/auth';
-import { Ripple } from "../components";
 
 const NAV_ITEMS = [
     {
-        name: 'Trang chủ',
+        name: 'Home',
         path: '/Homepage',
     },
     {
@@ -14,8 +13,8 @@ const NAV_ITEMS = [
         path: '/MasterData',
     },
     {
-        name: 'Rooms',
-        path: '/Competitors',
+        name: 'Hotels',
+        path: '/hotels',
     },
     {
         name: 'Contact',

@@ -6,6 +6,8 @@ import { loadUser } from './actions/auth';
 import ProtectedRoute from './routing/ProtectedRoute';
 import './scss/_custom.scss';
 import TheHeader from "./containers/TheHeader";
+import "react-datepicker/dist/react-datepicker.css";
+import 'react-slideshow-image/dist/styles.css'
 
 const loading = () => (
     <div className='animated fadeIn pt-3 text-center'>
@@ -16,7 +18,6 @@ const loading = () => (
 const store = createStore;
 
 const Login = React.lazy(() => import('./views/Pages/Login/Login'));
-const HomePage = React.lazy(() => import('./views/Pages/Dashboard'));
 // const Register = React.lazy(() => import('./views/Pages/Register/Register'));
 const DefaultLayout = React.lazy(() => import('./containers/TheLayout'));
 
@@ -29,12 +30,9 @@ const App = () => {
         <Provider store={store}>
             <BrowserRouter>
                 <React.Suspense fallback={loading()}>
-                    <TheHeader />
                     <Switch>
-                    <Route exact path='/' component={HomePage} />
                         <Route exact path='/login' component={Login} />
-                        <Route exact path='/homepage' component={HomePage} />
-                        <ProtectedRoute path='/' component={DefaultLayout} />
+                        <Route path='/' component={DefaultLayout} />
                     </Switch>
                 </React.Suspense>
             </BrowserRouter>

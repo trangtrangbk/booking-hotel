@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import TheHeader from './TheHeader';
 
 import routes from '../routing/routes';
+import TheFooter from "./TheFooter";
 
 const loading = (
     <div className='pt-3 text-center'>
@@ -31,6 +32,8 @@ const TheLayout = () => {
                     })}
                 </Switch>
             </Suspense>
+            <TheFooter />
+
         </>
     );
 };
