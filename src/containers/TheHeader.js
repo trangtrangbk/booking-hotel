@@ -6,7 +6,7 @@ import { logout } from '../actions/auth';
 const NAV_ITEMS = [
     {
         name: 'Home',
-        path: '/Homepage',
+        path: '/homepage',
     },
     {
         name: 'About us',

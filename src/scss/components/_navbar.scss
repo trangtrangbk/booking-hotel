@@ -58,7 +58,7 @@ $blue: lighten(rgb(4, 159, 217), 5%);
       width: 100%;
       height: 44px;
       // background: #aaa;
-      padding-left: 15px;
+      padding-left: 18px;
 
       &.with-add {
         width: calc(100% - 35px);
@@ -66,8 +66,8 @@ $blue: lighten(rgb(4, 159, 217), 5%);
 
       .tab-button {
         position: absolute;
-        // width: 115px;
-        height: 27px;
+        // width: 118px;
+        // he/sight: 27px;
         user-select: none;
 
         &:hover {
@@ -126,7 +126,7 @@ $blue: lighten(rgb(4, 159, 217), 5%);
 
       .text {
         position: absolute;
-        left: 15px;
+        left: 18px;
         top: 12px;
         z-index: 999;
         font-size: 12px;
@@ -210,8 +210,8 @@ $blue: lighten(rgb(4, 159, 217), 5%);
         position: absolute;
         left: calc(100% - 30px);
         top: 12px;
-        width: 15px;
-        height: 15px;
+        width: 18px;
+        height: 18px;
         border-radius: 50%;
         transform: rotateZ(45deg);
 
@@ -280,7 +280,7 @@ $blue: lighten(rgb(4, 159, 217), 5%);
       left: 100px;
       top: 40px;
       z-index: 999;
-      padding: 5px 15px;
+      padding: 5px 18px;
       white-space: nowrap;
       background-color: #fff;
       color: #333;

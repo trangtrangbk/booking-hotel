@@ -58,5 +58,5 @@ input:checked+.slider {
 }
 
 input:checked+.slider:before {
-  @include prefix(transform, translateX(15px));
+  @include prefix(transform, translateX(18px));
 }

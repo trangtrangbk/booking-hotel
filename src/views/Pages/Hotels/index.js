@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListHotels } from "../../../redux/reducers/hotels/actions";
-import { Feather, TextField } from "../../../components";
+import { Feather, Spinner, TextField } from "../../../components";
 import { NavLink } from "react-router-dom";
 
 const Hotels = () => {
@@ -54,34 +54,35 @@ const Hotels = () => {
 
       <div className="section">
         <div className="row">
-          <div className='col-md-12'>
-         <div className='row'>
-         {hotels.map((hotel) => (
-            <div
-              key={hotel._id}
-              className="hotel__item"
-              style={{
-                backgroundImage: `url(${hotel.image[0]})`,
-                backgroundSize: "cover",
-              }}
-            >
-              <div className="hotel__info">
-                <span>{hotel.name}</span>
-                <div className='flex justify-flex-end'>
-                  <Feather name="MapPin" width ='15px'/>
-                  <span className='hotel__city'>{hotel.city}</span>
+          <div className="col-md-12">
+            <div className="row">
+              {hotels.map((hotel) => (
+                <div key={hotel._id} className="hotel__item col-md-3">
+                  <img src={hotel.image[0]} />
+                  <div className="hotel__info">
+                    <h4 className="row md-3">{hotel.name}</h4>
+                    <div className="flex justify-content-between">
+                      <div className="flex justify-flex-start">
+                        <Feather
+                          name="MapPin"
+                          className="mr-10"
+                          width="18px"
+                          color="#ffa37b"
+                        />
+                        <span className="hotel__city mx-auto">{hotel.city}</span>
+                      </div>
+                      <div className="visit_button">
+                        <NavLink to={`/hotels/${hotel._id}`}>Visit</NavLink>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="bg"></div>
-              <div className="book_button">
-                <NavLink to={`/hotels/${hotel._id}`}>Book now</NavLink>
-              </div>
+              ))}
             </div>
-          ))}
-         </div>
           </div>
         </div>
       </div>
+      {sending && <Spinner />}
     </div>
   );
 };
