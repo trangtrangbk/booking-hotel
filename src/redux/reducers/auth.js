@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isAuthenticated: true,
                 loading: false,
-                user: payload
+                user: payload.account
             };
         case LOGIN :
             return {

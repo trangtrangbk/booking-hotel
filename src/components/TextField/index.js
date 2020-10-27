@@ -8,10 +8,12 @@ const TextField = ({
     customClass = '',
     disabled = false,
     onRef,
+    InputProps=null,
     ...props
 }) => {
     return (
-        <input
+       <div className='relative'>
+            <input
             type={type}
             disabled={disabled}
             className={`text textfield ${customClass} ${disabled ? 'textfield--disabled' : ''}`}
@@ -19,6 +21,10 @@ const TextField = ({
             ref = {onRef}
             {...props}
         />
+        {
+            InputProps?.endAdornment
+        }
+       </div>
     );
 };
 

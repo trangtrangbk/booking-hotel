@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../../actions/auth';
 import { Redirect } from 'react-router-dom';
-import { Button, TextField, Spinner } from '../../../components';
+import { Button, TextField, Spinner, GoogleBtn } from '../../../components';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -49,16 +49,19 @@ const Login = () => {
                             }}
                         />
                     </div>
+                    <GoogleBtn/>
+
                     <div className='form-group'>
                         <Button
                             customClass='btn--block btn--primary'
-                            style={{ maxWidth: '200px', margin: 'auto' }}
+                            style={{ margin: '1rem auto', height : "42px" }}
                             htmlType='submit'
                             type='primary'
                             onClick={login}>
                             <strong>Log in</strong>
                         </Button>
                     </div>
+
                 </div>
                 <div className='text-center'>
                     <a href='#' className='forgot-pw'>

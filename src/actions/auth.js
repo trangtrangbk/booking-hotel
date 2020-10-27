@@ -25,17 +25,17 @@ export const loginUser = (email, password) => async dispatch => {
 
 export const loadUser = () => async dispatch => {
     setAuthToken(localStorage.getItem('token'));
-    // try {
-    //     const res = await service.get('/users/me');
-    //     dispatch({
-    //         type: USER_LOADED,
-    //         payload: res.data
-    //     });
-    // } catch (e) {
-    //     dispatch({
-    //         type: AUTH_ERROR
-    //     });
-    // }
+    try {
+        const res = await service.get('/accounts/me');
+        dispatch({
+            type: USER_LOADED,
+            payload: res.data
+        });
+    } catch (e) {
+        dispatch({
+            type: AUTH_ERROR
+        });
+    }
 };
 
 export const logout = () => async dispatch => {
