@@ -3,7 +3,6 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import createStore from "./store/store";
 import { loadUser } from "./actions/auth";
-import ProtectedRoute from "./routing/ProtectedRoute";
 import "./scss/_custom.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-slideshow-image/dist/styles.css";

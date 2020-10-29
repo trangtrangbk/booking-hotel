@@ -55,7 +55,6 @@ const Register = () => {
           <div className="form-group">
             <span style={{ color: "#de1414cf", fontSize: "15px" }}>{msg}</span>
           </div>
-          <GoogleBtn />
           <form onSubmit={signup}>
             <div className="form-group">
               <label>Name</label>
@@ -129,10 +128,12 @@ const Register = () => {
                 required
               />
             </div>
+            <GoogleBtn />
+
             <div className="form-group">
               <Button
                 customClass="btn--block btn--primary"
-                style={{ maxWidth: "200px", margin: "auto" }}
+                style={{ margin: "1rem auto", height: "42px" }}
                 htmlType="submit"
                 type="primary"
               >

@@ -13,7 +13,7 @@
   }
 
   &__content {
-    padding: 2rem 5rem;
+    padding: 1rem 0;
     
     .table-comp{
       max-height: 80vh;
@@ -21,8 +21,9 @@
   }
 
   &__main {
-    max-width: 800px;
     position: fixed;
+    max-height: calc(100vh - 50px);
+    overflow: auto;
     background: white;
     width: 80%;
     border-radius: 7px;

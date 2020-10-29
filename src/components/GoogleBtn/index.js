@@ -52,10 +52,10 @@ const GoogleBtn = () => {
   }
 
   return (
-    <div>
+    <div className="form-group" style={{ marginTop: "3rem" }}>
       <GoogleLogin
         clientId={CLIENT_ID}
-        className= "google_btn"
+        className="google_btn"
         buttonText="Login with google account"
         onSuccess={login}
         onFailure={handleLoginFailure}
@@ -65,5 +65,4 @@ const GoogleBtn = () => {
     </div>
   );
 };
-
 export default GoogleBtn;

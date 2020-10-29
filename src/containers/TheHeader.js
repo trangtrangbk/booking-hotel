@@ -3,7 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
 import {
-    Avatar,
+  Avatar,
   Button,
   ClickAwayListener,
   Grow,
@@ -13,6 +13,7 @@ import {
   Popper,
 } from "@material-ui/core";
 import { getInitialsName } from "../utils/mathUtil";
+import { Feather } from "../components";
 
 const NAV_ITEMS = [
   {
@@ -37,7 +38,7 @@ const TheHeader = () => {
   let history = useHistory();
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
-  const {user} = useSelector(store => store.auth)
+  const { user } = useSelector((store) => store.auth);
   const anchorRef = React.useRef(null);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -70,7 +71,7 @@ const TheHeader = () => {
   const { isAuthenticated } = useSelector((store) => store.auth);
   const handleLogout = () => {
     dispatch(logout());
-    history.push('/login')
+    history.push("/login");
   };
   return (
     <header className="header">
@@ -101,16 +102,16 @@ const TheHeader = () => {
                 aria-haspopup="true"
                 onClick={handleToggle}
               >
-               <Avatar
-                    src={user?.avatar}
-                    style={{
-                      width: '30px',
-                      height: '30px',
-                      marginRight: '10px'
-                    }}
-                  >
-                    {getInitialsName(user?.name)}
-                  </Avatar>
+                <Avatar
+                  src={user?.avatar}
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginRight: "10px",
+                  }}
+                >
+                  {getInitialsName(user?.name)}
+                </Avatar>
               </Button>
               <Popper
                 open={open}
@@ -134,9 +135,17 @@ const TheHeader = () => {
                           id="menu-list-grow"
                           onKeyDown={handleListKeyDown}
                         >
-                          <MenuItem onClick={handleClose}>Profile</MenuItem>
-                          <MenuItem onClick={handleClose}>My Hotels</MenuItem>
-                          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                          <MenuItem onClick={() => {
+                            setOpen(false)
+                            history.push('/dashboard')
+                          }}>
+                            <Feather name="Grid" style={{marginRight: '20px',width :"20px"}}/>
+                            <span>Dashboard</span>
+                          </MenuItem>
+                          <MenuItem onClick={handleLogout}>
+                            <Feather name="LogOut" style={{marginRight: '20px',width :"20px"}}/>
+                            <span>Logout</span>
+                          </MenuItem>
                         </MenuList>
                       </ClickAwayListener>
                     </Paper>
