@@ -17,10 +17,6 @@ import { Feather } from "../components";
 
 const NAV_ITEMS = [
   {
-    name: "Home",
-    path: "/homepage",
-  },
-  {
     name: "About us",
     path: "/MasterData",
   },
@@ -77,7 +73,7 @@ const TheHeader = () => {
     <header className="header">
       <div className="header_content d-flex flex-row align-items-center justify-content-between">
         <div className="logo">
-          <a href="#">The River</a>
+          <NavLink to="/">The River</NavLink>
         </div>
         <div className="ml-auto d-flex flex-row align-items-center justify-content-start">
           <nav className="main_nav">

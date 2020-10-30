@@ -1,6 +1,14 @@
 .setup {
-  background: #ffff;
-
+  .main {
+    max-height: calc(100vh - 200px);
+    overflow: auto;
+  }
+  svg {
+    cursor: pointer;
+    &:hover {
+      color: #FF8939; 
+    }
+  }
   &--hide {
     max-height: 0;
     opacity: 0;
@@ -28,8 +36,7 @@
     .leftbar {
       background-color: #0E3F66;
       display: block;
-      width: 350px;
-      height: 100%;
+      width: 330px;
       z-index: 1;
       min-height: calc(100vh - 210px);
 
@@ -71,8 +78,7 @@
     .main-menu {
       width: calc(100vw - 350px);
       background-color: rgba(224, 231, 255, 0.2);
-      padding: 2rem;
-
+      position: relative;
       &__content {
         animation: LeftToRight 0.25s;
       }

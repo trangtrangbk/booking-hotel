@@ -1,8 +1,188 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import { Feather, SmallCard } from "../../../components";
+import service from "../../../service/service";
+import { useSelector } from "react-redux";
+import AddRoom from "./AddRoom";
+import { CircularProgress } from "@material-ui/core";
+import { mappingStatus } from "../../../utils/statusUtil";
+import ConfirmModal from "../../../components/ConfirmModal";
+import EditRoom from "./EditRoom";
+import RoomDetails from "./RoomDetails";
 
 const Rooms = () => {
+  const [addRoom, setAddRoom] = useState(false);
+  const [editRoom, setEditRoom] = useState(false);
+  const [viewRoom, setViewRoom] = useState(false);
+  const [deleteRoom, setDeleteRoom] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState({});
+  const [hotels, setHotels] = useState([]);
+  const [rooms, setRooms] = useState([]);
+  const { user } = useSelector((store) => store.auth);
+  const [loading, setLoading] = useState(false);
+  const fetchOwnHotels = () => {
+    setLoading(true);
+    service
+      .get("/hotels", { params: { filter: { accountId: user._id } } })
+      .then((res) => {
+        setHotels(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    if (hotels && hotels.length > 0) {
+      setLoading(true);
+      service
+        .get("/rooms", { params: { filter: { hotelId: hotels[0]._id } } })
+        .then((res) => {
+          setRooms(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    } else setLoading(false);
+  }, [hotels]);
+
+  useEffect(() => {
+    if (hotels && hotels.length > 0) {
+      service
+        .get("/rooms", { params: { filter: { hotelId: hotels[0]._id } } })
+        .then((res) => setRooms(res.data))
+        .catch((err) => console.log(err));
+    }
+  }, [hotels]);
+  useEffect(() => {
+    fetchOwnHotels();
+  }, []);
+
+  const onDeleteRoom = () => {
+    console.log(hotels[0]._id);
+    service
+      .delete(`/rooms/${selectedRoom._id}`, {
+        params: { hotelId: hotels[0]._id },
+      })
+      .then((res) => {
+        setDeleteRoom(false);
+        const temp = [...rooms];
+        const index = temp.findIndex((r) => r._id === selectedRoom._id);
+        if (index === -1) return;
+        temp.splice(index, 1);
+        setRooms(temp);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  if(viewRoom) return <RoomDetails room ={selectedRoom} setView = {(v) => setViewRoom(v)}/>
+
   return (
-    <div>Rooms</div>
+    <>
+      {loading ? (
+        <CircularProgress />
+      ) : hotels.length === 0 ? (
+        <div className="row justify-content-center">
+          <span className="text-center" style={{ margin: "auto" }}>
+            Create your hotel first.
+          </span>
+        </div>
+      ) : rooms.length === 0 ? (
+        <div className="row justify-content-center">
+          <span className="text-center" style={{ margin: "auto" }}>
+            Your hotel currently has no rooms. Create one{" "}
+            <span className="hover-text" onClick={() => setAddRoom(true)}>
+              here
+            </span>
+          </span>
+        </div>
+      ) : (
+        <div className="relative" style={{ padding: "1.5rem" }}>
+          <div className="row justify-flex-end">
+            <Feather name="PlusCircle" onClick={() => setAddRoom(true)} />
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <div className="row">
+                {rooms.map((room) => (
+                  <div key={room._id} className="hotel__item col-md-3">
+                    <img src={room.image[0]} />
+                    <div className="bg"></div>
+                    <div className="hotel__info">
+                      <h4 className="row md-3">{room.name}</h4>
+                      <div className="hotel__tag">{room.price}$</div>
+                      <div className="flex justify-content-between">
+                        <SmallCard
+                          background={mappingStatus(room.status).bg}
+                          color={mappingStatus(room.status).color}
+                        >
+                          <span className="status-label">{room.status}</span>
+                        </SmallCard>
+                        <span style={{ fontWeight: "100" }}>
+                          {room.area}m<sup>2</sup>
+                        </span>
+                      </div>
+                      <div className="action-room">
+                        <Feather name="Eye" 
+                        onClick={() => {
+                          setSelectedRoom(room);
+                          setViewRoom(true);
+                        }}
+                        />
+                        <Feather
+                          name="Edit2"
+                          onClick={() => {
+                            setSelectedRoom(room);
+                            setEditRoom(true);
+                          }}
+                        />
+                        <Feather
+                          name="Trash"
+                          onClick={() => {
+                            setSelectedRoom(room);
+                            setDeleteRoom(true);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* filter */}
+
+      <AddRoom
+        hotelId={hotels && hotels[0] && hotels[0]._id}
+        show={addRoom}
+        handleClose={() => setAddRoom(false)}
+        onAddSuccess={(room) => setRooms([...rooms, room])}
+      />
+      <EditRoom
+        hotelId={hotels && hotels[0] && hotels[0]._id}
+        show={editRoom}
+        room={selectedRoom}
+        handleClose={() => setEditRoom(false)}
+        onEditSuccess={(room) => {
+          const temp =[...rooms]
+          const index = temp.findIndex(r => r._id === selectedRoom._id)
+          temp[index] = room
+          setRooms(temp)
+        }}
+      />
+      <ConfirmModal
+        show={deleteRoom}
+        handleClose={() => setDeleteRoom(false)}
+        msg={"This room will be permanently deleted"}
+        onConfirm={onDeleteRoom}
+      />
+    </>
   );
 };
 

@@ -16,6 +16,7 @@ const TextField = ({
             <input
             type={type}
             disabled={disabled}
+            style ={InputProps? {} : {padding : "0.5rem"}}
             className={`text textfield ${customClass} ${disabled ? 'textfield--disabled' : ''}`}
             placeholder={placeholder}
             ref = {onRef}

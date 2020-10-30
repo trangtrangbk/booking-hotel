@@ -124,9 +124,11 @@ video {
 .mt-16 {
   margin-top: 6rem;
 }
+
 .no-padding {
   padding: 0 !important;
 }
+
 .cursor_pointer {
   cursor: pointer;
 }
@@ -1561,15 +1563,6 @@ ul {
   appearance: none;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-}
-
 .booking_input::-webkit-input-placeholder {
   font-size: 18px !important;
   font-weight: 500 !important;
@@ -1804,17 +1797,20 @@ section {
 
 .main {
   min-height: calc(100vh - 300px);
+
   .homepage {
     position: relative;
     min-height: 750px;
     background: #00000091;
     color: #FFFFFF;
+
     .text {
       color: #FFFFFF;
       border: 2px solid #FFFFFF;
       background: #00000030;
       border-radius: 0;
     }
+
     .bg {
       background-image: url('../booking.jpg');
       opacity: 0.75;
@@ -1892,12 +1888,14 @@ section {
       color: #ffffff;
       width: 245px;
       border-radius: 5px;
+
       &:hover {
         box-shadow: 2px 3px 10px -2px #E0E7FF;
       }
+
       &:focus {
         border: 1.5px solid #d0dbff !important;
-    }
+      }
     }
   }
 
@@ -1936,37 +1934,57 @@ section {
 
 .section {
   margin: 3rem auto;
-  max-width: 1500px;;
+  max-width: 1500px;
+  ;
 }
+
 .footer {
   font-size: 18px;
   background-color: #032a40;
   padding: 20px;
+
   &_content {
     .container {
       margin: auto;
     }
   }
+
   .copyright {
     text-align: center;
     margin: 10px 0;
   }
+
   &_title {
     color: #FFFFFF;
   }
 }
 
-.hotel__item{
+.hotel__infor {
+  padding: 2rem;
+
+  svg {
+    margin-right: 1rem;
+    color: #0E3F66;
+  }
+
+  &__item {
+    margin: 0.5rem 2rem;
+  }
+}
+
+.hotel__item {
   overflow: hidden;
   margin: 20px 40px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
   font-weight: 600;
+
   &:hover {
-    .action {
+    .action-room {
       display: inline;
     }
   }
+
   .hotel__tag {
     position: absolute;
     transform: rotate(-45deg);
@@ -1979,22 +1997,27 @@ section {
     line-height: 30px;
     height: 30px;
   }
+
   img {
     width: 100%;
     height: 250px;
   }
+
   &:hover {
     .bg {
       background-color: rgba(0, 0, 0, 0.62);
     }
   }
+
   .bg {
     position: absolute;
     width: 100%;
+    top: 0;
     height: 100%;
     background-color: #ffffff00;
-    z-index: 0;
+    z-index: 1;
   }
+
   .hotel__info {
     bottom: 0;
     width: 100%;
@@ -2010,6 +2033,7 @@ section {
   border: 1px solid #ffa37b;
   border-radius: 4px;
   padding: 0.25rem 1rem;
+
   a {
     color: #ffa37b;
   }
@@ -2025,24 +2049,29 @@ section {
     font-weight: 600;
     width: 100%;
   }
+
   span {
     font-size: 16px;
   }
 }
+
 .booking-form {
   border-radius: 5px;
   box-shadow: 0px 9px 35px rgba(0, 0, 0, 0.09);
   font-size: 18px;
+
   &__head {
     text-align: center;
     color: white;
     background: black;
     padding: 0.75rem;
   }
-  &__main{
+
+  &__main {
     padding: 1rem 1.5rem;
 
   }
+
   .react-datepicker__input-container input {
     width: 100%;
     color: #707070;
@@ -2075,17 +2104,15 @@ section {
     z-index: -1;
     width: calc(100% + var(--border-width) * 2);
     height: calc(100% + var(--border-width) * 2);
-    background: linear-gradient(
-      60deg,
-      hsl(224, 85%, 66%),
-      hsl(269, 85%, 66%),
-      hsl(314, 85%, 66%),
-      hsl(359, 85%, 66%),
-      hsl(44, 85%, 66%),
-      hsl(89, 85%, 66%),
-      hsl(134, 85%, 66%),
-      hsl(179, 85%, 66%)
-    );
+    background: linear-gradient(60deg,
+        hsl(224, 85%, 66%),
+        hsl(269, 85%, 66%),
+        hsl(314, 85%, 66%),
+        hsl(359, 85%, 66%),
+        hsl(44, 85%, 66%),
+        hsl(89, 85%, 66%),
+        hsl(134, 85%, 66%),
+        hsl(179, 85%, 66%));
     background-size: 300% 300%;
     background-position: 0 50%;
     border-radius: calc(2 * var(--border-width));
@@ -2150,7 +2177,7 @@ $price-tag-dot-background: #fff;
     font-size: 1.15em;
     font-weight: 600;
 
-    ~ * {
+    ~* {
       opacity: 0.85;
     }
   }
@@ -2196,31 +2223,145 @@ $price-tag-dot-background: #fff;
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
+
   svg {
     width: 20px;
     height: 20px;
   }
 }
+
 .google_btn {
   width: 100%;
   justify-content: center;
-  height : 42px
+  height: 42px
 }
 
 .action {
+  padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+
+  svg {
+    color: white;
+    cursor: pointer;
+    margin: 0 0.75rem;
+
+    &:hover {
+      color: #ffa37b
+    }
+  }
+}
+
+.action-room {
+  padding: 0.5rem;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  padding: 0.5rem;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   display: none;
 
   svg {
-    color : white;
+    color: white;
     cursor: pointer;
-    margin: 0 1rem;
+    margin: 0 0.75rem;
+
     &:hover {
-      color : #ffa37b
+      color: #ffa37b
     }
   }
+}
+
+.hover-text {
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    color: #ffa37b
+  }
+}
+
+.amenities {
+  height: 100px;
+  justify-content: center;
+
+  &__item {
+    padding: 1rem;
+    margin: 0 2rem;
+    width: 100px;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.MuiCircularProgress-root {
+  position: absolute;
+  left: 50%;
+}
+
+.uploadPictureContainer {
+  width: 25%;
+  margin: 5%;
+  padding: 10px;
+  background: #edf2f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: inherit;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d0dbe4;
+  position: relative;
+
+  .deleteImage {
+    position: absolute;
+    top: -9px;
+    right: -9px;
+    color: #fff;
+    background: #ff4081;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.back-link {
+  cursor: pointer;
+  font-weight: 600;
+  color: #0e3f66;
+  margin-bottom: 1.5rem;
+
+  &:hover {
+    color: #FF8939
+  }
+}
+.react-slideshow-container {
+  max-width: 900px;
+  max-height: 500px;
+  margin: auto;
+  .react-slideshow-wrapper{
+    max-width: 900px;
+    max-height: 500px;
+    margin: auto;
+  }
+}
+.fill {
+  overflow: hidden;
+  width : 900px;
+  height : 500px;
+  background-size: cover;
+  background-position: center;
+}
+
+.big-padding {
+  padding: 2rem 8rem;
 }

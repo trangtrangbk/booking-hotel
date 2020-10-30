@@ -8,9 +8,10 @@ import Ripple from './Ripple';
 import GoogleBtn from './GoogleBtn';
 import Modal from './Modal';
 import Dropdown from './Dropdown';
-
+import SmallCard from './SmallCard'
 export {
     Modal,
+    SmallCard,
     Feather,
     Spinner,
     Button,

@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Feather } from "../../../components";
+
+import { Feather, Spinner } from "../../../components";
 import AddHotel from "./AddHotels";
 import service from "../../../service/service";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import ConfirmModal from "../../../components/ConfirmModal";
+import { mappingAmenity } from "../../../utils/amenities";
+import { CircularProgress } from "@material-ui/core";
 
 const Hotel = () => {
   const [addHotel, setAddHotel] = useState(false);
   const [deleteHotel, setDeleteHotel] = useState(false);
 
   const [hotels, setHotels] = useState([]);
-  const [selectedHotel, setSelectedHotel] = useState(null);
   const { user } = useSelector((store) => store.auth);
   const [loading, setLoading] = useState(false);
   const fetchOwnHotels = () => {
+    setLoading(true);
+    if (!user) return;
     service
       .get("/hotels", { params: { filter: { accountId: user._id } } })
       .then((res) => {
-        console.log(res);
+        setLoading(false);
         setHotels(res.data);
       })
       .catch((err) => {
@@ -30,78 +33,110 @@ const Hotel = () => {
   useEffect(() => {
     fetchOwnHotels();
   }, []);
- const onDeleteHotel = ()=>{
-  service
-  .delete(`/hotels/${selectedHotel._id}`,{hotelId : selectedHotel._id})
-  .then((res) => {
-    console.log(res);
-    const temp = [...hotels];
-    const index = temp.findIndex(h => h._id === selectedHotel._id)
-    temp.splice(index,1)
-    setHotels(temp);
-    setDeleteHotel(false);
-  })
-  .catch((err) => {
-    console.log(err);
-    setLoading(false);
-  });
- }
+
+  const onDeleteHotel = () => {
+    service
+      .delete(`/hotels/${hotels[0]._id}`, { params : {hotelId: hotels[0]._id} })
+      .then((res) => {
+        setHotels([]);
+        setDeleteHotel(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
+
   return (
-    <div>
-      <div className="row justify-flex-end">
-        <Feather
-          name="PlusCircle"
-          color="#FF8939"
-          className="cursor_pointer"
-          onClick={() => setAddHotel(true)}
-        />
-      </div>
-      {/* filter */}
-      <div className="row">
-        {hotels.map((hotel) => (
-          <div key={hotel._id} className="hotel__item col-md-5">
-            <div className="bg"></div>
-            <img src={hotel.image[0]} />
-            <div className="hotel__info">
-              <h4 className="row md-3">{hotel.name}</h4>
-              <div className="flex justify-content-between">
-                <div className="flex justify-flex-start">
-                  <Feather
-                    name="MapPin"
-                    className="mr-10"
-                    width="18px"
-                    color="#ffa37b"
-                  />
-                  <span className="hotel__city mx-auto">{hotel.city}</span>
+    <>
+      {loading ? (
+        <CircularProgress />
+      ) : hotels.length === 0 ? (
+        <div className="row justify-content-center">
+          <span className="text-center" style={{ margin: "auto" }}>
+            Create your own hotel{" "}
+            <span className="hover-text" onClick={() => setAddHotel(true)}>
+              here
+            </span>
+          </span>
+        </div>
+      ) : (
+        <div className="relative">
+          <div className="action">
+            <Feather name="Edit2" />
+            <Feather
+              name="Trash"
+              onClick={() => {
+                setDeleteHotel(true);
+              }}
+            />
+          </div>
+          <div className="main">
+            <div className="homepage">
+              <div
+                className="bg"
+                style={
+                  hotels[0].image
+                    ? { backgroundImage: `url(${hotels[0].image[0]})` }
+                    : {}
+                }
+              ></div>
+
+              {/* welcome  */}
+              <div className="welcome">
+                <h1 className="row">{hotels[0].name}</h1>
+              </div>
+            </div>
+            <div className="row hotel__infor">
+              <div className="row amenities">
+                {hotels[0].amenities.map((amenity, index) => (
+                  <div className="amenities__item" key={index}>
+                    <img src={mappingAmenity(amenity)} alt={amenity}/>
+                  </div>
+                ))}
+              </div>
+              <div className="row hotel__infor__item">
+                <span>{hotels[0].description}</span>
+              </div>
+              <div className="col-6" style={{ padding: "2rem" }}>
+                <div className="row hotel__infor__item">
+                  <Feather name="Mail" />
+                  <span>{hotels[0].email}</span>
                 </div>
-                <div className="visit_button">
-                  <NavLink to={`/hotels/${hotel._id}`}>Visit</NavLink>
+
+                <div className="row hotel__infor__item">
+                  <Feather name="Phone" />
+                  <span>{hotels[0].phone}</span>
+                </div>
+
+                <div className="row hotel__infor__item">
+                  <Feather name="Anchor" />
+                  <span>{hotels[0].address}</span>
+                </div>
+
+                <div className="row hotel__infor__item">
+                  <Feather name="MapPin" />
+                  <span>{hotels[0].city}</span>
                 </div>
               </div>
             </div>
-            <div className="action">
-              <Feather name="Eye"/>
-              <Feather name="Edit2" />
-              <Feather name="Trash" onClick= {()=>{
-                setDeleteHotel(true);
-                setSelectedHotel(hotel)
-              }} />
-            </div>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
+      {/* filter */}
+
       <AddHotel
         show={addHotel}
         handleClose={() => setAddHotel(false)}
         onAddSuccess={(hotel) => setHotels([...hotels, hotel])}
       />
-       <ConfirmModal
+      <ConfirmModal
         show={deleteHotel}
         handleClose={() => setDeleteHotel(false)}
-        msg = {"This hotel will be permanently deleted"}
-        onConfirm = {onDeleteHotel}
+        msg={"This hotel will be permanently deleted"}
+        onConfirm={onDeleteHotel}
       />
-    </div>
+    </>
   );
 };
 

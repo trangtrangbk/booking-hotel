@@ -26,13 +26,13 @@ const menu = [
         children: [
             {
                 id: 3,
-                title: 'Hotels',
+                title: 'Hotel Informations',
                 children: [],
                 component: React.lazy(() => import('../Hotels'))
             },
             {
                 id: 4,
-                title: 'Rooms',
+                title: 'Hotel Rooms',
                 children: [],
                 component: React.lazy(() => import('../Rooms'))
             },
@@ -63,7 +63,7 @@ const Setup = () => {
         <div className='setup'>
             <Header />
             <div className='content'>
-                <div className='leftbar'>
+                <div className='leftbar '>
                     <div>
                         {menu.map(item => (
                             <React.Fragment key={item.id}>
@@ -105,7 +105,7 @@ const Setup = () => {
                     {renderMenu ? (
                         renderMenu.children.length === 0 ? (
                             renderMenu.component ? (
-                                <React.Suspense fallback={'...'}>
+                                <React.Suspense fallback={''}>
                                     <renderMenu.component />
                                 </React.Suspense>
                             ) : null

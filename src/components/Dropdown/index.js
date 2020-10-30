@@ -26,9 +26,9 @@ export default function Dropdown({
   }, [defaultValue]);
   useEffect(() => {
     const filterOptions = (event) => {
-      if (event.keyCode >= 48 && event.keyCode <= 90)
+      if (displayMenu && event.keyCode >= 48 && event.keyCode <= 90)
         setOptions(
-          dd_options.filter((o) =>
+          options.filter((o) =>
             nonAccentVietnamese(o.value.toLocaleLowerCase()).startsWith(
               event.key
             )
@@ -41,7 +41,7 @@ export default function Dropdown({
     return () => {
       window.removeEventListener("keydown", filterOptions);
     };
-  }, []);
+  }, [displayMenu]);
 
   const selectedProps = selected
     ? options.find((opt) => opt.value === selected.value)

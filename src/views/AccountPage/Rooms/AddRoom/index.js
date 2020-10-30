@@ -8,9 +8,9 @@ import {
   Button,
   TextArea,
   TextField,
+  Feather,
   Dropdown,
 } from "../../../../components";
-import { useSelector } from "react-redux";
 import DropdownCheckBox from "../../../../components/DropdownCheckBox";
 
 const amenityList = [
@@ -19,16 +19,16 @@ const amenityList = [
     label: "Wifi",
   },
   {
-    value: "Elevator",
-    label: "Elevator",
+    value: "Hair Dryer",
+    label: "Hair Dryer",
   },
   {
-    value: "Parking",
-    label: "Parking",
+    value: "Air Conditioner",
+    label: "Air Conditioner",
   },
   {
-    value: "Pool",
-    label: "Pool",
+    value: "First Aid Box",
+    label: "First Aid Box",
   },
   {
     value: "Free Meal",
@@ -36,58 +36,65 @@ const amenityList = [
   },
 ];
 
-const AddHotel = ({ show, handleClose, onAddSuccess }) => {
+const statusList = [
+  {
+    value: "Available",
+    label: "Available",
+  },
+  {
+    value: "Booked",
+    label: "Booked",
+  },
+  {
+    value: "Not Ready",
+    label: "Not Ready",
+  },
+];
+const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
   const [picture, setPicture] = useState([]);
-  const [city, setCity] = useState("");
   const [name, set_name] = useState("");
   const [description, set_description] = useState("");
-  const [email, set_email] = useState("");
-  const [phone, set_phone] = useState("");
-  const [address, set_address] = useState("");
+  const [price, set_price] = useState("");
+  const [area, set_area] = useState("");
+  const [status, set_status] = useState("Available");
   const [amenities, set_amenities] = useState([]);
-  const { user } = useSelector((store) => store.auth);
-
+  const [rules, set_rules] = useState(["No smoking"]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setPicture([]);
-    setCity("");
-    set_name("");
-    set_description("");
-    set_email("");
-    set_phone("");
-    set_address("");
-    set_amenities([]);
-    setMsg("");
-  }, [show]);
   const [msg, setMsg] = useState("");
   const onDrop = (pic) => {
     setPicture(pic);
   };
 
-  const handleAddHotel = (e) => {
+  useEffect(() => {
+    set_name("");
+    set_description("");
+    set_price("");
+    set_amenities([]);
+    set_area("");
+    set_rules(["No smoking"]);
+    setPicture([]);
+    set_status("Available");
+    setMsg("");
+  }, [show]);
+  const handleAddRoom = (e) => {
     e.preventDefault();
-
-    if (city === "") {
-      setMsg("Please fill all fields");
-      return;
-    }
     setLoading(true);
     handleFireBaseUpload()
       .then((image) => {
         const params = {
-          accountId: user._id,
+          hotelId,
           image,
+          amenities: amenities,
+          rules: rules.filter((rule) => rule !== ""),
           name,
-          amenities,
-          address,
-          city,
-          email,
-          phone,
           description,
+          price,
+          area,
+          status,
         };
         service
-          .post("/hotels", params)
+          .post("/rooms", params)
           .then((res) => {
             onAddSuccess(res.data);
             handleClose();
@@ -99,11 +106,16 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
         setMsg("Something went wrong when upload image, please try later");
       });
   };
 
   const handleFireBaseUpload = async () => {
+    if (picture.length === 0) {
+      setMsg("Please fill all fields");
+      return;
+    }
     let result = await Promise.all(
       picture.map((el) => {
         return new Promise((resolve, reject) => {
@@ -134,20 +146,21 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
   return (
     <Modal show={show} handleClose={handleClose} maxWidth={1200}>
       <div className="modal__title">
-        Create your hotel by fill the below fields
+        Create hotel room by fill the below fields
       </div>
       <div className="modal__content">
         <div className="row">
           <span style={{ color: "#de1414cf", fontSize: "15px" }}>{msg}</span>
         </div>
-        <form onSubmit={handleAddHotel}>
+        <form onSubmit={handleAddRoom}>
           <div className="row">
             <div className="col-6">
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Name</label>
+                  <label>Room name</label>
                   <TextField
                     onChange={(e) => set_name(e.target.value)}
+                    value={name}
                     type="text"
                     required
                   />
@@ -157,9 +170,9 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
                 <div className="form-group" style={{ width: "100%" }}>
                   <label>Description</label>
                   <TextArea
+                    value={description}
                     onChange={(e) => set_description(e.target.value)}
                     type="text"
-                    required
                   />
                 </div>
               </div>
@@ -176,9 +189,46 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
                   />
                 </div>
               </div>
+              <div className="row">
+                <div className="col-6 no-padding">
+                  <div className="form-group" style={{ width: "100%" }}>
+                    <label>
+                      Area (m<sup>2</sup>)
+                    </label>
+                    <TextField
+                      value={area}
+                      onChange={(e) => set_area(e.target.value)}
+                      type="number"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="col-6" style={{ paddingRight: "0" }}>
+                  <div className="form-group" style={{ width: "100%" }}>
+                    <label>
+                      Price <sup>$/day</sup>
+                    </label>
+                    <TextField
+                      value={price}
+                      onChange={(e) => set_price(e.target.value)}
+                      type="number"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="col-6">
               <div className="row">
+                <div className="form-group" style={{ width: "100%" }}>
+                  <label>Status</label>
+                  <Dropdown
+                    onChange={(e) => set_status(e.value)}
+                    defaultValue={{ value: status, label: status }}
+                    options={statusList}
+                  />
+                </div>
+
                 <div className="form-group" style={{ width: "100%" }}>
                   <label>Amenities</label>
                   <DropdownCheckBox
@@ -197,62 +247,64 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
                     handleChange={(e) => set_amenities(e.map((a) => a.value))}
                   />
                 </div>
-              </div>
-              <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Email</label>
-                  <TextField
-                    onChange={(e) => set_email(e.target.value)}
-                    type="email"
-                    required
-                  />
-                </div>
-
-                <div className="form-group" style={{ width: "100%" }}>
-                  <label>Phone</label>
-                  <TextField
-                    onChange={(e) => set_phone(e.target.value)}
-                    type="text"
-                    required
-                  />
-                </div>
-
-                <div className="row">
-                  <div className="col-6 no-padding">
-                    <div className="form-group" style={{ width: "100%" }}>
-                      <label>Address</label>
-                      <TextField
-                        onChange={(e) => set_address(e.target.value)}
-                        type="text"
-                        required
-                      />
+                  <label className="row justify-content-start">
+                    <span>Room rules</span>
+                    <Feather
+                      name="PlusCircle"
+                      style={{ marginLeft: "20px" }}
+                      onClick={() => {
+                        if (!rules[rules.length - 1]) {
+                          set_rules([...rules, ""]);
+                          return;
+                        }
+                        if (!rules[rules.length - 1]) return;
+                        set_rules([...rules, ""]);
+                      }}
+                    />
+                  </label>
+                  {rules.map((rule, index) => (
+                    <div className="row" key={index}>
+                      <div className="row justify-flex-end">
+                        <Feather
+                          name="X"
+                          style={{
+                            color: "#b3b3b3",
+                            width: "18px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            const temp = [...rules];
+                            temp.splice(index, 1);
+                            set_rules(temp);
+                          }}
+                        />
+                      </div>
+                      <div className="row">
+                        <div className="col-12 no-padding">
+                          <TextField
+                            value={rule}
+                            type="text"
+                            onChange={(e) => {
+                              const temp = [...rules];
+                              temp[index] = e.target.value;
+                              set_rules(temp);
+                            }}
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-6" style={{ paddingRight: "0" }}>
-                    <div className="form-group" style={{ width: "100%" }}>
-                      <label>City</label>
-                      <Dropdown
-                        onChange={(e) => setCity(e.value)}
-                        defaultValue={{ value: city, label: city }}
-                        options={cityList.map((c) => {
-                          return {
-                            value: c,
-                            label: c,
-                          };
-                        })}
-                      />
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
           <div className="row justify-flex-end">
             <Button
+              disabled={loading}
               customClass="btn--block btn--primary"
               style={{ width: "100px" }}
               htmlType="submit"
-              disabled={loading}
               type="primary"
             >
               <strong>Add</strong>
@@ -263,4 +315,4 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
     </Modal>
   );
 };
-export default AddHotel;
+export default AddRoom;

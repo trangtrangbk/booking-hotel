@@ -49,7 +49,7 @@ const TheLayout = () => {
           })}
         </Switch>
       </Suspense>
-      <TheFooter />
+      {/* <TheFooter /> */}
     </>
   );
 };

@@ -5,6 +5,7 @@ import service from "../../../service/service";
 import { Feather, Spinner } from "../../../components";
 import { NavLink } from "react-router-dom";
 import { fetchListRooms } from "../../../redux/reducers/rooms/actions";
+import { mappingAmenity } from "../../../utils/amenities";
 
 const Rooms = (props) => {
   const { rooms, sending } = useSelector((store) => store.rooms);
@@ -41,7 +42,41 @@ const Rooms = (props) => {
           <h1 className="row">{hotel.name}</h1>
         </div>
       </div>
+      <div className="row hotel__infor">
+              <div className='row amenities'>
+                {
+                  hotel.amenities?.map(amenity => 
+                  <div className='amenities__item'><img src ={mappingAmenity(amenity)}/></div>
+                    )
+                }
+              </div>
+              <div style ={{padding: "2rem 8rem"}}>
+              <div className="row hotel__infor__item">
+                <span>{hotel.description}</span>
+              </div>
+              <div className="col-6" style={{ padding: "2rem" }}>
+                               <div className="row hotel__infor__item">
+                  <Feather name="Mail" />
+                  <span>{hotel.email}</span>
+                </div>
 
+                <div className="row hotel__infor__item">
+                  <Feather name="Phone" />
+                  <span>{hotel.phone}</span>
+                </div>
+
+                <div className="row hotel__infor__item">
+                  <Feather name="Anchor" />
+                  <span>{hotel.address}</span>
+                </div>
+
+                <div className="row hotel__infor__item">
+                  <Feather name="MapPin" />
+                  <span>{hotel.city}</span>
+                </div>
+              </div>
+              </div>
+            </div>
       <div className="section">
         <div className="row">
           <div className="col-md-12">
