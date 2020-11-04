@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Slide } from "react-slideshow-image";
 import DatePicker from "react-datepicker";
+import moment from "moment";
 
 import service from "../../../service/service";
-import { Spinner, TextField } from "../../../components";
+import { Spinner, TextArea, TextField } from "../../../components";
 import { diffDays } from "../../../utils/dateUtil";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setReservation } from "../../../redux/reducers/reservations/actions";
 import { useHistory } from "react-router-dom";
 import { mappingAmenity } from "../../../utils/amenities";
-import Pin from "../../../assets/icons/pin.svg"
+import Pin from "../../../assets/icons/pin.svg";
+import { randomString } from "../../../utils/mathUtil";
+
 const Room = (props) => {
   let history = useHistory();
   const dispatch = useDispatch();
@@ -23,11 +26,21 @@ const Room = (props) => {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [adult, setAdult] = useState(0);
+  const [children, setChildren] = useState(0);
+  const { user } = useSelector((store) => store.auth);
+  const [note, setNote] = useState("");
   useEffect(() => {
     fetchHotel();
     fetchRoom();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+    }
+  }, [user]);
   const fetchHotel = () => {
     setLoading(true);
     service
@@ -65,11 +78,18 @@ const Room = (props) => {
           email,
           phone,
         },
-        checkIn: startDate,
-        checkOut: endDate,
+        code: randomString(15),
+        checkIn: moment(startDate).format("DD/MM/YYYY"),
+        checkOut: moment(endDate).format("DD/MM/YYYY"),
         cost: room.price * diffDays(startDate, endDate),
-        hotelId: hotelId,
-        roomId: roomId,
+        hotel: hotel,
+        room: room,
+        note : note || "No Note",
+        diffDays: diffDays(startDate, endDate),
+        guests: {
+          adult,
+          children,
+        },
       })
     );
     history.push("/reservation");
@@ -95,7 +115,7 @@ const Room = (props) => {
         <div className="row">
           <div className="col-md-12">
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-7">
                 <h4 className="bottom-line mb-5" style={{ padding: "10px 0" }}>
                   <span className="mr-20">{room.name}</span>
                   <span className="price-tag">
@@ -106,7 +126,7 @@ const Room = (props) => {
                   <Slide easing="ease" pauseOnHover={true} duration={3000}>
                     {room.image.map((img) => (
                       <div
-                        class="fill"
+                        className="fill"
                         key={img}
                         style={{ backgroundImage: `url(${img})` }}
                       ></div>
@@ -136,23 +156,23 @@ const Room = (props) => {
                   </div>
                   <div className="col-md-6 no-padding">
                     <label>House Rules</label>
-                      {room.rules &&
-                        room.rules.map((rule, index) => (
-                          <div className="row">
+                    {room.rules &&
+                      room.rules.map((rule, index) => (
+                        <div className="row" key={index}>
                           <img
-                              src={Pin}
-                              width="20px"
-                              height="20px"
-                              style={{ marginRight: "1rem" }}
-                            />
-                            <span key={index}>{rule}</span>
-                          </div>
-                        ))}
+                            src={Pin}
+                            width="20px"
+                            height="20px"
+                            style={{ marginRight: "1rem" }}
+                          />
+                          <span key={index}>{rule}</span>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <form className="booking-form" onSubmit={handleSubmit}>
                   <div className="booking-form__head">Make a reservation</div>
                   <div className="booking-form__main">
@@ -200,6 +220,35 @@ const Room = (props) => {
                         />
                       </div>
                     </div>
+                    <div className="row">
+                      <div className="col-6" style={{ paddingLeft: "0" }}>
+                        <label className="row">Adult</label>
+                        <TextField
+                          type="number"
+                          defaultValue={adult}
+                          onChange={(e) => setAdult(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="col-6 no-padding">
+                        <label className="row">Children</label>
+                        <TextField
+                          type="number"
+                          defaultValue={children}
+                          onChange={(e) => setChildren(e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <label className="row">Note</label>
+                      <TextArea
+                        defaultValue={note}
+                        onChange={(e) => setNote(e.target.value)}
+                      />
+                    </div>
+
                     <div className="row mt-3">
                       <label className="row">Cost</label>
                       <div className="row justify-content-between">
@@ -219,7 +268,10 @@ const Room = (props) => {
                     </div>
 
                     <div className="row justify-flex-end">
-                      <button className="book_button" type="submit">
+                      <button
+                        className="book_button cursor_pointer"
+                        type="submit"
+                      >
                         Book now
                       </button>
                     </div>

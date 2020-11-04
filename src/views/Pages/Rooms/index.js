@@ -46,7 +46,7 @@ const Rooms = (props) => {
               <div className='row amenities'>
                 {
                   hotel.amenities?.map(amenity => 
-                  <div className='amenities__item'><img src ={mappingAmenity(amenity)}/></div>
+                  <div className='amenities__item' key={amenity}><img src ={mappingAmenity(amenity)}/></div>
                     )
                 }
               </div>

@@ -28,7 +28,7 @@ const RoomDetails = ({ room, setView = () => {}, ...props }) => {
               <Slide easing="ease" pauseOnHover={true} duration={3000}>
                 {room.image.map((img) => (
                   <div
-                    class="fill"
+                    className="fill"
                     key={img}
                     style={{ backgroundImage: `url(${img})` }}
                   ></div>
@@ -62,7 +62,7 @@ const RoomDetails = ({ room, setView = () => {}, ...props }) => {
               <div className="row">
                 {room.rules &&
                   room.rules.map((rule, index) => (
-                    <div className="col-md-6">
+                    <div className="col-md-6" key ={index}>
                       <img
                         src={Pin}
                         width="20px"

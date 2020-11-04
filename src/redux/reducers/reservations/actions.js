@@ -1,6 +1,7 @@
 import * as types from "./types";
 
 const setReservation = (reservation = {}) => async (dispatch) => {
+  console.log(reservation);
   try {
     dispatch({ type: types.SET_RESERVATION, payload: reservation });
   } catch (error) {

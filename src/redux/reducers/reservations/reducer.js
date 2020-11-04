@@ -1,7 +1,7 @@
 import * as types from "./types";
 
 const initialState = {
-  reservation: {},
+  reservation: null,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -13,7 +13,7 @@ export const reducer = (state = initialState, action) => {
       };
     case types.RESET_RESERVATION:
       return {
-        ...state,
+        reservation : null
       };
     default:
       return state;

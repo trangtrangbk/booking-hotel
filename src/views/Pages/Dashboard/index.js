@@ -24,7 +24,7 @@ const Dashboard = () => {
 
         {/* welcome  */}
         <div className="welcome">
-          <h1 className="row">A luxury stay</h1>
+          <h1 className="row">Find The Best Hotel</h1>
           <div className="row booking-form">
             <div className="welcome__block">
               <label className="row">Check In</label>

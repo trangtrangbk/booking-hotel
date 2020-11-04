@@ -375,6 +375,11 @@ video {
   justify-content: center !important;
 }
 
+.justify-space-around {
+  @include prefix(pack, space-around !important);
+  justify-content: space-around !important;
+}
+
 .align-items-center {
   -webkit-box-align: center !important;
   -ms-flex-align: center !important;
@@ -2072,12 +2077,15 @@ section {
 
   }
 
-  .react-datepicker__input-container input {
-    width: 100%;
-    color: #707070;
-    background: #F9FAFF;
-    border: 1px solid #E0E7FF;
-    font-size: 16px;
+  .react-datepicker__input-container {
+    input {
+      width: 100%;
+      color: #707070;
+      background: #F9FAFF;
+      border: 1px solid #E0E7FF;
+      font-size: 16px;
+    }
+    margin-bottom: 10px;
   }
 
   .book_button {
@@ -2364,4 +2372,74 @@ $price-tag-dot-background: #fff;
 
 .big-padding {
   padding: 2rem 8rem;
+}
+
+.reservation {
+  max-width: 1300px;
+  margin: 50px auto 10px auto;
+  box-shadow: 0px 9px 35px rgba(0, 0, 0, 0.09);
+  padding: 30px;
+  &__hotel-name {
+    font-weight: 600;
+    color: #0f4673;
+    font-size: 25px;
+    line-height: 25px;
+    padding-bottom: 20px;
+  }
+  label {
+    color: black;
+    font-weight: 600;
+  }
+  &__code {
+    color: #00b4b7;
+    font-weight: 600;
+  }
+}
+
+._2pGos{
+  color : black;
+  background-color: #e0e7ff;
+}
+._hsN1w {
+  background-color: #ffa37b;
+  border: 1px solid #ff8939;
+  color: white;
+  &:hover {
+    background-color: #ffa37b !important;
+    border: 1px solid #ff8939 !important;
+  }
+}
+._3uApM {
+  padding: 0 50px;
+}
+.payment {
+  max-width: 500px;
+  margin: 50px auto;
+}
+._3uApM {
+  display: none !important;
+}
+.circle , .tick {
+  stroke: #00b717 !important;
+}
+.complete_reservation {
+  margin: 50px auto;
+  max-width: 1300px;
+}
+
+.hotel-reservation {
+  padding: 2rem
+}
+
+.MuiTypography-body2 {
+  font-size: 16px !important;
+}
+.MuiTablePagination-root {
+  font-size: 16px !important;
+}
+.search-form {
+  .relative {
+    max-width: 350px;
+    margin-bottom: 1rem;
+  }
 }

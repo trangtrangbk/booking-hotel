@@ -48,7 +48,7 @@ const GoogleBtn = () => {
     alert("Failed to log in");
   };
   if (isAuthenticated) {
-    return <Redirect to="/Homepage" />;
+    return <Redirect to="/" />;
   }
 
   return (

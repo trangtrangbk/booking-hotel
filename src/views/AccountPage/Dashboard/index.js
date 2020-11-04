@@ -26,13 +26,13 @@ const menu = [
         children: [
             {
                 id: 3,
-                title: 'Hotel Informations',
+                title: 'Informations',
                 children: [],
                 component: React.lazy(() => import('../Hotels'))
             },
             {
                 id: 4,
-                title: 'Hotel Rooms',
+                title: 'Rooms',
                 children: [],
                 component: React.lazy(() => import('../Rooms'))
             },
@@ -43,6 +43,13 @@ const menu = [
                 component: React.lazy(() => import('../Reservations'))
             }
         ]
+    },
+    {
+        id: 7,
+        title: 'My Reservations',
+        icon: 'Calendar',
+        children: [],
+        component: React.lazy(() => import('../MyReservations'))
     },
     {
         id: 6,

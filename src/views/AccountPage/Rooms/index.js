@@ -47,15 +47,7 @@ const Rooms = () => {
         });
     } else setLoading(false);
   }, [hotels]);
-
-  useEffect(() => {
-    if (hotels && hotels.length > 0) {
-      service
-        .get("/rooms", { params: { filter: { hotelId: hotels[0]._id } } })
-        .then((res) => setRooms(res.data))
-        .catch((err) => console.log(err));
-    }
-  }, [hotels]);
+  
   useEffect(() => {
     fetchOwnHotels();
   }, []);

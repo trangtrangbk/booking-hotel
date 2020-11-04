@@ -16,7 +16,7 @@ const Login = () => {
   }
 
   if (isAuthenticated) {
-    return <Redirect to="/Homepage" />;
+    return <Redirect to="/" />;
   }
 
   return (

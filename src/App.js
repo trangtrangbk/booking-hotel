@@ -6,6 +6,7 @@ import { loadUser } from "./actions/auth";
 import "./scss/_custom.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-slideshow-image/dist/styles.css";
+import 'react-step-progress/dist/index.css';
 
 const loading = () => (
   <div className="animated fadeIn pt-3 text-center">
