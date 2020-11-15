@@ -493,7 +493,8 @@ const Reservations = () => {
           />
         </div>
         <div className="col-12">
-          <FilterTable tableData={content} />
+          <FilterTable tableData={content} head={["Code","Room", "Email", "Check in", "Check out","Total days",
+        "Status", "Created At"]}/>
         </div>
       </div>
       <div className="row justify-flex-end">

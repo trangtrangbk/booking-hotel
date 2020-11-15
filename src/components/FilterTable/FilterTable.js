@@ -22,14 +22,11 @@ class FilterTable extends React.Component {
             id="personal-pto-request-table">
             <thead>
               <tr>
-                <th className="text-center">Code</th>
-                <th className="text-center">Room</th>
-                <th className="text-center">Email</th>
-                <th className="text-center">Check In</th>
-                <th className="text-center">Check Out</th>
-                <th className="text-center">Total days</th>
-                <th className="text-center">Status</th>
-                <th className="text-center">Create At</th>
+                {
+                  this.props.head.map((head,index) => 
+                <th key = {index} className="text-center">{head}</th>
+                    )
+                }              
               </tr>
             </thead>
             <tbody>{content}</tbody>

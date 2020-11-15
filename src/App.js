@@ -6,7 +6,14 @@ import { loadUser } from "./actions/auth";
 import "./scss/_custom.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-slideshow-image/dist/styles.css";
-import 'react-step-progress/dist/index.css';
+import "react-step-progress/dist/index.css";
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+
+import socketIOClient from "socket.io-client";
 
 const loading = () => (
   <div className="animated fadeIn pt-3 text-center">
@@ -24,9 +31,22 @@ const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
+  const socket = socketIOClient("localhost:3006");
+
+  socket.on("push-notif", (message) => {
+    console.log(message);
+    NotificationManager.info(message.message,message.title,1000);
+  });
 
   return (
     <Provider store={store}>
+      <NotificationContainer />
+      <label onClick = {() => socket.emit("push-notif", {
+          title : "You have a new reservation",
+          type : "new",
+          message : "A new reservation have been create. Please check and confirm/ cancel it.",
+          link : "http://localhost:3000/dashboard",
+        })}>aaaaaaa</label>
       <BrowserRouter>
         <React.Suspense fallback={loading()}>
           <Switch>

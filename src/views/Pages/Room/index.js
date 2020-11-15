@@ -78,6 +78,7 @@ const Room = (props) => {
           email,
           phone,
         },
+        customerId : user?._id,
         code: randomString(15),
         checkIn: moment(startDate).format("DD/MM/YYYY"),
         checkOut: moment(endDate).format("DD/MM/YYYY"),

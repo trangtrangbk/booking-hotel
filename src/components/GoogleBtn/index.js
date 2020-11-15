@@ -28,6 +28,7 @@ const GoogleBtn = () => {
               email: profile.email,
               avatar: profile.imageUrl,
               password: profile.googleId,
+              linked : true
             })
             .then((res) => {
               console.log(res);

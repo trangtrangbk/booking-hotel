@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ImageUploader from "react-images-upload";
-import { cityList } from "../../../../utils/cityUtil";
 import { storage } from "../../../../firebase/firebase";
 import service from "../../../../service/service";
 import {
