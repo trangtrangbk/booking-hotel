@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextArea, Modal, Button } from "../../../../components";
 
-const ReasonModal = ({ show, handleClose, onConfirm }) => {
+const ReasonModal = ({updating, show, handleClose, onConfirm }) => {
   const [reason, set_reason] = useState("");
   return (
     <Modal show={show} handleClose={handleClose} maxWidth={500}>
@@ -24,6 +24,7 @@ const ReasonModal = ({ show, handleClose, onConfirm }) => {
           <Button
             customClass="btn--block btn--primary"
             style={{ width: "150px" }}
+            disabled={updating}
             type="primary"
             onClick={() => onConfirm(reason)}
           >

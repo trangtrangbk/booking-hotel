@@ -12,6 +12,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import socketIOClient from "socket.io-client";
 

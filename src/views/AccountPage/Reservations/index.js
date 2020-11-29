@@ -175,7 +175,7 @@ const Reservations = () => {
   }, [tableData, searchText]);
 
   const filter1 = [
-    { value: "waiting", label: "waiting" },
+    { value: "waiting", label: "Waiting" },
     { value: "confirmed", label: "Confirmed" },
     { value: "canceled", label: "Canceled" },
   ];

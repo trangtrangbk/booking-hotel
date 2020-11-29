@@ -42,10 +42,6 @@ const statusList = [
     label: "Available",
   },
   {
-    value: "Booked",
-    label: "Booked",
-  },
-  {
     value: "Not Ready",
     label: "Not Ready",
   },

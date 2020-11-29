@@ -71,7 +71,7 @@ const Rooms = () => {
       });
   };
 
-  if(viewRoom) return <RoomDetails room ={selectedRoom} setView = {(v) => setViewRoom(v)}/>
+  if(viewRoom) return <RoomDetails room ={selectedRoom} hotels={hotels} setView = {(v) => setViewRoom(v)}/>
 
   return (
     <>

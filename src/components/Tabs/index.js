@@ -59,7 +59,6 @@ const TabComponent = ({ tabsFormat = content => content,vertical=false, ...props
                             <Ripple color={'#ff89397a'} duration={750} />
                         </Tab>
                     ))}
-                    <div className='tab__highlight'></div>
                 </TabList>
                 {tabsFormat(panel)}
             </Tabs>

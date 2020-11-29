@@ -16,4 +16,13 @@ const resetReservation = () => async (dispatch) => {
     console.log(error);
   }
 };
-export { setReservation, resetReservation };
+
+const setModal = (modal) => async (dispatch) => {
+  try {
+    dispatch({ type: types.SET_MODAL, payload : modal });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { setReservation, resetReservation, setModal };

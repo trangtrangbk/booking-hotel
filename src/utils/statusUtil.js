@@ -6,10 +6,6 @@ export const mappingStatus = (status) => {
       color = "#0b8a2f";
       bg = "#baf7c6";
       break;
-    case "Booked":
-      color = "#e9701e";
-      bg = "#f7c09b";
-      break;
     case "Not Ready":
       color = "#47637a";
       bg = "#ccc";

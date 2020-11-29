@@ -2478,3 +2478,11 @@ $price-tag-dot-background: #fff;
     width: 50%;
   }
 }
+
+// calendar 
+.rbc-calendar {
+  width: 100%;
+}
+.rbc-month-row {
+  flex-basis: 80px !important;
+}

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 export const useOnClickOutside = (ref, handler) => {
     useEffect(() => {
+        console.log(ref.current)
         const listener = event => {
             if (event?.target?.parentNode?.attributes?.nottoggle) return;
             if (!ref.current || ref.current.contains(event.target)) {
