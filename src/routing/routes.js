@@ -5,6 +5,8 @@ const Hotels = React.lazy(() => import("../views/Pages/Hotels"));
 const Rooms = React.lazy(() => import("../views/Pages/Rooms"));
 const Room = React.lazy(() => import("../views/Pages/Room"));
 const Reservation = React.lazy(() => import("../views/Pages/Reservation"));
+const Rating = React.lazy(() => import("../views/Pages/Rating"));
+
 const routes = [
   {
     id: 4,
@@ -41,6 +43,13 @@ const routes = [
     name: "Homepage",
     component: Reservation,
   },
+  {
+    id: 6,
+    exact: true,
+    path: "/rating/:hotelId/:code",
+    name: "Rating",
+    component: Rating,
+  }
 ];
 
 export default routes;

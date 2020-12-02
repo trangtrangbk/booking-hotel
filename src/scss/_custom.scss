@@ -2293,7 +2293,7 @@ $price-tag-dot-background: #fff;
 }
 
 .amenities {
-  height: 100px;
+  min-height: 100px;
   justify-content: center;
 
   &__item {
@@ -2444,7 +2444,7 @@ $price-tag-dot-background: #fff;
   }
 }
 .notification-container {
-  width: 450px;
+  width: 370px !important;
   .notification {
     opacity: 1;
     .title {
@@ -2485,4 +2485,16 @@ $price-tag-dot-background: #fff;
 }
 .rbc-month-row {
   flex-basis: 80px !important;
+}
+.rbc-toolbar .rbc-toolbar-label {
+  order: -1
+}
+.rbc-btn-group{
+  order :0
+}
+.rbc-block {
+  pointer-events: none;
+}
+.rbc-event {
+  border-radius: none;
 }

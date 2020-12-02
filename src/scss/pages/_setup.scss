@@ -1,7 +1,7 @@
 .setup {
   .main {
-    max-height: calc(100vh - 200px);
-    overflow: auto;
+    // max-height: calc(100vh - 200px);
+    // overflow: auto;
   }
   svg {
     cursor: pointer;
@@ -34,11 +34,12 @@
     display: flex;
 
     .leftbar {
+      position: fixed;
       background-color: #0E3F66;
       display: block;
       width: 330px;
       z-index: 1;
-      min-height: calc(100vh - 210px);
+      min-height: 100vh;
 
       .menu__block {
         cursor: pointer;
@@ -76,7 +77,8 @@
     }
 
     .main-menu {
-      width: calc(100vw - 350px);
+      width: calc(100vw - 337px);
+      left: 330px;
       background-color: rgba(224, 231, 255, 0.2);
       position: relative;
       &__content {

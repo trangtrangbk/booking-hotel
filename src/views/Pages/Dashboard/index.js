@@ -95,17 +95,15 @@ const Dashboard = () => {
                     </div>
                     <div>
                       <StarRatings
-                        rating={hotel.rate}
-                        starRatedColor="blue"
-                        starDimension="25px"
-                        starSpacing ='5px'
-                        // changeRating={this.changeRating}
+                        rating={hotel.rate || 0}
+                        starRatedColor="#ff8939"
+                        starDimension="22px"
+                        starSpacing ='3px'
                         numberOfStars={5}
                         name="rating"
                       />
                     </div>
                     <span>{hotel.description}</span>
-                    
                   </div>
                 </div>
               ))}

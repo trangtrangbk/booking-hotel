@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../../../scss/pages/_setup.scss';
-import Header from './Header';
 import styled from 'styled-components';
 import { Ripple, Feather } from '../../../components';
 
@@ -68,7 +67,6 @@ const Setup = () => {
     const renderSubmenu = renderMenu.children.find(child => child.id === selectedSub);
     return (
         <div className='setup'>
-            <Header />
             <div className='content'>
                 <div className='leftbar '>
                     <div>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import service from "../../../service/service";
 import { Feather, Spinner } from "../../../components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { fetchListRooms } from "../../../redux/reducers/rooms/actions";
 import { mappingAmenity } from "../../../utils/amenities";
 
@@ -12,10 +12,12 @@ const Rooms = (props) => {
   const [hotel, setHotel] = useState({});
   const { hotelId } = props.match.params;
   const dispatch = useDispatch();
-
+  const history = useHistory();
+  const [reviews, set_reviews] = useState([])
   useEffect(() => {
     fetchHotel();
     dispatch(fetchListRooms({ filter: { hotelId } }));
+    fetchReviews();
   }, []);
 
   const fetchHotel = () => {
@@ -26,6 +28,10 @@ const Rooms = (props) => {
         console.log(err);
       });
   };
+  const fetchReviews = () => {
+    service.get(`/rating`, { params: { filter: { hotelId} } }).then(res =>
+      set_reviews(res.data)).then(e => console.log(e))
+  }
   return (
     <div className="main">
       {/* filter */}
@@ -82,7 +88,7 @@ const Rooms = (props) => {
           <div className="col-md-12">
             <div className="row">
               {rooms.map((room) => (
-                <div key={room._id} className="hotel__item col-md-3">
+                <div key={room._id} className="hotel__item col-md-3 cursor_pointer" onClick={()=>history.push(`/hotels/${hotelId}/rooms/${room._id}`)}>
                   <img src={room.image[0]} />
                   <div className="hotel__info">
                     <h4 className="row md-3">{room.name}</h4>
@@ -101,6 +107,29 @@ const Rooms = (props) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="section">
+      <div className="row">
+          <div className="col-md-12">
+          <h3>Reviews</h3>  
+                {
+                  reviews.length==0 ?
+                  <span>No review</span>
+                  :
+                  reviews.map(review => <div>
+                      <StarRatings
+                        rating={review.rate || 0}
+                        starRatedColor="#ff8939"
+                        starDimension="22px"
+                        starSpacing ='3px'
+                        numberOfStars={5}
+                        name="rating"
+                      />
+                      
+                    </div>
+                    )
+                }
+          </div></div>
       </div>
       {sending && <Spinner />}
     </div>

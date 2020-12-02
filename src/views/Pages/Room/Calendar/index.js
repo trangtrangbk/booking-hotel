@@ -1,32 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import { useDispatch } from "react-redux";
-import { setModal } from "../../../../../redux/reducers/reservations/actions";
+import service from '../../../../service/service';
 
-const RoomCalendar = ({room_reservation}) => {
+const RoomCalendar = ({room}) => {
   const localizer = momentLocalizer(moment);
-  const dispatch = useDispatch()
-  
+  const [room_reservation, set_room_reservation] = useState([]);
+
+  useEffect(() => {
+    if(room._id) {
+      service
+      .get("reservations/filter", {
+        params: {
+          filter: {
+            room: room._id,
+            status: ["waiting", "confirmed"],
+          },
+        },
+      })
+      .then((response) => {
+        set_room_reservation(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  }, [room]);
   return (
     <div className="content" style={{ padding: "20px" }}>
       <Calendar
         events={room_reservation.map((r) => {
-          console.log(typeof r.checkIn, r.checkIn);
           return {
             id: r._id,
-            title: `Code : ${r.code}`,
+            // title: `Code : ${r.code}`,
             start: `${r.checkIn.substring(0,10)}T00:00:00.000Z`,
             end: `${r.checkOut.substring(0,10)}T00:00:00.000Z`,
-            status: r.status,
-            reservation: r,
           };
         })}
-        views={["month", "week", "agenda"]}
+        views={["month"]}
         step={60}
-        onSelectEvent={(ev) => {
-          dispatch(setModal(ev.reservation))
-        }}
         showMultiDayTimes
         defaultDate={new Date()}
         components={{
@@ -35,20 +47,13 @@ const RoomCalendar = ({room_reservation}) => {
         localizer={localizer}
         eventPropGetter={(event, start, end, isSelected) => {
           let newStyle = {
-            backgroundColor: "lightblue",
+            backgroundColor: "#aeaeae `",
+            height : "50px",
             color: "white",
             border: "none",
           };
-
-          if (event.status === "waiting") {
-            newStyle.backgroundColor = "#216ba5";
-          }
-          if (event.status === "confirmed") {
-            newStyle.backgroundColor = "#ffa37b";
-          }
-
           return {
-            className: "",
+            className: "rbc-block",
             style: newStyle,
           };
         }}

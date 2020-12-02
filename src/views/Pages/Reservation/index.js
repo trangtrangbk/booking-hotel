@@ -9,7 +9,6 @@ import { useHistory } from "react-router-dom";
 import socketIOClient from "socket.io-client"
 const socket = socketIOClient("http://localhost:3006")
 
-
 const Reservation = () => {
   const { reservation } = useSelector((store) => store.reservations);
   const dispatch = useDispatch();
@@ -224,8 +223,8 @@ const Payment = ({ reservation, onPrevious, onNext }) => {
           message : "A new reservation have been create. Please check and make a confirmation",
           link : "http://localhost:3000/dashboard",
         })
+        service.post("/reservations/mail", reservation).then(res => res).catch(e => console.log(e))
         onNext();
-
       })
       .catch((err) => {
         console.log(err);

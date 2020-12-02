@@ -36,18 +36,12 @@ const App = () => {
 
   socket.on("push-notif", (message) => {
     console.log(message);
-    NotificationManager.info(message.message,message.title,1000);
+    NotificationManager.info(message.message,message.title,1000000);
   });
 
   return (
     <Provider store={store}>
       <NotificationContainer />
-      <label onClick = {() => socket.emit("push-notif", {
-          title : "You have a new reservation",
-          type : "new",
-          message : "A new reservation have been create. Please check and confirm/ cancel it.",
-          link : "http://localhost:3000/dashboard",
-        })}>aaaaaaa</label>
       <BrowserRouter>
         <React.Suspense fallback={loading()}>
           <Switch>

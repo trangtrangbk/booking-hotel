@@ -12,6 +12,8 @@ import { useHistory } from "react-router-dom";
 import { mappingAmenity } from "../../../utils/amenities";
 import Pin from "../../../assets/icons/pin.svg";
 import { randomString } from "../../../utils/mathUtil";
+import NotificationManager from "react-notifications/lib/NotificationManager";
+import Calendar from './Calendar';
 
 const Room = (props) => {
   let history = useHistory();
@@ -78,14 +80,14 @@ const Room = (props) => {
           email,
           phone,
         },
-        customerId : user?._id,
+        customerId: user?._id,
         code: randomString(15),
         checkIn: moment(startDate).format("DD/MM/YYYY"),
         checkOut: moment(endDate).format("DD/MM/YYYY"),
         cost: room.price * diffDays(startDate, endDate),
         hotel: hotel,
         room: room,
-        note : note || "No Note",
+        note: note || "No Note",
         diffDays: diffDays(startDate, endDate),
         guests: {
           adult,
@@ -93,7 +95,20 @@ const Room = (props) => {
         },
       })
     );
-    history.push("/reservation");
+    service
+      .post("/reservations/checkdate", {
+        roomId: roomId,
+        checkIn: startDate,
+        checkOut: endDate,
+      })
+      .then((res) => history.push("/reservation"))
+      .catch((err) => {
+        NotificationManager.warning(
+          "You date order is not availabel. Please choose other day",
+          "Not availabel date",
+          3000
+        );
+      });
   };
   return (
     <div className="main">
@@ -174,6 +189,7 @@ const Room = (props) => {
               </div>
 
               <div className="col-md-5">
+                <Calendar room = {room}/>
                 <form className="booking-form" onSubmit={handleSubmit}>
                   <div className="booking-form__head">Make a reservation</div>
                   <div className="booking-form__main">

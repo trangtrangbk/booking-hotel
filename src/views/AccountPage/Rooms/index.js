@@ -50,6 +50,7 @@ const Rooms = () => {
   
   useEffect(() => {
     fetchOwnHotels();
+    setViewRoom(false)
   }, []);
 
   const onDeleteRoom = () => {

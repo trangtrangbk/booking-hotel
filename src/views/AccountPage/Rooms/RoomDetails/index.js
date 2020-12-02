@@ -54,7 +54,6 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
       .get("reservations/filter", {
         params: {
           filter: {
-            hotelId: hotels[0]._id,
             room: room._id,
             status: ["waiting", "confirmed"],
           },
