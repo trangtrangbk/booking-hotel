@@ -22,7 +22,7 @@ const Hotel = () => {
       .get("/hotels", { params: { filter: { accountId: user._id } } })
       .then((res) => {
         setLoading(false);
-        setHotels(res.data);
+        setHotels(res.data.hotels);
       })
       .catch((err) => {
         console.log(err);

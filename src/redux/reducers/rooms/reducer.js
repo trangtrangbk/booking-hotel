@@ -69,9 +69,20 @@ export const reducer = (state = initialState, action) => {
         sending: true,
       };
     case types.FETCH_LIST_ROOMS_SUCCESS:
+      let _temp = [...action.payload.oldRoom];
+      const _id_list = _temp.map((t) => t._id);
+      if (_id_list.length === 0) {
+        _temp = action.payload.newRoom;
+      } else {
+        action.payload.newRoom.forEach((el) => {
+          if (!_id_list.includes(el._id)) {
+            _temp = [..._temp, el];
+          }
+        });
+      }
       return {
         ...state,
-        rooms: action.payload,
+        rooms: _temp,
         details: action.payload.details,
         sending: false,
       };

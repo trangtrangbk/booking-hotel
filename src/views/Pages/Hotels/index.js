@@ -3,16 +3,24 @@ import DatePicker from "react-datepicker";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListHotels } from "../../../redux/reducers/hotels/actions";
-import { Feather, Spinner, TextField } from "../../../components";
-import { NavLink } from "react-router-dom";
+import { Button, Feather, Spinner, TextField } from "../../../components";
+import { NavLink, useHistory } from "react-router-dom";
 
 const Hotels = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const { hotels, sending } = useSelector((store) => store.hotels);
+  const { hotels, sending, count } = useSelector((store) => store.hotels);
+  const [limit, set_limit] = useState(6);
   const dispatch = useDispatch();
-
+  const history = useHistory();
   useEffect(() => {
-    dispatch(fetchListHotels());
+    dispatch(
+      fetchListHotels({
+        setting: {
+          limit,
+          offset: 0,
+        },
+      })
+    );
   }, []);
 
   return (
@@ -57,7 +65,7 @@ const Hotels = () => {
           <div className="col-md-12">
             <div className="row">
               {hotels.map((hotel) => (
-                <div key={hotel._id} className="hotel__item col-md-3">
+                <div key={hotel._id} className="hotel__item col-md-3 cursor_pointer" onClick= {()=>history.push(`/hotels/${hotel._id}`)}>
                   <img src={hotel.image[0]} />
                   <div className="hotel__info">
                     <h4 className="row md-3">{hotel.name}</h4>
@@ -69,7 +77,9 @@ const Hotels = () => {
                           width="18px"
                           color="#ffa37b"
                         />
-                        <span className="hotel__city mx-auto">{hotel.city}</span>
+                        <span className="hotel__city mx-auto">
+                          {hotel.city}
+                        </span>
                       </div>
                       <div className="visit_button">
                         <NavLink to={`/hotels/${hotel._id}`}>Visit</NavLink>
@@ -79,6 +89,27 @@ const Hotels = () => {
                 </div>
               ))}
             </div>
+            {count > hotels.length && (
+              <div className="row">
+                <Button
+                  customClass="btn--primary"
+                  style={{ width: "150px", margin: "auto" }}
+                  type="primary"
+                  onClick={() =>
+                    dispatch(
+                      fetchListHotels({
+                        setting: {
+                          limit,
+                          offset: hotels.length,
+                        },
+                      })
+                    )
+                  }
+                >
+                  <strong>See more...</strong>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ const Rooms = () => {
     service
       .get("/hotels", { params: { filter: { accountId: user._id } } })
       .then((res) => {
-        setHotels(res.data);
+        setHotels(res.data.hotels);
       })
       .catch((err) => {
         console.log(err);

@@ -1,12 +1,15 @@
 import * as types from "./types";
 import service from "../../../service/service";
 
-const fetchListRooms = (params = {}) => async (dispatch) => {
+const fetchListRooms = (params = {},oldRoom=[]) => async (dispatch) => {
   console.log({params});
   dispatch({ type: types.FETCH_LIST_ROOMS });
   try {
     const rooms = await service.get("/rooms",{params});
-    dispatch({ type: types.FETCH_LIST_ROOMS_SUCCESS, payload: rooms.data });
+    dispatch({ type: types.FETCH_LIST_ROOMS_SUCCESS, payload: {
+        oldRoom : oldRoom,
+        newRoom :rooms.data
+    } });
   } catch (error) {
       console.log(error);
     dispatch({ type: types.FETCH_LIST_ROOMS_FAIL });

@@ -1808,7 +1808,9 @@ section {
     min-height: 750px;
     background: #00000091;
     color: #FFFFFF;
-
+    .star-ratings {
+      margin: auto;
+    }
     .text {
       color: #FFFFFF;
       border: 2px solid #FFFFFF;
@@ -1840,7 +1842,7 @@ section {
         display: flex;
         justify-content: center;
         color: #FFFFFF;
-        margin: 5rem 0;
+        margin: 1rem 0;
         font-size: 80px;
       }
 
@@ -1969,7 +1971,7 @@ section {
 
   svg {
     margin-right: 1rem;
-    color: #0E3F66;
+    color: #97e80a;
   }
 
   &__item {
@@ -2360,6 +2362,18 @@ $price-tag-dot-background: #fff;
     max-width: 900px;
     max-height: 500px;
     margin: auto;
+  }
+}
+.hotels {
+  .react-slideshow-container {
+    max-width: 1300px;
+    max-height: 500px;
+    margin: auto;
+    .react-slideshow-wrapper{
+      max-width: 1300px;
+      max-height: 500px;
+      margin: auto;
+    }
   }
 }
 .fill {
