@@ -42,7 +42,7 @@ const MyReservations = () => {
         service
         .get("/hotels")
         .then((res) => {
-          setHotel(res.data);
+          setHotel(res.data.hotels);
         })
         .catch((err) => {
           console.log(err);

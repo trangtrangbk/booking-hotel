@@ -1,44 +1,35 @@
 import React, { Suspense, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import TheHeader from "./TheHeader";
-
-import routes from "../routing/routes";
-import TheFooter from "./TheFooter";
 import ScrollToTop from "./ScrollToTop";
-import ProtectedRoute from "../routing/ProtectedRoute";
-import accountRoutes from "../routing/accountRoutes";
+import AdminRoutes from "../routing/AdminRoutes";
+import admin_routes from "../routing/admin_routes";
+import TheSidebar from "./TheSidebar";
+
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
   </div>
 );
-console.log("load index layout");
+
+const Login = React.lazy(() => import("../views/AdminPage/Login/Login"));
 
 const TheLayout = () => {
+  const history = useHistory();
   return (
     <>
       <TheHeader />
-      <Suspense fallback={loading}>
+      <div className = "admin-layout">
+        <TheSidebar />
+       <div className="main">
+       <Suspense fallback={loading}>
         <ScrollToTop />
         <Switch>
-          {routes.map((route, idx) => {
+          <Route path="/admin/login" render={(props) => <Login {...props} />} />
+          {admin_routes.map((route, idx) => {
             return (
               route.component && (
-                <Route
-                  key={idx}
-                  path={route.path}
-                  name={route.name}
-                  exact={route.exact}
-                  render={(props) => <route.component {...props} />}
-                />
-              )
-            );
-          })}
-
-          {accountRoutes.map((route, idx) => {
-            return (
-              route.component && (
-                <ProtectedRoute
+                <AdminRoutes
                   key={idx}
                   path={route.path}
                   name={route.name}
@@ -48,8 +39,11 @@ const TheLayout = () => {
               )
             );
           })}
+
         </Switch>
       </Suspense>
+       </div>
+      </div>
       {/* <TheFooter /> */}
     </>
   );

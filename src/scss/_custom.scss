@@ -1808,9 +1808,11 @@ section {
     min-height: 750px;
     background: #00000091;
     color: #FFFFFF;
+
     .star-ratings {
       margin: auto;
     }
+
     .text {
       color: #FFFFFF;
       border: 2px solid #FFFFFF;
@@ -1867,7 +1869,52 @@ section {
           line-height: 40px;
         }
       }
+      .dropdown {
+      background: none;
+      border-radius: 0;
+      width: 200px;
+      border: 1px solid white;
+      .placeholder,.dropdown__selected {
+        color: white;
+      }
     }
+
+      .MuiInputLabel-shrink {
+        transform: none;
+        font-size: 18px;
+        font-family: "Raleway", sans-serif !important;
+        position: unset;
+        line-height: 29px;
+      }
+
+      label+.MuiInput-formControl {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+      }
+      .MuiInputBase-input{
+        font-size: 18px;
+        width: 150px;
+      }
+      .MuiInputBase-root {
+        height: 40px;
+        color: #FFFFFF;
+        border: 1px solid;
+        padding: 0 0.5rem;
+      }
+
+      .MuiFormControl-marginNormal {
+        margin-top: 0;
+      }
+
+      .MuiInput-underline:before {
+        content: unset;
+      }
+
+      .MuiIconButton-root {
+        color: #FFFFFF;
+      }
+    }
+
   }
 
   .hotels {
@@ -2048,6 +2095,7 @@ section {
 
 .content__block {
   padding: 2rem 0;
+
   label {
     color: #393939;
     margin-bottom: 10px;
@@ -2087,6 +2135,7 @@ section {
       border: 1px solid #E0E7FF;
       font-size: 16px;
     }
+
     margin-bottom: 10px;
   }
 
@@ -2354,32 +2403,37 @@ $price-tag-dot-background: #fff;
     color: #FF8939
   }
 }
+
 .react-slideshow-container {
   max-width: 900px;
   max-height: 500px;
   margin: auto;
-  .react-slideshow-wrapper{
+
+  .react-slideshow-wrapper {
     max-width: 900px;
     max-height: 500px;
     margin: auto;
   }
 }
+
 .hotels {
   .react-slideshow-container {
     max-width: 1300px;
     max-height: 500px;
     margin: auto;
-    .react-slideshow-wrapper{
+
+    .react-slideshow-wrapper {
       max-width: 1300px;
       max-height: 500px;
       margin: auto;
     }
   }
 }
+
 .fill {
   overflow: hidden;
-  width : 900px;
-  height : 500px;
+  width: 900px;
+  height: 500px;
   background-size: cover;
   background-position: center;
 }
@@ -2393,6 +2447,7 @@ $price-tag-dot-background: #fff;
   margin: 50px auto 10px auto;
   box-shadow: 0px 9px 35px rgba(0, 0, 0, 0.09);
   padding: 30px;
+
   &__hotel-name {
     font-weight: 600;
     color: #0f4673;
@@ -2400,42 +2455,52 @@ $price-tag-dot-background: #fff;
     line-height: 25px;
     padding-bottom: 20px;
   }
+
   label {
     color: black;
     font-weight: 600;
   }
+
   &__code {
     color: #00b4b7;
     font-weight: 600;
   }
 }
 
-._2pGos{
-  color : black;
+._2pGos {
+  color: black;
   background-color: #e0e7ff;
 }
+
 ._hsN1w {
   background-color: #ffa37b;
   border: 1px solid #ff8939;
   color: white;
+
   &:hover {
     background-color: #ffa37b !important;
     border: 1px solid #ff8939 !important;
   }
 }
+
 ._3uApM {
   padding: 0 50px;
 }
+
 .payment {
   max-width: 500px;
   margin: 50px auto;
 }
+
 ._3uApM {
   display: none !important;
 }
-.circle , .tick {
+
+.circle,
+.tick {
   stroke: #00b717 !important;
 }
+
 .complete_reservation {
   margin: 50px auto;
   max-width: 1300px;
@@ -2448,23 +2513,29 @@ $price-tag-dot-background: #fff;
 .MuiTypography-body2 {
   font-size: 16px !important;
 }
+
 .MuiTablePagination-root {
   font-size: 16px !important;
 }
+
 .search-form {
   .relative {
     max-width: 350px;
     margin-bottom: 1rem;
   }
 }
+
 .notification-container {
   width: 370px !important;
+
   .notification {
     opacity: 1;
+
     .title {
       color: white !important;
       font-weight: 600;
     }
+
     .message {
       font-weight: normal;
       font-size: 17px;
@@ -2480,12 +2551,15 @@ $price-tag-dot-background: #fff;
   padding: 2rem;
   width: fit-content;
   min-width: 800px;
+
   .row {
     margin-bottom: 2rem;
+
     label {
       margin: auto 1rem auto 0;
     }
   }
+
   .uploadPictureContainer {
     margin: 2rem auto;
     max-width: 740px;
@@ -2497,18 +2571,71 @@ $price-tag-dot-background: #fff;
 .rbc-calendar {
   width: 100%;
 }
+
 .rbc-month-row {
   flex-basis: 80px !important;
 }
+
 .rbc-toolbar .rbc-toolbar-label {
   order: -1
 }
-.rbc-btn-group{
-  order :0
+
+.rbc-btn-group {
+  order: 0
 }
+
 .rbc-block {
   pointer-events: none;
 }
+
 .rbc-event {
   border-radius: none;
+}
+
+//admin css
+.admin {
+  background-color: #032a40;
+  .signinbox {
+    box-shadow: none;
+    background-color: #0e3f66;
+    color: white;
+    label {
+      color: white;
+      font-size: 15px !important;
+    }
+  }
+  .btn--primary{
+    background-color: #032a40ba;
+    &:hover {
+      box-shadow: 2px 3px 10px -2px #032a40ba;
+    }
+  }
+}
+
+.admin-layout {
+  display: flex;
+  .sidebar {
+    width: 350px;
+    height: calc(100vh - 70px);
+    background: #032a40;
+    a {
+      width: 100%;
+      padding: 10px 15px;
+      &:hover {
+        background:#0e3f66;
+      }
+      svg {
+        margin-right: 20px;
+        transform: translateY(5px);
+      }
+    }
+    .active {
+      background: #0d5288 !important;
+    }
+  }
+  .main {
+    width: calc(100vw - 350px);
+    max-height: calc(100vh - 70px);
+    overflow: auto;
+  }
 }

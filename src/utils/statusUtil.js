@@ -2,6 +2,14 @@ export const mappingStatus = (status) => {
   let color = "#216ba5";
   let bg = "#90cff5";
   switch (status) {
+    case "Active":
+      color = "rgb(40, 165, 33)";
+      bg = "rgba(130, 241, 96, 0.44)";
+      break;
+    case "Blocked" :
+      color = "rgb(165, 33, 33)";
+      bg = "rgba(241, 43, 43, 0.44)";
+      break;
     case "Available":
       color = "#0b8a2f";
       bg = "#baf7c6";

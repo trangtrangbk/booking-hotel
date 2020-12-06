@@ -7,3 +7,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGOUT = 'LOGOUT';
 
+export const ADMIN_LOADED = 'ADMIN_LOADED';
+export const ADMIN_LOGIN = 'ADMIN_LOGIN';
+export const ADMIN_LOGIN_SUCCESS = 'ADMIN_LOGIN_SUCCESS';
+export const ADMIN_LOGIN_FAILED = 'ADMIN_LOGIN_FAILED';
+

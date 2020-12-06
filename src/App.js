@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import createStore from "./store/store";
-import { loadUser } from "./actions/auth";
+import { loadAdmin, loadUser } from "./actions/auth";
 import "./scss/_custom.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-slideshow-image/dist/styles.css";
@@ -27,10 +27,13 @@ const store = createStore;
 const Login = React.lazy(() => import("./views/Pages/Login/Login"));
 const Register = React.lazy(() => import("./views/Pages/Register/Register"));
 const DefaultLayout = React.lazy(() => import("./containers/TheLayout"));
+const AdminLayout = React.lazy(() => import("./admin-containers/TheLayout"));
+const AdminLogin = React.lazy(() => import("./views/AdminPage/Login/Login"));
 
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
+    store.dispatch(loadAdmin());
   }, []);
   const socket = socketIOClient("localhost:3006");
 
@@ -45,6 +48,8 @@ const App = () => {
       <BrowserRouter>
         <React.Suspense fallback={loading()}>
           <Switch>
+            <Route exact path="/admin/login" component={AdminLogin} />
+            <Route path="/admin" component={AdminLayout} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route path="/" component={DefaultLayout} />
