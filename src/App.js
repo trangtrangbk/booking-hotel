@@ -31,10 +31,7 @@ const AdminLayout = React.lazy(() => import("./admin-containers/TheLayout"));
 const AdminLogin = React.lazy(() => import("./views/AdminPage/Login/Login"));
 
 const App = () => {
-  useEffect(() => {
-    store.dispatch(loadUser());
-    store.dispatch(loadAdmin());
-  }, []);
+
   const socket = socketIOClient("localhost:3006");
 
   socket.on("push-notif", (message) => {

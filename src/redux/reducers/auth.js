@@ -15,13 +15,13 @@ import {
 
 const initialState = {
   token: localStorage.getItem("token"),
-  adminToken : localStorage.getItem("admin_token"),
+  adminToken: localStorage.getItem("admin_token"),
   isAuthenticated: localStorage.getItem("token") != null,
   isAdminAuthenticated: localStorage.getItem("admin_token") != null,
   loading: false,
   user: null,
   msg: "",
-  admin : null
+  admin: null,
 };
 
 export default (state = initialState, action) => {
@@ -34,13 +34,13 @@ export default (state = initialState, action) => {
         loading: false,
         user: payload.account,
       };
-      case ADMIN_LOADED:
-        return {
-          ...state,
-          isAdminAuthenticated: true,
-          loading: false,
-          admin: payload.account,
-        };
+    case ADMIN_LOADED:
+      return {
+        ...state,
+        isAdminAuthenticated: true,
+        loading: false,
+        admin: payload.account,
+      };
     case LOGIN:
       return {
         ...state,
@@ -51,18 +51,20 @@ export default (state = initialState, action) => {
         ...state,
         loading: true,
       };
-      case ADMIN_LOGIN_SUCCESS:
-        localStorage.setItem("admin_token", payload.token);
-        return {
-          ...state,
-          ...payload,
-          msg: "",
-          isAdminAuthenticated: true,
-          loading: false,
-        };
+    case ADMIN_LOGIN_SUCCESS:
+      localStorage.setItem("admin_token", payload.token);
+
+      return {
+        ...state,
+        ...payload,
+        msg: "",
+        isAdminAuthenticated: true,
+        loading: false,
+      };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
+
       return {
         ...state,
         ...payload,
@@ -77,7 +79,7 @@ export default (state = initialState, action) => {
     case AUTH_ERROR:
       return {
         ...state,
-        loading : false,
+        loading: false,
         msg: action.payload,
       };
     case LOGOUT:
@@ -87,13 +89,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         token: null,
-        adminToken : null,
+        adminToken: null,
         user: null,
-        admin : null,
+        admin: null,
         isAuthenticated: false,
-        isAdminAuthenticated : false,
+        isAdminAuthenticated: false,
         loading: false,
-        msg : ""
+        msg: "",
       };
 
     default:

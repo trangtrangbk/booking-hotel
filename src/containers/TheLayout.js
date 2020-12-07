@@ -7,14 +7,19 @@ import TheFooter from "./TheFooter";
 import ScrollToTop from "./ScrollToTop";
 import ProtectedRoute from "../routing/ProtectedRoute";
 import accountRoutes from "../routing/accountRoutes";
+import { loadUser } from "../actions/auth";
+import { useDispatch } from "react-redux";
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
   </div>
 );
-console.log("load index layout");
 
 const TheLayout = () => {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(loadUser())
+  },[])
   return (
     <>
       <TheHeader />

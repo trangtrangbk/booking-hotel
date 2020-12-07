@@ -5,6 +5,8 @@ import ScrollToTop from "./ScrollToTop";
 import AdminRoutes from "../routing/AdminRoutes";
 import admin_routes from "../routing/admin_routes";
 import TheSidebar from "./TheSidebar";
+import { loadAdmin } from "../actions/auth";
+import { useDispatch } from "react-redux";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -15,7 +17,11 @@ const loading = (
 const Login = React.lazy(() => import("../views/AdminPage/Login/Login"));
 
 const TheLayout = () => {
-  const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(loadAdmin())
+  },[])
   return (
     <>
       <TheHeader />

@@ -7,11 +7,12 @@ import { useSelector } from "react-redux";
 import ConfirmModal from "../../../components/ConfirmModal";
 import { mappingAmenity } from "../../../utils/amenities";
 import { CircularProgress } from "@material-ui/core";
+import EditHotel from "./EditHotels";
 
 const Hotel = () => {
   const [addHotel, setAddHotel] = useState(false);
   const [deleteHotel, setDeleteHotel] = useState(false);
-
+  const [editHotel, setEditHotel] = useState(null);
   const [hotels, setHotels] = useState([]);
   const { user } = useSelector((store) => store.auth);
   const [loading, setLoading] = useState(false);
@@ -63,7 +64,9 @@ const Hotel = () => {
       ) : (
         <div className="relative">
           <div className="action">
-            <Feather name="Edit2" />
+            <Feather name="Edit2"  onClick={() => {
+                setEditHotel(hotels[0]);
+              }}/>
             <Feather
               name="Trash"
               onClick={() => {
@@ -85,8 +88,7 @@ const Hotel = () => {
               {/* welcome  */}
               <div className="welcome">
                 <h1 className="row">{hotels[0].name}</h1>
-              </div>
-            </div>
+
             <div className="row hotel__infor">
               <div className="row amenities">
                 {hotels[0].amenities.map((amenity, index) => (
@@ -120,6 +122,8 @@ const Hotel = () => {
                 </div>
               </div>
             </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -128,8 +132,14 @@ const Hotel = () => {
       <AddHotel
         show={addHotel}
         handleClose={() => setAddHotel(false)}
-        onAddSuccess={(hotel) => setHotels([...hotels, hotel])}
+        onAddSuccess={(hotel) => setHotels([hotel])}
       />
+      {editHotel &&  <EditHotel
+        show={editHotel}
+        handleClose={() => setEditHotel(false)}
+        hotel = {editHotel}
+        onAddSuccess={(hotel) => setHotels([hotel])}
+      />}
       <ConfirmModal
         show={deleteHotel}
         handleClose={() => setDeleteHotel(false)}

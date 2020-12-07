@@ -1805,7 +1805,7 @@ section {
 
   .homepage {
     position: relative;
-    min-height: 750px;
+    min-height: calc(100vh - 70px);
     background: #00000091;
     color: #FFFFFF;
 
@@ -2637,5 +2637,28 @@ $price-tag-dot-background: #fff;
     width: calc(100vw - 350px);
     max-height: calc(100vh - 70px);
     overflow: auto;
+  }
+}
+.dashboard {
+  padding: 1rem;
+  height: 100%;
+  .card-el {
+    box-shadow: 0px 9px 35px rgba(0, 0, 0, 0.09);
+    padding: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #FFF;
+    span {
+      font-weight: lighter;
+      text-transform: unset;
+      font-size: 15px !important;
+    }
+    svg {
+      width: 50px;
+      height: 50px;
+      &:hover {
+        color: white !important;
+      }
+    }
   }
 }
