@@ -85,7 +85,7 @@ const Accounts = () => {
           <td>{_item.email}</td>
           <td>{_item.address}</td>
           <td>{_item.phone}</td>
-          <td>{_item.linked ? "Google account" : "The River account"}</td>
+          <td>{_item.linked ? "Tài khoản Google" : "Tài khoản The River"}</td>
           <td>
             <SmallCard
               background={mappingStatus(_item.status ? "Active" : "Blocked").bg}
@@ -128,7 +128,7 @@ const Accounts = () => {
   return (
     <div className="hotel-reservation">
       <div className="row mb-5">
-        <h3 style={{ color: "#0E3F66" }}>Account management</h3>
+        <h3 style={{ color: "#0E3F66" }}>Quản lý người dùng</h3>
       </div>
       <div className="row">
         <div className="col-12 search-form">
@@ -151,14 +151,14 @@ const Accounts = () => {
             tableData={content}
             head={[
               "Avatar",
-              "Name",
+              "Tên",
               "Email",
-              "Address",
-              "Phone",
-              "Type",
-              "Status",
-              "Created",
-              "Updated",
+              "Địa chỉ",
+              "SĐT",
+              "Loại tài khoản",
+              "Trạng thái",
+              "Ngày tạo",
+              "Ngày cập nhật",
             ]}
           />
         </div>
@@ -187,8 +187,8 @@ const Accounts = () => {
           handleClose={() => set_confirm(null)}
           msg={`${
             confirm.status
-              ? "This account will be locked"
-              : "This account will be activated"
+              ? "Tài khoản này sẽ bị khóa"
+              : "Tài khoản này sẽ được kích hoạt"
           }`}
           onConfirm={onChangeStatus}
         />

@@ -100,7 +100,7 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
                       className="row bottom-line"
                       style={{ paddingTop: "20px", paddingBottom: "20px" }}
                     >
-                      <label style={{ marginRight: "20px" }}>Room</label>
+                      <label style={{ marginRight: "20px" }}>Phòng</label>
                       <span>{room.name}</span>
                     </div>
                     <div
@@ -109,7 +109,7 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
                     >
                       <div className="col-4 no-padding">
                         <div className="row justify-flex-start">
-                          <label>Check-In</label>
+                          <label>Check In</label>
                         </div>
                         <div className="row justify-flex-start">
                           <span>
@@ -129,19 +129,13 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
                             {diffDays(
                               moment(modal.checkIn),
                               moment(modal.checkOut)
-                            )}{" "}
-                            {diffDays(
-                              moment(modal.checkIn),
-                              moment(modal.checkOut)
-                            ) > 1
-                              ? "days"
-                              : "day"}
+                            )}{" "}ngày
                           </span>
                         </div>
                       </div>
                       <div className="col-4 no-padding">
                         <div className="row justify-flex-end">
-                          <label>Check-Out</label>
+                          <label>Check Out</label>
                         </div>
                         <div className="row justify-flex-end">
                           <span>
@@ -152,16 +146,15 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
                     </div>
                     <div className="row" style={{ paddingTop: "20px" }}>
                       <div className="col-6 no-padding">
-                        <label style={{ marginRight: "20px" }}>Cost</label>
+                        <label style={{ marginRight: "20px" }}>Chi phí</label>
                         <span style={{ color: "#f52200" }}>${modal.cost}</span>
                       </div>
                       <div className="col-6 no-padding justify-flex-end">
-                        <label style={{ marginRight: "20px" }}>Guests</label>
+                        <label style={{ marginRight: "20px" }}>Khách</label>
                         <span>
-                          {modal.guests.adult}{" "}
-                          {modal.guests.adult > 1 ? "Adults" : "Adult"} -{" "}
-                          {modal.guests.children} Children
-                        </span>
+                          {modal.guests.adult}{" "}người lớn {" "}-{" "}
+                          {modal.guests.children} trẻ em
+                          </span>
                       </div>
                     </div>
                   </div>
@@ -182,11 +175,11 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
                         }}
                         className="bottom-line"
                       >
-                        Guest informations
+                        Thông tin khách
                       </label>
                       <div className="row">
                         <div className="row">
-                          <label style={{ marginRight: "10px" }}>Name: </label>
+                          <label style={{ marginRight: "10px" }}>Tên: </label>
                           <span>{modal.name}</span>
                         </div>
                         <div className="row">
@@ -195,16 +188,16 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
                         </div>
                         <div className="row">
                           <label style={{ marginRight: "10px" }}>
-                            Address:{" "}
+                          Địa chỉ:{" "}
                           </label>
                           <span>{modal.address}</span>
                         </div>
                         <div className="row">
-                          <label style={{ marginRight: "10px" }}>Phone: </label>
+                          <label style={{ marginRight: "10px" }}>Số điện thoại: </label>
                           <span>{modal.phone}</span>
                         </div>
                         <div className="row">
-                          <label style={{ marginRight: "10px" }}>Note: </label>
+                          <label style={{ marginRight: "10px" }}>Ghi chú: </label>
                           <span>{modal.note}</span>
                         </div>
                       </div>
@@ -225,7 +218,7 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
                     setConfirmModal(true);
                   }}
                 >
-                  <strong>Cancel</strong>
+                  <strong>Hủy bỏ</strong>
                 </Button>
                 <Button
                   customClass="btn--block btn--primary"
@@ -236,7 +229,7 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
                     handleUpdateReservation({ status: "confirmed" })
                   }
                 >
-                  <strong>Confirm</strong>
+                  <strong>Xác nhận</strong>
                 </Button>
               </div>
             )}
@@ -244,7 +237,7 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
               show={confirmModal}
               updating= {updating}
               handleClose={() => setConfirmModal(false)}
-              msg={"Are you sure to cancel this reservation?"}
+              msg={"Xác nhận hủy đơn?"}
               onConfirm={(reason) =>
                 handleUpdateReservation({
                   status: "canceled",

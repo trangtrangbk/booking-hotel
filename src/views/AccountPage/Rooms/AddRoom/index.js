@@ -54,7 +54,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
   const [area, set_area] = useState("");
   const [status, set_status] = useState("Available");
   const [amenities, set_amenities] = useState([]);
-  const [rules, set_rules] = useState(["No smoking"]);
+  const [rules, set_rules] = useState(["Không hút thuốc"]);
   const [loading, setLoading] = useState(false);
 
   const [msg, setMsg] = useState("");
@@ -68,7 +68,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
     set_price("");
     set_amenities([]);
     set_area("");
-    set_rules(["No smoking"]);
+    set_rules(["Không hút thuốc"]);
     setPicture([]);
     set_status("Available");
     setMsg("");
@@ -142,8 +142,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
   return (
     <Modal show={show} handleClose={handleClose} maxWidth={1200}>
       <div className="modal__title">
-        Create hotel room by fill the below fields
-      </div>
+      Tạo phòng mới bằng cách điền đẩy đủ những thông tin dưới đây      </div>
       <div className="modal__content">
         <div className="row">
           <span style={{ color: "#de1414cf", fontSize: "15px" }}>{msg}</span>
@@ -153,7 +152,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
             <div className="col-6">
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Room name</label>
+                  <label>Tên phòng</label>
                   <TextField
                     onChange={(e) => set_name(e.target.value)}
                     value={name}
@@ -164,7 +163,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
               </div>
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Description</label>
+                  <label>Mô tả</label>
                   <TextArea
                     value={description}
                     onChange={(e) => set_description(e.target.value)}
@@ -174,11 +173,11 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
               </div>
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Image</label>
+                  <label>Hình ảnh</label>
                   <ImageUploader
                     withPreview
                     withIcon={true}
-                    buttonText="Choose images"
+                    buttonText="Chọn hình ảnh"
                     onChange={(pic) => onDrop(pic)}
                     imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                     maxFileSize={5242880}
@@ -189,7 +188,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
                 <div className="col-6 no-padding">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label>
-                      Area (m<sup>2</sup>)
+                    Diện tích (m<sup>2</sup>)
                     </label>
                     <TextField
                       value={area}
@@ -202,7 +201,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
                 <div className="col-6" style={{ paddingRight: "0" }}>
                   <div className="form-group" style={{ width: "100%" }}>
                     <label>
-                      Price <sup>$/day</sup>
+                    Giá <sup>$/ngày</sup>
                     </label>
                     <TextField
                       value={price}
@@ -217,7 +216,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
             <div className="col-6">
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Status</label>
+                  <label>Trạng thái</label>
                   <Dropdown
                     onChange={(e) => set_status(e.value)}
                     defaultValue={{ value: status, label: status }}
@@ -226,7 +225,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
                 </div>
 
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Amenities</label>
+                  <label>Tiện ích</label>
                   <DropdownCheckBox
                     options={amenityList}
                     defaultValue={
@@ -245,7 +244,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
                 </div>
                 <div className="form-group" style={{ width: "100%" }}>
                   <label className="row justify-content-start">
-                    <span>Room rules</span>
+                    <span>Quy tắc trong phòng</span>
                     <Feather
                       name="PlusCircle"
                       style={{ marginLeft: "20px" }}
@@ -303,7 +302,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
               htmlType="submit"
               type="primary"
             >
-              <strong>Add</strong>
+              <strong>Thêm</strong>
             </Button>
           </div>
         </form>

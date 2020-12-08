@@ -213,7 +213,7 @@ const Reservations = () => {
                   className="row bottom-line"
                   style={{ paddingTop: "20px", paddingBottom: "20px" }}
                 >
-                  <label style={{ marginRight: "20px" }}>Room</label>
+                  <label style={{ marginRight: "20px" }}>Phòng</label>
                   <span>{selectedRoom.name}</span>
                 </div>
                 <div
@@ -222,7 +222,7 @@ const Reservations = () => {
                 >
                   <div className="col-4 no-padding">
                     <div className="row justify-flex-start">
-                      <label>Check-In</label>
+                      <label>Check In</label>
                     </div>
                     <div className="row justify-flex-start">
                       <span>
@@ -245,7 +245,7 @@ const Reservations = () => {
                   </div>
                   <div className="col-4 no-padding">
                     <div className="row justify-flex-end">
-                      <label>Check-Out</label>
+                      <label>Check Out</label>
                     </div>
                     <div className="row justify-flex-end">
                       <span>
@@ -256,17 +256,17 @@ const Reservations = () => {
                 </div>
                 <div className="row" style={{ paddingTop: "20px" }}>
                   <div className="col-6 no-padding">
-                    <label style={{ marginRight: "20px" }}>Cost</label>
+                    <label style={{ marginRight: "20px" }}>Chi phí</label>
                     <span style={{ color: "#f52200" }}>
                       ${selectedRow.cost}
                     </span>
                   </div>
                   <div className="col-6 no-padding justify-flex-end">
-                    <label style={{ marginRight: "20px" }}>Guests</label>
+                    <label style={{ marginRight: "20px" }}>Khách</label>
                     <span>
-                      {selectedRow.guests.adult}{" "}
-                      {selectedRow.guests.adult > 1 ? "Adults" : "Adult"} -{" "}
-                      {selectedRow.guests.children} Children
+                      {selectedRow.guests.adult}{" "} người lớn -{" "}
+ -{" "}
+                      {selectedRow.guests.children} trẻ em
                     </span>
                   </div>
                 </div>
@@ -285,11 +285,11 @@ const Reservations = () => {
                     }}
                     className="bottom-line"
                   >
-                    Guest informations
+                    Thông tin khách
                   </label>
                   <div className="row">
                     <div className="row">
-                      <label style={{ marginRight: "10px" }}>Name: </label>
+                      <label style={{ marginRight: "10px" }}>Tên: </label>
                       <span>{selectedRow.name}</span>
                     </div>
                     <div className="row">
@@ -297,15 +297,15 @@ const Reservations = () => {
                       <span>{selectedRow.email}</span>
                     </div>
                     <div className="row">
-                      <label style={{ marginRight: "10px" }}>Address: </label>
+                      <label style={{ marginRight: "10px" }}>Địa chỉ: </label>
                       <span>{selectedRow.address}</span>
                     </div>
                     <div className="row">
-                      <label style={{ marginRight: "10px" }}>Phone: </label>
+                      <label style={{ marginRight: "10px" }}>Số điện thoại: </label>
                       <span>{selectedRow.phone}</span>
                     </div>
                     <div className="row">
-                      <label style={{ marginRight: "10px" }}>Note: </label>
+                      <label style={{ marginRight: "10px" }}>Ghi chú: </label>
                       <span>{selectedRow.note}</span>
                     </div>
                   </div>
@@ -327,7 +327,7 @@ const Reservations = () => {
                 setConfirmModal(true);
               }}
             >
-              <strong>Cancel</strong>
+              <strong>Hủy bỏ </strong>
             </Button>
             <Button
               customClass="btn--block btn--primary"
@@ -335,7 +335,7 @@ const Reservations = () => {
               type="primary"
               onClick={() => handleUpdateReservation({ status: "confirmed" })}
             >
-              <strong>Confirm</strong>
+              <strong>Xác nhận</strong>
             </Button>
           </div>
         )}
@@ -375,7 +375,7 @@ const Reservations = () => {
           <Input
             suggestions={filter1}
             name="filterStatus"
-            label="Filter by status"
+            label="Lọc theo trạng thái"
             getOptions={(value, name) => {
               const options = [];
               if (value) value.map((_item) => options.push(_item.value));
@@ -385,7 +385,7 @@ const Reservations = () => {
           <Input
             suggestions={filter2}
             name="filterRoom"
-            label="Filter by rooms"
+            label="Lọc theo phòng"
             getOptions={(value, name) => {
               const options = [];
               if (value) value.map((_item) => options.push(_item.value));
@@ -400,7 +400,7 @@ const Reservations = () => {
                 <KeyboardDatePicker
                   margin="normal"
                   id="mui-pickers-date"
-                  label="Check-In From"
+                  label="Check In từ ngày"
                   value={checkInFrom}
                   name="checkInFrom"
                   format="dd/MM/yyyy"
@@ -416,7 +416,7 @@ const Reservations = () => {
                 <KeyboardDatePicker
                   margin="normal"
                   id="mui-pickers-date"
-                  label="Check-In To"
+                  label="Check In đến ngày"
                   value={checkInTo}
                   name="checkInTo"
                   format="dd/MM/yyyy"
@@ -436,7 +436,7 @@ const Reservations = () => {
                 <KeyboardDatePicker
                   margin="normal"
                   id="mui-pickers-date"
-                  label="Check-In date"
+                  label="Check Out từ ngày"
                   value={checkOutFrom}
                   name="checkOutFrom"
                   format="dd/MM/yyyy"
@@ -452,7 +452,7 @@ const Reservations = () => {
                 <KeyboardDatePicker
                   margin="normal"
                   id="mui-pickers-date"
-                  label="Check-Out To"
+                  label="Check Out đến ngày"
                   value={checkOutTo}
                   name="checkOutTo"
                   format="dd/MM/yyyy"
@@ -472,7 +472,7 @@ const Reservations = () => {
             htmlType="submit"
             style={{ width: "70px", margin: "2rem auto" }}
           >
-            FILTER
+            Lọc
           </Button>
         </div>
       </form>
@@ -493,8 +493,8 @@ const Reservations = () => {
           />
         </div>
         <div className="col-12">
-          <FilterTable tableData={content} head={["Code","Room", "Email", "Check in", "Check out","Total days",
-        "Status", "Created At"]}/>
+        <FilterTable tableData={content} head={["Code", "Phòng", "Email", "Check in", "Check out","Tổng ngày",
+        " Trạng thái ", "Ngày tạo"]} />
         </div>
       </div>
       <div className="row justify-flex-end">
@@ -519,7 +519,7 @@ const Reservations = () => {
       <ReasonModal
         show={confirmModal}
         handleClose={() => setConfirmModal(false)}
-        msg={"Are you sure to cancel this reservation?"}
+        msg={"Xác nhận hủy đơn này?"}
         onConfirm={(reason) =>
           handleUpdateReservation({
             status: "canceled",

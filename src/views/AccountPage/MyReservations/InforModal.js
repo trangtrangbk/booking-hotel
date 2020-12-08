@@ -22,13 +22,13 @@ const InforModal = ({ selectedRow, show, handleClose, rooms }) => {
                 style={{ paddingTop: "20px", paddingBottom: "20px" }}
               >
                 <div className="col-6 no-padding">
-                  <label style={{ marginRight: "20px" }}>Room</label>
+                  <label style={{ marginRight: "20px" }}>Phòng</label>
                   <span>
                     {rooms.find((r) => r._id === selectedRow.roomId)?.name}
                   </span>
                 </div>
                 <div className="col-6 no-padding">
-                  <a style={{ marginRight: "20px" , color : "#216ba5" }} href = {`/hotels/${selectedRow.hotelId}`}>View hotel</a>
+                  <a style={{ marginRight: "20px" , color : "#216ba5" }} href = {`/hotels/${selectedRow.hotelId}`}> Xem khách sạn</a>
                 </div>
               </div>
               <div
@@ -37,7 +37,7 @@ const InforModal = ({ selectedRow, show, handleClose, rooms }) => {
               >
                 <div className="col-4 no-padding">
                   <div className="row justify-flex-start">
-                    <label>Check-In</label>
+                    <label>Check In</label>
                   </div>
                   <div className="row justify-flex-start">
                     <span>
@@ -54,19 +54,13 @@ const InforModal = ({ selectedRow, show, handleClose, rooms }) => {
                       {diffDays(
                         moment(selectedRow.checkIn),
                         moment(selectedRow.checkOut)
-                      )}{" "}
-                      {diffDays(
-                        moment(selectedRow.checkIn),
-                        moment(selectedRow.checkOut)
-                      ) > 1
-                        ? "days"
-                        : "day"}
+                      )}{" "}ngày
                     </span>
                   </div>
                 </div>
                 <div className="col-4 no-padding">
                   <div className="row justify-flex-end">
-                    <label>Check-Out</label>
+                    <label>Check Out</label>
                   </div>
                   <div className="row justify-flex-end">
                     <span>
@@ -77,15 +71,15 @@ const InforModal = ({ selectedRow, show, handleClose, rooms }) => {
               </div>
               <div className="row" style={{ paddingTop: "20px" }}>
                 <div className="col-6 no-padding">
-                  <label style={{ marginRight: "20px" }}>Cost</label>
+                  <label style={{ marginRight: "20px" }}>Chi phí</label>
                   <span style={{ color: "#f52200" }}>${selectedRow.cost}</span>
                 </div>
                 <div className="col-6 no-padding justify-flex-end">
-                  <label style={{ marginRight: "20px" }}>Guests</label>
+                  <label style={{ marginRight: "20px" }}>Khách</label>
                   <span>
                     {selectedRow.guests.adult}{" "}
-                    {selectedRow.guests.adult > 1 ? "Adults" : "Adult"} -{" "}
-                    {selectedRow.guests.children} Children
+                    người lớn-{" "}
+                    {selectedRow.guests.children} trẻ em
                   </span>
                 </div>
               </div>
@@ -104,11 +98,11 @@ const InforModal = ({ selectedRow, show, handleClose, rooms }) => {
                   }}
                   className="bottom-line"
                 >
-                  Informations
+                  Thông tin
                 </label>
                 <div className="row">
                   <div className="row">
-                    <label style={{ marginRight: "10px" }}>Name: </label>
+                    <label style={{ marginRight: "10px" }}>Tên: </label>
                     <span>{selectedRow.name}</span>
                   </div>
                   <div className="row">
@@ -116,15 +110,15 @@ const InforModal = ({ selectedRow, show, handleClose, rooms }) => {
                     <span>{selectedRow.email}</span>
                   </div>
                   <div className="row">
-                    <label style={{ marginRight: "10px" }}>Address: </label>
+                    <label style={{ marginRight: "10px" }}>Địa chỉ: </label>
                     <span>{selectedRow.address}</span>
                   </div>
                   <div className="row">
-                    <label style={{ marginRight: "10px" }}>Phone: </label>
+                    <label style={{ marginRight: "10px" }}>Số điện thoại: </label>
                     <span>{selectedRow.phone}</span>
                   </div>
                   <div className="row">
-                    <label style={{ marginRight: "10px" }}>Note: </label>
+                    <label style={{ marginRight: "10px" }}>Ghi chú: </label>
                     <span>{selectedRow.note}</span>
                   </div>
                 </div>

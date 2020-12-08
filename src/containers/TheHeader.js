@@ -17,17 +17,9 @@ import { Feather } from "../components";
 
 const NAV_ITEMS = [
   {
-    name: "About us",
-    path: "/MasterData",
-  },
-  {
-    name: "Hotels",
+    name: "Khách sạn",
     path: "/hotels",
-  },
-  {
-    name: "Contact",
-    path: "/PricePlanning",
-  },
+  }
 ];
 
 const TheHeader = () => {
@@ -136,11 +128,11 @@ const TheHeader = () => {
                             history.push('/dashboard')
                           }}>
                             <Feather name="Grid" style={{marginRight: '20px',width :"20px"}}/>
-                            <span>Dashboard</span>
+                            <span>Trang quản lý</span>
                           </MenuItem>
                           <MenuItem onClick={handleLogout}>
                             <Feather name="LogOut" style={{marginRight: '20px',width :"20px"}}/>
-                            <span>Logout</span>
+                            <span>Đăng xuất</span>
                           </MenuItem>
                         </MenuList>
                       </ClickAwayListener>
@@ -152,10 +144,10 @@ const TheHeader = () => {
           ) : (
             <>
               <div className="book_button">
-                <NavLink to="/register">Sign up</NavLink>
+                <NavLink to="/register">Đăng ký</NavLink>
               </div>
               <div className="book_button">
-                <NavLink to="/login">Log in</NavLink>
+                <NavLink to="/login">Đăng nhập</NavLink>
               </div>
             </>
           )}

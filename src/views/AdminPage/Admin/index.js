@@ -141,8 +141,8 @@ const Admins = () => {
       );
     }).catch(e => {
       NotificationManager.error(
-        "Something went wrong, please try later",
-        "Failed",
+        "Có lỗi xảy ra, vui lòng thử lại sau",
+        "Có lỗi xảy ra",
         2000
       );
     })
@@ -171,7 +171,7 @@ const Admins = () => {
   return (
     <div className="hotel-reservation">
       <div className="row mb-5">
-        <h3 style={{ color: "#0E3F66" }}>Admin management</h3>
+        <h3 style={{ color: "#0E3F66" }}>Quản lý quản trị viên</h3>
       </div>
       <div className="row">
         <div className="col-12 search-form flex justify-content-between">
@@ -193,7 +193,7 @@ const Admins = () => {
             style={{ width: "100px" }}
             onClick={() => set_add_modal(true)}
           >
-            Add
+            Thêm
           </Button>
         </div>
         <div className="col-12">
@@ -201,12 +201,12 @@ const Admins = () => {
             tableData={content}
             head={[
               "Avatar",
-              "Name",
+              "Tên",
               "Email",
-              "Role",
-              "Status",
-              "Created",
-              "Updated",
+              "Quyền",
+              "Trạng thái",
+              "Ngày tạo",
+              "Ngày cập nhật",
               ""
             ]}
           />

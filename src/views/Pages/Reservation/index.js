@@ -37,15 +37,15 @@ const Reservation = () => {
           startingStep={0}
           steps={[
             {
-              label: "Confirm reservation",
-              name: "step 1",
+              label: "Xác nhận đơn",
+              name: "Bước 1",
               content: (
                 <ReservationData reservation={reservation} onNext={onNext} />
               ),
             },
             {
-              label: "Payment",
-              name: "step 2",
+              label: "Thanh toán",
+              name: "Bước 2",
               content: (
                 <Payment
                   onPrevious={onPrevious}
@@ -55,8 +55,8 @@ const Reservation = () => {
               ),
             },
             {
-              label: "Complete",
-              name: "step 3",
+              label: "Hoàn thành",
+              name: "Bước 3",
               content: (
                 <CompleteReservation onSubmitProgress={onSubmitProgress} />
               ),
@@ -105,7 +105,7 @@ const ReservationData = ({ reservation, onNext }) => {
                 className="row bottom-line"
                 style={{ paddingTop: "20px", paddingBottom: "20px" }}
               >
-                <label style={{ marginRight: "20px" }}>Room</label>
+                <label style={{ marginRight: "20px" }}>Phòng</label>
                 <span>{reservation.room.name}</span>
               </div>
               <div
@@ -114,7 +114,7 @@ const ReservationData = ({ reservation, onNext }) => {
               >
                 <div className="col-4 no-padding">
                   <div className="row justify-flex-start">
-                    <label>Check-In</label>
+                    <label>Check In</label>
                   </div>
                   <div className="row justify-flex-start">
                     <span>{reservation.checkIn}</span>
@@ -126,14 +126,13 @@ const ReservationData = ({ reservation, onNext }) => {
                   </div>
                   <div className="row justify-content-center">
                     <span>
-                      {reservation.diffDays}{" "}
-                      {reservation.diffDays > 1 ? "days" : "day"}
+                      {reservation.diffDays}{" "}ngày
                     </span>
                   </div>
                 </div>
                 <div className="col-4 no-padding">
                   <div className="row justify-flex-end">
-                    <label>Check-Out</label>
+                    <label>Check Out</label>
                   </div>
                   <div className="row justify-flex-end">
                     <span>{reservation.checkOut}</span>
@@ -142,15 +141,14 @@ const ReservationData = ({ reservation, onNext }) => {
               </div>
               <div className="row" style={{ paddingTop: "20px" }}>
                 <div className="col-6 no-padding">
-                  <label style={{ marginRight: "20px" }}>Cost</label>
+                  <label style={{ marginRight: "20px" }}>Chi phí </label>
                   <span style={{ color: "#f52200" }}>${reservation.cost}</span>
                 </div>
                 <div className="col-6 no-padding justify-flex-end">
-                  <label style={{ marginRight: "20px" }}>Guests</label>
+                  <label style={{ marginRight: "20px" }}>Bao gồm </label>
                   <span>
-                    {reservation.guests.adult}{" "}
-                    {reservation.guests.adult > 1 ? "Adults" : "Adult"} -{" "}
-                    {reservation.guests.children} Children
+                    {reservation.guests.adult}{" "}Người lớn -{" "}
+                    {reservation.guests.children}  Trẻ em
                   </span>
                 </div>
               </div>
@@ -165,12 +163,12 @@ const ReservationData = ({ reservation, onNext }) => {
               }}
               className="bottom-line"
             >
-              Your information
+              Thông tin của bạn
             </label>
             <div className="row">
               <div className="col-6">
                 <div className="row">
-                  <label style={{ marginRight: "10px" }}>Name: </label>
+                  <label style={{ marginRight: "10px" }}>Tên: </label>
                   <span>{reservation.infor.name}</span>
                 </div>
                 <div className="row">
@@ -180,17 +178,17 @@ const ReservationData = ({ reservation, onNext }) => {
               </div>
               <div className="col-6">
                 <div className="row">
-                  <label style={{ marginRight: "10px" }}>Address: </label>
+                  <label style={{ marginRight: "10px" }}>Địa chỉ: </label>
                   <span>{reservation.infor.address}</span>
                 </div>
                 <div className="row">
-                  <label style={{ marginRight: "10px" }}>Phone: </label>
+                  <label style={{ marginRight: "10px" }}>Số điện thoại: </label>
                   <span>{reservation.infor.phone}</span>
                 </div>
               </div>
             </div>
             <div className="row" style={{ marginLeft: "18px" }}>
-              <label style={{ marginRight: "10px" }}>Note: </label>
+              <label style={{ marginRight: "10px" }}>Ghi chú: </label>
               <span>{reservation.note}</span>
             </div>
           </div>
@@ -201,7 +199,7 @@ const ReservationData = ({ reservation, onNext }) => {
         style={{ maxWidth: "1300px", margin: "20px auto" }}
       >
         <Button onClick={onNext} style={{ width: "100px" }}>
-          Next
+        Tiếp theo
         </Button>
       </div>
     </>
@@ -248,7 +246,7 @@ const Payment = ({ reservation, onPrevious, onNext }) => {
         style={{ maxWidth: "1300px", margin: "20px auto" }}
       >
         <Button onClick={onPrevious} style={{ width: "100px" }}>
-          Back
+        Trở về
         </Button>
       </div>
     </>
@@ -262,8 +260,7 @@ const CompleteReservation = ({ onSubmitProgress }) => {
       <div className="complete_reservation">
         <div className="row">
           <span style={{ margin: "auto" }}>
-            Thank you! Your booking has been placed. We will contact you to
-            confirm about the booking soon.
+          Cảm ơn đã sử dụng dịch vụ của chúng tôi. Đơn của bạn đã được gửi đến khách sạn. Chúng tôi sẽ liên hệ với bạn để xác nhận việc đặt phòng, xin hãy kiểm tra email thường xuyên.
           </span>
         </div>
         <div className="row">
@@ -279,7 +276,7 @@ const CompleteReservation = ({ onSubmitProgress }) => {
           type={"secondary"}
           style={{ width: "100px" }}
         >
-          Home
+          Trang chủ 
         </Button>
       </div>
     </>

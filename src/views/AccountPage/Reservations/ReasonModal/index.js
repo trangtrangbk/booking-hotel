@@ -5,12 +5,11 @@ const ReasonModal = ({updating, show, handleClose, onConfirm }) => {
   const [reason, set_reason] = useState("");
   return (
     <Modal show={show} handleClose={handleClose} maxWidth={500}>
-      <div className="modal__title">Cancel reservation</div>
+      <div className="modal__title">Hủy đơn</div>
       <div className="modal__content">
         <div className="row justify-content-center mb-5">
           <span style={{ fontSize: "15px", textAlign: "center" }}>
-            An email will be sent to your client informing them that their
-            reservation has been canceled. Please fill the reason below
+            Một email sẽ được gửi đến khách hàng của bạn thông báo rằng đơn của họ đã bị hủy bỏ. Vui lòng điền lý do bên dưới
           </span>
         </div>
         <TextArea
@@ -28,7 +27,7 @@ const ReasonModal = ({updating, show, handleClose, onConfirm }) => {
             type="primary"
             onClick={() => onConfirm(reason)}
           >
-            <strong>Save</strong>
+            <strong>Lưu</strong>
           </Button>
         </div>
       </div>

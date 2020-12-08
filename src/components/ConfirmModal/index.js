@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Feather } from "../../components";
+import { Modal, Button } from "../../components";
 
 const ConfirmModal = ({
   show,
@@ -19,7 +19,7 @@ const ConfirmModal = ({
             style={{ width: "150px" }}
             onClick={handleClose}
           >
-            <strong>Cancel</strong>
+            <strong>Hủy bỏ</strong>
           </Button>
           <Button
             customClass="btn--block btn--primary"
@@ -27,7 +27,7 @@ const ConfirmModal = ({
             type="primary"
             onClick={onConfirm}
           >
-            <strong>Confirm</strong>
+            <strong>Xác nhận</strong>
           </Button>
         </div>
       </div>

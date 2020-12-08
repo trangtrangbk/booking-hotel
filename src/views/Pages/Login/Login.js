@@ -27,7 +27,7 @@ const Login = () => {
         </div>
         <div className="signinbox bg-white">
           <div className="signin-header text-center">
-            <h2 className="widget-title mb-3">Log in</h2>
+            <h2 className="widget-title mb-3">Đăng nhập</h2>
           </div>
           <div className="form-group">
             <label>EMAIL</label>
@@ -59,7 +59,7 @@ const Login = () => {
               type="primary"
               onClick={login}
             >
-              <strong>Log in</strong>
+              <strong>Đăng nhập</strong>
             </Button>
           </div>
         </div>

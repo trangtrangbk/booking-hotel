@@ -46,7 +46,6 @@ const GoogleBtn = () => {
 
   const handleLoginFailure = (response) => {
     console.log(response);
-    alert("Failed to log in");
   };
   if (isAuthenticated) {
     return <Redirect to="/" />;

@@ -173,7 +173,7 @@ const MyReservations = () => {
                 <KeyboardDatePicker
                   margin="normal"
                   id="mui-pickers-date"
-                  label="Check-In From"
+                  label="Check In từ ngày"
                   value={checkInFrom}
                   name="checkInFrom"
                   format="dd/MM/yyyy"
@@ -189,7 +189,7 @@ const MyReservations = () => {
                 <KeyboardDatePicker
                   margin="normal"
                   id="mui-pickers-date"
-                  label="Check-In To"
+                  label="Check In đến ngày"
                   value={checkInTo}
                   name="checkInTo"
                   format="dd/MM/yyyy"
@@ -209,7 +209,7 @@ const MyReservations = () => {
                 <KeyboardDatePicker
                   margin="normal"
                   id="mui-pickers-date"
-                  label="Check-In date"
+                  label="Check Out từ ngày"
                   value={checkOutFrom}
                   name="checkOutFrom"
                   format="dd/MM/yyyy"
@@ -225,7 +225,7 @@ const MyReservations = () => {
                 <KeyboardDatePicker
                   margin="normal"
                   id="mui-pickers-date"
-                  label="Check-Out To"
+                  label="Check Out đến ngày"
                   value={checkOutTo}
                   name="checkOutTo"
                   format="dd/MM/yyyy"
@@ -245,7 +245,7 @@ const MyReservations = () => {
             htmlType="submit"
             style={{ width: "70px", margin: "2rem auto" }}
           >
-            FILTER
+            Lọc
           </Button>
         </div>
       </form>
@@ -266,8 +266,9 @@ const MyReservations = () => {
           />
         </div>
         <div className="col-12">
-          <FilterTable tableData={content} head={["Code", "Hotel", "Room", "Email", "Check in", "Check out","Total days",
-        "Status", "Created At"]} />
+          <FilterTable tableData={content} head={["Code", "Khách sạn"
+          , "Phòng", "Email", "Check in", "Check out","Tổng ngày",
+        " Trạng thái ", "Ngày tạo"]} />
         </div>
       </div>
       <div className="row justify-flex-end">

@@ -110,7 +110,7 @@ const AddAdmin = ({ show, handleClose, onAddSuccess }) => {
                   <ImageUploader
                     withPreview
                     withIcon={true}
-                    buttonText="Choose images"
+                    buttonText="Chọn hình ảnh"
                     onChange={(pic) => onDrop(pic)}
                     imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                     maxFileSize={5242880}

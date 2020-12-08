@@ -134,7 +134,7 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
   return (
     <Modal show={show} handleClose={handleClose} maxWidth={1200}>
       <div className="modal__title">
-        Create your hotel by fill the below fields
+      Tạo khách sạn của bạn bằng cách điền đầy đủ thông tin dưới đây
       </div>
       <div className="modal__content">
         <div className="row">
@@ -145,7 +145,7 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
             <div className="col-6">
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Name</label>
+                  <label>Tên </label>
                   <TextField
                     onChange={(e) => set_name(e.target.value)}
                     type="text"
@@ -155,7 +155,7 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
               </div>
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Description</label>
+                  <label> Mô tả </label>
                   <TextArea
                     onChange={(e) => set_description(e.target.value)}
                     type="text"
@@ -165,11 +165,11 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
               </div>
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Image</label>
+                  <label>Hình ảnh</label>
                   <ImageUploader
                     withPreview
                     withIcon={true}
-                    buttonText="Choose images"
+                    buttonText="Chọn hình ảnh"
                     onChange={(pic) => onDrop(pic)}
                     imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                     maxFileSize={5242880}
@@ -180,7 +180,7 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
             <div className="col-6">
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Amenities</label>
+                  <label>Tiện ích </label>
                   <DropdownCheckBox
                     options={amenityList}
                     defaultValue={
@@ -209,7 +209,7 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
                 </div>
 
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Phone</label>
+                  <label>Số điện thoại </label>
                   <TextField
                     onChange={(e) => set_phone(e.target.value)}
                     type="text"
@@ -220,7 +220,7 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
                 <div className="row">
                   <div className="col-6 no-padding">
                     <div className="form-group" style={{ width: "100%" }}>
-                      <label>Address</label>
+                      <label>Địa chỉ</label>
                       <TextField
                         onChange={(e) => set_address(e.target.value)}
                         type="text"
@@ -230,7 +230,7 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
                   </div>
                   <div className="col-6" style={{ paddingRight: "0" }}>
                     <div className="form-group" style={{ width: "100%" }}>
-                      <label>City</label>
+                      <label> Thành phố</label>
                       <Dropdown
                         onChange={(e) => setCity(e.value)}
                         defaultValue={{ value: city, label: city }}
@@ -255,7 +255,7 @@ const AddHotel = ({ show, handleClose, onAddSuccess }) => {
               disabled={loading}
               type="primary"
             >
-              <strong>Add</strong>
+              <strong>Thêm</strong>
             </Button>
           </div>
         </form>

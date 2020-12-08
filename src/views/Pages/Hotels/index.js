@@ -42,7 +42,7 @@ const Hotels = () => {
 
         {/* welcome  */}
         <div className="welcome">
-          <h1 className="row">Find The Best Hotels</h1>
+          <h1 className="row">The River System</h1>
           <div className="row booking-form">
             <div className="welcome__block">
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -81,7 +81,7 @@ const Hotels = () => {
               </MuiPickersUtilsProvider>
             </div>
             <div className="welcome__block">
-              <label className="row">Location</label>
+              <label className="row">Địa điểm</label>
               <Dropdown
                 onChange={(e) => setCity(e.value)}
                 defaultValue={{ value: city, label: city }}
@@ -95,7 +95,7 @@ const Hotels = () => {
             </div>
             <div className="welcome__block" style={{ marginTop: "38px" }}>
               <div className="book_button">
-                <a href="booking.html">Filter</a>
+                <a href="booking.html">Lọc</a>
               </div>
             </div>
           </div>
@@ -152,7 +152,7 @@ const Hotels = () => {
                     )
                   }
                 >
-                  <strong>See more...</strong>
+                  <strong>Xem thêm</strong>
                 </Button>
               </div>
             )}

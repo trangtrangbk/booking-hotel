@@ -10,12 +10,12 @@ const Profile = () => {
   return (
     <div className="content" style={{ padding: "20px" }}>
       {user?.linked ? (
-        <TabComponent tabs={["Information", "Setup"]}>
+        <TabComponent tabs={["Thông tin", "Thiết lập"]}>
           <Information />
           <Setup />
         </TabComponent>
       ) : (
-        <TabComponent tabs={["Information", "Password", "Setup"]}>
+        <TabComponent tabs={["Thông tin", "Mật khẩu", "Thiết lập"]}>
           <Information />
           <Password />
           <Setup />

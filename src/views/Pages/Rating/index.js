@@ -114,7 +114,7 @@ const Rooms = (props) => {
                   color={"#fff"}
                   onClick={onReview}
                 >
-                  <span className="status-label">Save</span>
+                  <span className="status-label">Lưu</span>
                 </SmallCard>
               </div>
             </div>

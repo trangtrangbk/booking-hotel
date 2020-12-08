@@ -81,15 +81,14 @@ const Rooms = () => {
       ) : hotels.length === 0 ? (
         <div className="row justify-content-center">
           <span className="text-center" style={{ margin: "auto" }}>
-            Create your hotel first.
+          Đầu tiên, hãy tạo khách sạn của bạn
           </span>
         </div>
       ) : rooms.length === 0 ? (
         <div className="row justify-content-center">
           <span className="text-center" style={{ margin: "auto" }}>
-            Your hotel currently has no rooms. Create one{" "}
-            <span className="hover-text" onClick={() => setAddRoom(true)}>
-              here
+Khách sạn của bạn chưa có phòng nào. Hãy tạo phòng            <span className="hover-text" onClick={() => setAddRoom(true)}>
+ở đây
             </span>
           </span>
         </div>
@@ -172,7 +171,7 @@ const Rooms = () => {
       <ConfirmModal
         show={deleteRoom}
         handleClose={() => setDeleteRoom(false)}
-        msg={"This room will be permanently deleted"}
+        msg={"Xác nhận xóa phòng"}
         onConfirm={onDeleteRoom}
       />
     </>

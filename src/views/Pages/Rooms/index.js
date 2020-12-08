@@ -59,7 +59,10 @@ const Rooms = (props) => {
 
         {/* welcome  */}
         <div className="welcome">
-          <h1 className="row">{hotel.name}</h1>
+          <h1 className="row" style ={{textAlign : "center"}}>{hotel.name}</h1>
+          <div className="row">
+            <span style = {{margin : "auto", color : "#ff8939", fontWeight: "bold", fontSize : "25px"}}>{hotel.rate}</span>
+          </div>
           <div className="row">
             <StarRatings
               rating={hotel.rate || 0}
@@ -130,7 +133,7 @@ const Rooms = (props) => {
                       <div></div>
                       <div className="visit_button">
                         <NavLink to={`/hotels/${hotelId}/rooms/${room._id}`}>
-                          Book now
+                        Đặt ngay
                         </NavLink>
                       </div>
                     </div>
@@ -140,35 +143,38 @@ const Rooms = (props) => {
             </div>
           </div>
         </div>
-        {
-          (hotel.rooms > rooms.length) && <div className="row">
-          <Button
-            customClass="btn--primary"
-            style={{ width: "150px", margin: "auto" }}
-            type="primary"
-            onClick={() =>
-              dispatch(
-                fetchListRooms({
-                  filter: { hotelId },
-                  setting: {
-                    limit,
-                    offset: rooms.length,
-                  },
-                },rooms)
-              )
-            }
-          >
-            <strong>See more...</strong>
-          </Button>
-        </div>
-        }
+        {hotel.rooms > rooms.length && (
+          <div className="row">
+            <Button
+              customClass="btn--primary"
+              style={{ width: "150px", margin: "auto" }}
+              type="primary"
+              onClick={() =>
+                dispatch(
+                  fetchListRooms(
+                    {
+                      filter: { hotelId },
+                      setting: {
+                        limit,
+                        offset: rooms.length,
+                      },
+                    },
+                    rooms
+                  )
+                )
+              }
+            >
+              <strong>Xem thêm</strong>
+            </Button>
+          </div>
+        )}
       </div>
       <div className="section" style={{ maxWidth: "1300px" }}>
         <div className="row">
           <div className="col-md-12" style={{ color: "black" }}>
-            <h3 className="mb-5">Reviews</h3>
+            <h3 className="mb-5">Đánh giá</h3>
             {reviews.length == 0 ? (
-              <span>No review</span>
+              <span>Chưa có đánh giá</span>
             ) : (
               reviews.map((review) => (
                 <div key={review._id} className="mb-5">
@@ -207,7 +213,7 @@ const Rooms = (props) => {
             )}
           </div>
         </div>
-              </div>
+      </div>
       {sending && <Spinner />}
     </div>
   );

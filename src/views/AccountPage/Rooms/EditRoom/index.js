@@ -142,7 +142,6 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
   return (
     <Modal show={show} handleClose={handleClose} maxWidth={1200}>
       <div className="modal__title">
-        Create hotel room by fill the below fields
       </div>
       <div className="modal__content">
         <div className="row">
@@ -153,7 +152,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
             <div className="col-6">
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Room name</label>
+                  <label>Tên phòng</label>
                   <TextField
                     onChange={(e) => set_name(e.target.value)}
                     type="text"
@@ -164,7 +163,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
               </div>
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Description</label>
+                  <label>Mô tả</label>
                   <TextArea
                     onChange={(e) => set_description(e.target.value)}
                     type="text"
@@ -174,7 +173,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
               </div>
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Image</label>
+                  <label>Mô tả</label>
                   <div className='row'>
                     {images?.map((im,index) => (
                       <div className="uploadPictureContainer" key ={im}>
@@ -190,7 +189,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
                   <ImageUploader
                     withPreview
                     withIcon={true}
-                    buttonText="Choose images"
+                    buttonText="Chọn hình ảnh"
                     onChange={(pic) => onDrop(pic)}
                     imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                     maxFileSize={5242880}
@@ -201,7 +200,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
                 <div className="col-6 no-padding">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label>
-                      Area (m<sup>2</sup>)
+                    Diện tích (m<sup>2</sup>)
                     </label>
                     <TextField
                       onChange={(e) => set_area(e.target.value)}
@@ -214,7 +213,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
                 <div className="col-6" style={{ paddingRight: "0" }}>
                   <div className="form-group" style={{ width: "100%" }}>
                     <label>
-                      Price <sup>$/day</sup>
+                    Giá <sup>$/ngày</sup>
                     </label>
                     <TextField
                       onChange={(e) => set_price(e.target.value)}
@@ -229,7 +228,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
             <div className="col-6">
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Status</label>
+                  <label>Trạng thái</label>
                   <Dropdown
                     onChange={(e) => set_status(e.value)}
                     defaultValue={{ value: status, label: status }}
@@ -238,7 +237,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
                 </div>
 
                 <div className="form-group" style={{ width: "100%" }}>
-                  <label>Amenities</label>
+                  <label>Tiện ích</label>
                   <DropdownCheckBox
                     options={amenityList}
                     defaultValue={
@@ -257,7 +256,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
                 </div>
                 <div className="form-group" style={{ width: "100%" }}>
                   <label className="row justify-content-start">
-                    <span>Room rules</span>
+                    <span>Quy tắc trong phòng</span>
                     <Feather
                       name="PlusCircle"
                       style={{ marginLeft: "20px" }}
@@ -315,7 +314,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
               htmlType="submit"
               type="primary"
             >
-              <strong>Save</strong>
+              <strong>Lưu</strong>
             </Button>
           </div>
         </form>

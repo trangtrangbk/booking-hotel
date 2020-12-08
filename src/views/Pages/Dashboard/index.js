@@ -24,7 +24,7 @@ const Dashboard = () => {
 
         {/* welcome  */}
         <div className="welcome">
-          <h1 className="row">Find The Best Hotel</h1>
+          <h1 className="row">The River</h1>
           <div className="row booking-form">
             <div className="welcome__block">
               <label className="row">Check In</label>
@@ -42,7 +42,7 @@ const Dashboard = () => {
             </div>
             <div className="welcome__block" style={{ marginTop: "38px" }}>
               <div className="book_button">
-                <a href="booking.html">Book now</a>
+                <a href="booking.html">Đặt ngay</a>
               </div>
             </div>
           </div>
@@ -52,17 +52,15 @@ const Dashboard = () => {
       {/* hotels */}
       <div className="hotels">
         <div className="section text-center">
-          <h2>Book A Room</h2>
+          <h2>Đặt phòng ngay</h2>
           <span>
-            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-            posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque
-            eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante
-            ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-            Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum,
-            a bibendum lacus suscipit sit.
+            The River mang đến cho các bạn những lựa chọn phù hợp nhất để nghỉ
+            ngơi. Hệ thống của chúng tôi tập hợp nhiều khách sạn với đầy đủ tiện
+            nghi cũng như đa đạng về mức giá, dịch vụ. Hãy tận hưởng những
+            chuyến đi của bạn.
           </span>
           <div className="book_button" style={{ margin: "1rem auto" }}>
-            <NavLink to="/hotels">View more hotels</NavLink>
+            <NavLink to="/hotels">Xem thêm khách sạn</NavLink>
           </div>
         </div>
         <div className="section">
@@ -86,19 +84,28 @@ const Dashboard = () => {
                     ></div>
                   </div>
                   <div className="col-6 hotel__description">
-                    <h2 style={{padding:"0", color : '#ffa37b', marginBottom : '1rem'}}>{hotel.name}</h2>
-                    <div className='row flex justify-content-start mb-3'>
-                      <Feather name='MapPin' style={{marginRight : '0.5rem'}}/>
-                      <span>
-                      {hotel.city}
-                      </span>
+                    <h2
+                      style={{
+                        padding: "0",
+                        color: "#ffa37b",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      {hotel.name}
+                    </h2>
+                    <div className="row flex justify-content-start mb-3">
+                      <Feather
+                        name="MapPin"
+                        style={{ marginRight: "0.5rem" }}
+                      />
+                      <span>{hotel.city}</span>
                     </div>
                     <div>
                       <StarRatings
                         rating={hotel.rate || 0}
                         starRatedColor="#ff8939"
                         starDimension="22px"
-                        starSpacing ='3px'
+                        starSpacing="3px"
                         numberOfStars={5}
                         name="rating"
                       />

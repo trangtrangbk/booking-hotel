@@ -113,7 +113,7 @@ const Room = (props) => {
   return (
     <div className="main">
       {/* filter */}
-      <div className="homepage">
+      {/* <div className="homepage">
         <div
           className="bg"
           style={
@@ -121,11 +121,10 @@ const Room = (props) => {
           }
         ></div>
 
-        {/* welcome  */}
         <div className="welcome">
           <h1 className="row">{hotel.name}</h1>
         </div>
-      </div>
+      </div> */}
 
       <div className="section">
         <div className="row">
@@ -135,7 +134,7 @@ const Room = (props) => {
                 <h4 className="bottom-line mb-5" style={{ padding: "10px 0" }}>
                   <span className="mr-20">{room.name}</span>
                   <span className="price-tag">
-                    <span className="price-tag__main">{room.price} $/day</span>
+                    <span className="price-tag__main">{room.price} $/ngày</span>
                   </span>
                 </h4>
                 {room.image && (
@@ -150,11 +149,11 @@ const Room = (props) => {
                   </Slide>
                 )}
                 <div className="row content__block bottom-line">
-                  <label>Description</label>
+                  <label>Mô tả</label>
                   <span>{room.description}</span>
                 </div>
                 <div className="row content__block bottom-line">
-                  <label>Amenities</label>
+                  <label>Tiện ích</label>
                   <div className="row amenities">
                     {room.amenities?.map((amenity, index) => (
                       <div className="amenities__item" key={index}>
@@ -165,13 +164,13 @@ const Room = (props) => {
                 </div>
                 <div className="row content__block bottom-line">
                   <div className="col-md-6 no-padding">
-                    <label>Space</label>
+                    <label>Không gian</label>
                     <span>
-                      Area: {room.area} m <sup>2</sup>
+                    Diện tích: {room.area} m <sup>2</sup>
                     </span>
                   </div>
                   <div className="col-md-6 no-padding">
-                    <label>House Rules</label>
+                    <label>Lưu ý</label>
                     {room.rules &&
                       room.rules.map((rule, index) => (
                         <div className="row" key={index}>
@@ -191,15 +190,15 @@ const Room = (props) => {
               <div className="col-md-5">
                 <Calendar room = {room}/>
                 <form className="booking-form" onSubmit={handleSubmit}>
-                  <div className="booking-form__head">Make a reservation</div>
+                  <div className="booking-form__head">Tạo đơn đặt phòng</div>
                   <div className="booking-form__main">
-                    <label className="row">Name</label>
+                    <label className="row">Tên</label>
                     <TextField
                       defaultValue={name}
                       onChange={(e) => setName(e.target.value)}
                       required
                     />
-                    <label className="row">Address</label>
+                    <label className="row">Địa chỉ</label>
                     <TextField
                       defaultValue={address}
                       onChange={(e) => setAddress(e.target.value)}
@@ -213,7 +212,7 @@ const Room = (props) => {
                       required
                     />
 
-                    <label className="row">Phone</label>
+                    <label className="row">Số điện thoại</label>
                     <TextField
                       defaultValue={phone}
                       onChange={(e) => setPhone(e.target.value)}
@@ -239,7 +238,7 @@ const Room = (props) => {
                     </div>
                     <div className="row">
                       <div className="col-6" style={{ paddingLeft: "0" }}>
-                        <label className="row">Adult</label>
+                        <label className="row">Người lớn</label>
                         <TextField
                           type="number"
                           defaultValue={adult}
@@ -248,7 +247,7 @@ const Room = (props) => {
                         />
                       </div>
                       <div className="col-6 no-padding">
-                        <label className="row">Children</label>
+                        <label className="row">Trẻ em </label>
                         <TextField
                           type="number"
                           defaultValue={children}
@@ -259,7 +258,7 @@ const Room = (props) => {
                     </div>
 
                     <div className="row">
-                      <label className="row">Note</label>
+                      <label className="row">Ghi chú</label>
                       <TextArea
                         defaultValue={note}
                         onChange={(e) => setNote(e.target.value)}
@@ -267,7 +266,7 @@ const Room = (props) => {
                     </div>
 
                     <div className="row mt-3">
-                      <label className="row">Cost</label>
+                      <label className="row">Giá</label>
                       <div className="row justify-content-between">
                         <div>
                           <span className="price-tag">
@@ -275,8 +274,7 @@ const Room = (props) => {
                               {room.price} $
                             </span>
                           </span>{" "}
-                          x {diffDays(startDate, endDate)}{" "}
-                          {diffDays(startDate, endDate) > 0 ? "days" : "day"}
+                          x {diffDays(startDate, endDate)}{" "}ngày
                         </div>
                         <div>
                           = {room.price * diffDays(startDate, endDate)} $
@@ -289,7 +287,7 @@ const Room = (props) => {
                         className="book_button cursor_pointer"
                         type="submit"
                       >
-                        Book now
+                        Đặt phòng 
                       </button>
                     </div>
                   </div>

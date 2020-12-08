@@ -173,7 +173,7 @@ const Dashboard = () => {
             <span>Loading...</span>
           ) : (
             stat.ratings?.map((review) => (
-              <div key={review._id} className="mb-5">
+              <div key={review._id} className="mb-3">
                 <div className="row">
                   <div>
                     <Avatar
@@ -208,7 +208,8 @@ const Dashboard = () => {
             ))
           )}
         </div>
-        <div className="col-md-7">
+        <div className="col-md-7"  style={{ padding: "20px"}}>
+        <h3 className="mb-3">Thống kê đơn theo phòng</h3>
           <div className="row" style={{ padding: "2rem" }}>
             {bestSeller.loading ? (
               <CircularProgress />
@@ -222,7 +223,8 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-      </div>
+      </div>      
+      <h3 className="mb-3"  style={{ padding: "20px"}}>Thống kê theo năm</h3>
       <div className="row" style={{ padding: "2rem" }}>
         {yearData.loading ? (
           <CircularProgress />

@@ -121,7 +121,7 @@ const EditAdmin = ({ show, admin, handleClose, onEditSuccess }) => {
                     <ImageUploader
                       withPreview
                       withIcon={true}
-                      buttonText="Choose images"
+                      buttonText="Chọn hình ảnh"
                       onChange={(pic) => onDrop(pic)}
                       imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                       maxFileSize={5242880}
@@ -165,7 +165,7 @@ const EditAdmin = ({ show, admin, handleClose, onEditSuccess }) => {
               htmlType="submit"
               type="primary"
             >
-              <strong>Save</strong>
+              <strong>Lưu</strong>
             </Button>
           </div>
         </form>

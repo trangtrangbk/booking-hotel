@@ -13,31 +13,31 @@ const SubMenu = styled.div`
 const menu = [
     {
         id: 1,
-        title: 'Dashboard',
+        title: 'Thống kê',
         icon: 'Grid',
         children: [],
         component: React.lazy(() => import('./Dashboard'))
     },
     {
         id: 2,
-        title: 'Hotels',
+        title: 'Khách sạn',
         icon: 'Home',
         children: [
             {
                 id: 3,
-                title: 'Informations',
+                title: 'Thông tin ',
                 children: [],
                 component: React.lazy(() => import('../Hotels'))
             },
             {
                 id: 4,
-                title: 'Rooms',
+                title: 'Phòng',
                 children: [],
                 component: React.lazy(() => import('../Rooms'))
             },
             {
                 id: 5,
-                title: 'Reservations',
+                title: 'Đơn phòng',
                 children: [],
                 component: React.lazy(() => import('../Reservations'))
             }
@@ -45,14 +45,14 @@ const menu = [
     },
     {
         id: 7,
-        title: 'My Reservations',
+        title: 'Đơn của bạn ',
         icon: 'Calendar',
         children: [],
         component: React.lazy(() => import('../MyReservations'))
     },
     {
         id: 6,
-        title: 'Profile',
+        title: 'Tài khoản',
         icon: 'Settings',
         children: [],
         component: React.lazy(() => import('../Profile'))

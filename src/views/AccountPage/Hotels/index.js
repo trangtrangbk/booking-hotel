@@ -8,7 +8,7 @@ import ConfirmModal from "../../../components/ConfirmModal";
 import { mappingAmenity } from "../../../utils/amenities";
 import { CircularProgress } from "@material-ui/core";
 import EditHotel from "./EditHotels";
-
+import StarRatings from "react-star-ratings"
 const Hotel = () => {
   const [addHotel, setAddHotel] = useState(false);
   const [deleteHotel, setDeleteHotel] = useState(false);
@@ -55,9 +55,9 @@ const Hotel = () => {
       ) : hotels.length === 0 ? (
         <div className="row justify-content-center">
           <span className="text-center" style={{ margin: "auto" }}>
-            Create your own hotel{" "}
+          Tạo khách sạn của bạn{" "}
             <span className="hover-text" onClick={() => setAddHotel(true)}>
-              here
+            tại đây
             </span>
           </span>
         </div>
@@ -87,8 +87,20 @@ const Hotel = () => {
 
               {/* welcome  */}
               <div className="welcome">
-                <h1 className="row">{hotels[0].name}</h1>
-
+                <h1 className="row" style ={{textAlign : "center"}}>{hotels[0].name}</h1>
+                <div className="row">
+            <span style = {{margin : "auto", color : "#ff8939", fontWeight: "bold", fontSize : "25px"}}>{hotels[0].rate}</span>
+          </div>
+          <div className="row">
+            <StarRatings
+              rating={hotels[0].rate || 0}
+              starRatedColor="#ff8939"
+              starDimension="30px"
+              starSpacing="5px"
+              numberOfStars={5}
+              name="rating"
+            />
+          </div>
             <div className="row hotel__infor">
               <div className="row amenities">
                 {hotels[0].amenities.map((amenity, index) => (
@@ -143,7 +155,7 @@ const Hotel = () => {
       <ConfirmModal
         show={deleteHotel}
         handleClose={() => setDeleteHotel(false)}
-        msg={"This hotel will be permanently deleted"}
+        msg={"Xác nhận xóa khách sạn?"}
         onConfirm={onDeleteHotel}
       />
     </>

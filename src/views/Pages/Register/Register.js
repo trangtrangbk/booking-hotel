@@ -7,6 +7,7 @@ import {
   Spinner,
   TextField,
 } from "../../../components";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const Register = () => {
   const handleMouseDownConfirmPassword = () =>
     setShowConfirmPassword(!showPassword);
   const [showPassword, setShowPassword] = useState(false);
-
+  const history = useHistory();
   const [msg, setMsg] = useState("");
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
@@ -37,7 +38,9 @@ const Register = () => {
         email,
         password,
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        history.push("/login")
+      })
       .catch((err) => {
         setMsg(err.response.data.message);
       });
@@ -50,14 +53,14 @@ const Register = () => {
         </div>
         <div className="signinbox bg-white">
           <div className="signin-header text-center">
-            <h2 className="widget-title mb-3">Sign Up</h2>
+            <h2 className="widget-title mb-3">Đăng ký</h2>
           </div>
           <div className="form-group">
             <span style={{ color: "#de1414cf", fontSize: "15px" }}>{msg}</span>
           </div>
           <form onSubmit={signup}>
             <div className="form-group">
-              <label>Name</label>
+              <label>Tên</label>
               <TextField
                 placeholder=""
                 type="text"
@@ -79,7 +82,7 @@ const Register = () => {
               />
             </div>
             <div className="form-group">
-              <label>PASSWORD</label>
+              <label>Mật khẩu </label>
               <TextField
                 label="Some label"
                 variant="outlined"
@@ -104,7 +107,7 @@ const Register = () => {
               />
             </div>
             <div className="form-group">
-              <label>CONFIRM PASSWORD</label>
+              <label>Xác nhận mật khẩu</label>
               <TextField
                 label="Some label"
                 variant="outlined"
@@ -137,7 +140,7 @@ const Register = () => {
                 htmlType="submit"
                 type="primary"
               >
-                <strong>Sign up</strong>
+                <strong>Đăng ký</strong>
               </Button>
             </div>
           </form>

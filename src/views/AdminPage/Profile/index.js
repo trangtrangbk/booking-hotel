@@ -1,7 +1,17 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
+import Information from "./Infomation";
+import Password from "./Password";
+import TabComponent from "../../../components/Tabs";
 const Profile = () => {
-  return <div className="main">Profile</div>;
+
+  return (
+    <div className="content" style={{ padding: "20px" }}>
+      <TabComponent tabs={["Thông tin", "Mật khẩu"]}>
+        <Information />
+        <Password />
+      </TabComponent>
+    </div>
+  );
 };
 
 export default Profile;

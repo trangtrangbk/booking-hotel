@@ -20,7 +20,7 @@ const Details = ({ room, setView = () => {}, ...props }) => {
           <h4 className="bottom-line mb-5" style={{ padding: "10px 0" }}>
             <span className="mr-20">{room.name}</span>
             <span className="price-tag">
-              <span className="price-tag__main">{room.price} $/day</span>
+              <span className="price-tag__main">{room.price} $/ngày</span>
             </span>
           </h4>
           {room.image && (
@@ -37,11 +37,11 @@ const Details = ({ room, setView = () => {}, ...props }) => {
             </div>
           )}
           <div className="row content__block bottom-line big-padding">
-            <label>Description</label>
+            <label>Mô tả</label>
             <span>{room.description}</span>
           </div>
           <div className="row content__block bottom-line big-padding">
-            <label>Amenities</label>
+            <label>Tiện ích</label>
             <div className="row amenities">
               {room.amenities.map((amenity, index) => (
                 <div className="amenities__item" key={index}>
@@ -52,13 +52,13 @@ const Details = ({ room, setView = () => {}, ...props }) => {
           </div>
           <div className="row content__block bottom-line big-padding">
             <div className="col-md-6 no-padding">
-              <label>Space</label>
+              <label>Không gian</label>
               <span>
-                Area: {room.area} m <sup>2</sup>
+              Diện tích: {room.area} m <sup>2</sup>
               </span>
             </div>
             <div className="col-md-6 no-padding">
-              <label>Room Rules</label>
+              <label>Quy tắc trong phòng</label>
               <div className="row">
                 {room.rules &&
                   room.rules.map((rule, index) => (

@@ -4,24 +4,20 @@ import { Button, TextField } from "../../../../components";
 import ImageUploader from "react-images-upload";
 import service from "../../../../service/service";
 import { storage } from "../../../../firebase/firebase";
-import { loadUser } from "../../../../actions/auth";
+import { loadAdmin } from "../../../../actions/auth";
 import { NotificationManager } from "react-notifications";
 
 const Information = () => {
-  const { user } = useSelector((store) => store.auth);
-  const [name, set_name] = useState(user?.name);
-  const [avatar, set_avatar] = useState(user?.avatar);
+  const { admin } = useSelector((store) => store.auth);
+  const [name, set_name] = useState(admin?.name);
+  const [avatar, set_avatar] = useState(admin?.avatar);
   const [new_avatar, set_new_avatar] = useState([]);
-  const [phone, set_phone] = useState(user?.phone);
-  const [address, set_address] = useState(user?.address);
   const [loading, set_loading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-    set_name(user?.name);
-    set_avatar(user?.avatar);
-    set_address(user?.address);
-    set_phone(user?.phone);
-  }, [user]);
+    set_name(admin?.name);
+    set_avatar(admin?.avatar);
+  }, [admin]);
 
   const onDrop = (pic) => {
     set_new_avatar(pic);
@@ -37,7 +33,6 @@ const Information = () => {
             (snapshot) => {
               var progress =
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              // console.log("Upload is " + progress + "% done");
             },
             reject,
             () => {
@@ -64,18 +59,16 @@ const Information = () => {
         const params = {
           avatar: image[0] || avatar,
           name,
-          address,
-          phone
         };
         service
-          .put(`/accounts/${user._id}`, params)
+          .put(`/admins/${admin._id}`, params)
           .then((res) => {
             NotificationManager.success(
-              "Your account information has been updated successfully",
-              "Updated",
+              "Thông tin tài khoản của bạn đã được cập nhật",
+              "Đã cập nhật",
               1500
             );
-            dispatch(loadUser());
+            dispatch(loadAdmin());
             set_loading(false);
           })
           .catch((err) => {
@@ -131,24 +124,8 @@ const Information = () => {
               />
             </div>
             <div className="col-6">
-              <label>Địa chỉ</label>
-              <TextField
-                value={address}
-                onChange={(e) => set_address(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-6">
               <label>Email</label>
-              <TextField value={user?.email} disabled />
-            </div>
-            <div className="col-6">
-              <label>Số điện thoại</label>
-              <TextField
-                value={phone}
-                onChange={(e) => set_phone(e.target.value)}
-              />
+              <TextField value={admin?.email} disabled />
             </div>
           </div>
           <div className="row justify-flex-end">
