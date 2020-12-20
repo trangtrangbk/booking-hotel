@@ -65,7 +65,7 @@ const Rooms = (props) => {
         name,
         text,
       })
-      .then((res) => history.push("/"))
+      .then((res) => history.push(`/hotels/${hotelId}`))
       .catch((e) => console.log(e));
   };
   if (msg ==='home' || msg==='rated') history.push('/')

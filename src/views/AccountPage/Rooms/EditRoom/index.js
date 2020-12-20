@@ -51,6 +51,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
   const [description, set_description] = useState(room.description);
   const [price, set_price] = useState(room.price);
   const [area, set_area] = useState(room.area);
+  const [prepay, set_prepay] = useState(room.prepay || 0);
   const [status, set_status] = useState(room.status);
   const [amenities, set_amenities] = useState(room.amenities);
   const [rules, set_rules] = useState(room.rules);
@@ -66,6 +67,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
     set_description(room.description);
     set_price(room.price);
     set_amenities(room.amenities);
+    set_prepay(room.prepay || 0);
     set_area(room.area);
     set_rules(room.rules);
     set_images(room.image);
@@ -80,7 +82,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
       .then((image) => {
         const params = {
           hotelId,
-          image : image ?[...images, ...image] : images,
+          image: image ? [...images, ...image] : images,
           amenities: amenities,
           rules: rules.filter((rule) => rule !== ""),
           name,
@@ -88,6 +90,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
           price,
           area,
           status,
+          prepay,
         };
         service
           .put(`/rooms/${room._id}`, params)
@@ -141,8 +144,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
   };
   return (
     <Modal show={show} handleClose={handleClose} maxWidth={1200}>
-      <div className="modal__title">
-      </div>
+      <div className="modal__title"></div>
       <div className="modal__content">
         <div className="row">
           <span style={{ color: "#de1414cf", fontSize: "15px" }}>{msg}</span>
@@ -174,14 +176,19 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
               <div className="row">
                 <div className="form-group" style={{ width: "100%" }}>
                   <label>Mô tả</label>
-                  <div className='row'>
-                    {images?.map((im,index) => (
-                      <div className="uploadPictureContainer" key ={im}>
-                        <div className="deleteImage" onClick ={()=>{
-                          const temp =[...images]
-                          temp.splice(index,1)
-                          set_images(temp)
-                        }}>X</div>
+                  <div className="row">
+                    {images?.map((im, index) => (
+                      <div className="uploadPictureContainer" key={im}>
+                        <div
+                          className="deleteImage"
+                          onClick={() => {
+                            const temp = [...images];
+                            temp.splice(index, 1);
+                            set_images(temp);
+                          }}
+                        >
+                          X
+                        </div>
                         <img className="uploadPicture" alt="preview" src={im} />
                       </div>
                     ))}
@@ -197,10 +204,10 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-6 no-padding">
+                <div className="col-4 no-padding">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label>
-                    Diện tích (m<sup>2</sup>)
+                      Diện tích (m<sup>2</sup>)
                     </label>
                     <TextField
                       onChange={(e) => set_area(e.target.value)}
@@ -210,16 +217,27 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
                     />
                   </div>
                 </div>
-                <div className="col-6" style={{ paddingRight: "0" }}>
+                <div className="col-4" style={{ paddingRight: "0" }}>
                   <div className="form-group" style={{ width: "100%" }}>
                     <label>
-                    Giá <sup>$/ngày</sup>
+                      Giá <sup>$/ngày</sup>
                     </label>
                     <TextField
                       onChange={(e) => set_price(e.target.value)}
                       type="number"
                       required
                       value={price}
+                    />
+                  </div>
+                </div>
+                <div className="col-4" style={{ paddingRight: "0" }}>
+                  <div className="form-group" style={{ width: "100%" }}>
+                    <label>Trả trước (%)</label>
+                    <TextField
+                      onChange={(e) => set_prepay(e.target.value)}
+                      type="number"
+                      required
+                      value={prepay}
                     />
                   </div>
                 </div>

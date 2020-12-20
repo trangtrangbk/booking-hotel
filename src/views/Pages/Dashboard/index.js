@@ -5,18 +5,37 @@ import StarRatings from "react-star-ratings";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListHotels } from "../../../redux/reducers/hotels/actions";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Feather } from "../../../components";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import service from "../../../service/service";
 
 const Dashboard = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
   const { hotels, sending } = useSelector((store) => store.hotels);
   const dispatch = useDispatch();
-
+  const history = useHistory();
   useEffect(() => {
     dispatch(fetchListHotels());
   }, []);
 
+  const onGetAvailable = () => {
+    service
+      .get("/hotels/available", {params : {setting : {
+        checkIn : startDate,
+        checkOut : endDate
+      }}})
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => err);
+  };
   return (
     <div className="main">
       <div className="homepage">
@@ -24,25 +43,47 @@ const Dashboard = () => {
 
         {/* welcome  */}
         <div className="welcome">
-          <h1 className="row">The River</h1>
+          <h1 className="row">The River System</h1>
           <div className="row booking-form">
             <div className="welcome__block">
-              <label className="row">Check In</label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="mui-pickers-date"
+                  label="Check In"
+                  value={startDate}
+                  name="checkInFrom"
+                  format="dd/MM/yyyy"
+                  onChange={(date) => {
+                    setStartDate(date);
+                  }}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </MuiPickersUtilsProvider>
             </div>
             <div className="welcome__block">
-              <label className="row">Check Out</label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="mui-pickers-date"
+                  label="Check Out"
+                  value={endDate}
+                  name="checkInFrom"
+                  format="dd/MM/yyyy"
+                  onChange={(date) => {
+                    setEndDate(date);
+                  }}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </MuiPickersUtilsProvider>
             </div>
             <div className="welcome__block" style={{ marginTop: "38px" }}>
-              <div className="book_button">
-                <a href="booking.html">Đặt ngay</a>
+              <div className="book_button" onClick={onGetAvailable}>
+                <span>Lọc</span>
               </div>
             </div>
           </div>
@@ -72,7 +113,11 @@ const Dashboard = () => {
               // autoplay={false}
             >
               {hotels.map((hotel) => (
-                <div className="each-slide row flex" key={hotel._id}>
+                <div
+                  className="each-slide row flex"
+                  key={hotel._id}
+                  onClick={() => history.push(`/hotels/${hotel._id}`)}
+                >
                   <div className="col-6">
                     <div
                       style={{

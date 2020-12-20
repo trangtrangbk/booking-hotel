@@ -53,6 +53,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
   const [price, set_price] = useState("");
   const [area, set_area] = useState("");
   const [status, set_status] = useState("Available");
+  const [prepay, set_prepay] = useState(0);
   const [amenities, set_amenities] = useState([]);
   const [rules, set_rules] = useState(["Không hút thuốc"]);
   const [loading, setLoading] = useState(false);
@@ -68,6 +69,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
     set_price("");
     set_amenities([]);
     set_area("");
+    set_prepay(0);
     set_rules(["Không hút thuốc"]);
     setPicture([]);
     set_status("Available");
@@ -86,6 +88,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
           name,
           description,
           price,
+          prepay,
           area,
           status,
         };
@@ -142,7 +145,8 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
   return (
     <Modal show={show} handleClose={handleClose} maxWidth={1200}>
       <div className="modal__title">
-      Tạo phòng mới bằng cách điền đẩy đủ những thông tin dưới đây      </div>
+        Tạo phòng mới bằng cách điền đẩy đủ những thông tin dưới đây{" "}
+      </div>
       <div className="modal__content">
         <div className="row">
           <span style={{ color: "#de1414cf", fontSize: "15px" }}>{msg}</span>
@@ -185,10 +189,10 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-6 no-padding">
+                <div className="col-4 no-padding">
                   <div className="form-group" style={{ width: "100%" }}>
                     <label>
-                    Diện tích (m<sup>2</sup>)
+                      Diện tích (m<sup>2</sup>)
                     </label>
                     <TextField
                       value={area}
@@ -198,14 +202,25 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
                     />
                   </div>
                 </div>
-                <div className="col-6" style={{ paddingRight: "0" }}>
+                <div className="col-4" style={{ paddingRight: "0" }}>
                   <div className="form-group" style={{ width: "100%" }}>
                     <label>
-                    Giá <sup>$/ngày</sup>
+                      Giá <sup>$/ngày</sup>
                     </label>
                     <TextField
                       value={price}
                       onChange={(e) => set_price(e.target.value)}
+                      type="number"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="col-4" style={{ paddingRight: "0" }}>
+                  <div className="form-group" style={{ width: "100%" }}>
+                    <label>Trả trước (%)</label>
+                    <TextField
+                      value={prepay}
+                      onChange={(e) => set_prepay(e.target.value)}
                       type="number"
                       required
                     />

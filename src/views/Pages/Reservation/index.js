@@ -6,8 +6,8 @@ import service from "../../../service/service";
 import { Tick } from "react-crude-animated-tick";
 import { resetReservation } from "../../../redux/reducers/reservations/actions";
 import { useHistory } from "react-router-dom";
-import socketIOClient from "socket.io-client"
-const socket = socketIOClient("http://localhost:3006")
+import socketIOClient from "socket.io-client";
+const socket = socketIOClient("http://localhost:3006");
 
 const Reservation = () => {
   const { reservation } = useSelector((store) => store.reservations);
@@ -125,9 +125,7 @@ const ReservationData = ({ reservation, onNext }) => {
                     <Feather name="Clock" style={{ marginBottom: "11.5px" }} />
                   </div>
                   <div className="row justify-content-center">
-                    <span>
-                      {reservation.diffDays}{" "}ngày
-                    </span>
+                    <span>{reservation.diffDays} ngày</span>
                   </div>
                 </div>
                 <div className="col-4 no-padding">
@@ -147,8 +145,8 @@ const ReservationData = ({ reservation, onNext }) => {
                 <div className="col-6 no-padding justify-flex-end">
                   <label style={{ marginRight: "20px" }}>Bao gồm </label>
                   <span>
-                    {reservation.guests.adult}{" "}Người lớn -{" "}
-                    {reservation.guests.children}  Trẻ em
+                    {reservation.guests.adult} Người lớn -{" "}
+                    {reservation.guests.children} Trẻ em
                   </span>
                 </div>
               </div>
@@ -199,7 +197,7 @@ const ReservationData = ({ reservation, onNext }) => {
         style={{ maxWidth: "1300px", margin: "20px auto" }}
       >
         <Button onClick={onNext} style={{ width: "100px" }}>
-        Tiếp theo
+          Tiếp theo
         </Button>
       </div>
     </>
@@ -214,14 +212,17 @@ const Payment = ({ reservation, onPrevious, onNext }) => {
     service
       .post("/reservations", reservation)
       .then((res) => {
-        setLoading(false)
-        socket.emit("push-notif", {
-          title : "You have a new reservation",
-          type : "new",
-          message : "A new reservation have been create. Please check and make a confirmation",
-          link : "http://localhost:3000/dashboard",
-        })
-        service.post("/reservations/mail", reservation).then(res => res).catch(e => console.log(e))
+        setLoading(false);
+        // socket.emit("push-notif", {
+        //   title : "You have a new reservation",
+        //   type : "new",
+        //   message : "A new reservation have been create. Please check and make a confirmation",
+        //   link : "http://localhost:3000/dashboard",
+        // })
+        service
+          .post("/reservations/mail", reservation)
+          .then((res) => res)
+          .catch((e) => console.log(e));
         onNext();
       })
       .catch((err) => {
@@ -230,13 +231,25 @@ const Payment = ({ reservation, onPrevious, onNext }) => {
       });
   };
 
-  if(loading) return <Spinner />
+  if (loading) return <Spinner />;
 
   return (
     <>
+      <div style={{ textAlign: "center", marginTop: "60px" }}>
+        <span>
+          Phòng bạn muốn đặt có mức phí trả trước là{" "}
+          <strong>{reservation.room.prepay || 0}%</strong>.
+        </span>
+        <span>
+          Bạn cần trả trước{" "}
+          <strong>
+            {(reservation.cost * (reservation.room.prepay || 0)) / 100}$
+          </strong>
+        </span>
+      </div>
       <div className="payment">
         <PaypalBtn
-          amount={reservation.cost}
+          amount={(reservation.cost * (reservation.room.prepay || 0)) / 100}
           currency={"USD"}
           onSuccess={paymentHandler}
         />
@@ -246,7 +259,7 @@ const Payment = ({ reservation, onPrevious, onNext }) => {
         style={{ maxWidth: "1300px", margin: "20px auto" }}
       >
         <Button onClick={onPrevious} style={{ width: "100px" }}>
-        Trở về
+          Trở về
         </Button>
       </div>
     </>
@@ -254,13 +267,14 @@ const Payment = ({ reservation, onPrevious, onNext }) => {
 };
 
 const CompleteReservation = ({ onSubmitProgress }) => {
-  
   return (
     <>
       <div className="complete_reservation">
         <div className="row">
           <span style={{ margin: "auto" }}>
-          Cảm ơn đã sử dụng dịch vụ của chúng tôi. Đơn của bạn đã được gửi đến khách sạn. Chúng tôi sẽ liên hệ với bạn để xác nhận việc đặt phòng, xin hãy kiểm tra email thường xuyên.
+            Cảm ơn đã sử dụng dịch vụ của chúng tôi. Đơn của bạn đã được gửi đến
+            khách sạn. Chúng tôi sẽ liên hệ với bạn để xác nhận việc đặt phòng,
+            xin hãy kiểm tra email thường xuyên.
           </span>
         </div>
         <div className="row">
@@ -276,7 +290,7 @@ const CompleteReservation = ({ onSubmitProgress }) => {
           type={"secondary"}
           style={{ width: "100px" }}
         >
-          Trang chủ 
+          Trang chủ
         </Button>
       </div>
     </>

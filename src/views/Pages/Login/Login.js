@@ -63,11 +63,11 @@ const Login = () => {
             </Button>
           </div>
         </div>
-        <div className="text-center">
+        {/* <div className="text-center">
           <a href="#" className="forgot-pw">
             Forgot password?
           </a>
-        </div>
+        </div> */}
       </div>
       {loading && <Spinner />}
     </div>

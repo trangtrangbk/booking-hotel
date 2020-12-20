@@ -30,11 +30,13 @@ const RoomCalendar = ({room}) => {
     <div className="content" style={{ padding: "20px" }}>
       <Calendar
         events={room_reservation.map((r) => {
+          const _out = new Date(r.checkOut)
+          _out.setDate(_out.getDate() +1)
           return {
             id: r._id,
             // title: `Code : ${r.code}`,
-            start: `${r.checkIn.substring(0,10)}T00:00:00.000Z`,
-            end: `${r.checkOut.substring(0,10)}T00:00:00.000Z`,
+            start: `${r.checkIn}`,
+            end: `${_out}`,
           };
         })}
         views={["month"]}

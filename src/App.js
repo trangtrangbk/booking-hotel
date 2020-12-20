@@ -32,12 +32,12 @@ const AdminLogin = React.lazy(() => import("./views/AdminPage/Login/Login"));
 
 const App = () => {
 
-  const socket = socketIOClient("localhost:3006");
+  // const socket = socketIOClient("localhost:3006");
 
-  socket.on("push-notif", (message) => {
-    console.log(message);
-    NotificationManager.info(message.message,message.title,1000000);
-  });
+  // socket.on("push-notif", (message) => {
+  //   console.log(message);
+  //   NotificationManager.info(message.message,message.title,1000000);
+  // });
 
   return (
     <Provider store={store}>
