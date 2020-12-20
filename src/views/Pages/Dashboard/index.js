@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
 import { Slide } from "react-slideshow-image";
 import StarRatings from "react-star-ratings";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListHotels } from "../../../redux/reducers/hotels/actions";
 import { NavLink, useHistory } from "react-router-dom";
-import { Feather } from "../../../components";
+import { Dropdown, Feather, Spinner } from "../../../components";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
@@ -15,10 +14,12 @@ import DateFnsUtils from "@date-io/date-fns";
 import service from "../../../service/service";
 
 const Dashboard = () => {
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
-  const { hotels, sending } = useSelector((store) => store.hotels);
+  const [filtered_hotels, set_filtered_hotels] = useState(null);
+  const [loading, set_loading] = useState(false);
+  const { hotels } = useSelector((store) => store.hotels);
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
@@ -26,16 +27,26 @@ const Dashboard = () => {
   }, []);
 
   const onGetAvailable = () => {
+    set_loading(true);
     service
-      .get("/hotels/available", {params : {setting : {
-        checkIn : startDate,
-        checkOut : endDate
-      }}})
-      .then((res) => {
-        console.log(res);
+      .get("/hotels/available", {
+        params: {
+          setting: {
+            checkIn: startDate,
+            checkOut: endDate,
+          }
+        },
       })
-      .catch((err) => err);
+      .then((res) => {
+        set_loading(false);
+        set_filtered_hotels(res.data);
+      })
+      .catch((err) => {
+        set_loading(false);
+        console.log(err);
+      });
   };
+
   return (
     <div className="main">
       <div className="homepage">
@@ -80,89 +91,178 @@ const Dashboard = () => {
                   }}
                 />
               </MuiPickersUtilsProvider>
-            </div>
+            </div>            
             <div className="welcome__block" style={{ marginTop: "38px" }}>
-              <div className="book_button" onClick={onGetAvailable}>
+              <div
+                className="book_button cursor_pointer"
+                onClick={onGetAvailable}
+              >
                 <span>Lọc</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-
       {/* hotels */}
-      <div className="hotels">
-        <div className="section text-center">
-          <h2>Đặt phòng ngay</h2>
-          <span>
-            The River mang đến cho các bạn những lựa chọn phù hợp nhất để nghỉ
-            ngơi. Hệ thống của chúng tôi tập hợp nhiều khách sạn với đầy đủ tiện
-            nghi cũng như đa đạng về mức giá, dịch vụ. Hãy tận hưởng những
-            chuyến đi của bạn.
-          </span>
-          <div className="book_button" style={{ margin: "1rem auto" }}>
-            <NavLink to="/hotels">Xem thêm khách sạn</NavLink>
-          </div>
-        </div>
-        <div className="section">
-          {hotels && (
-            <Slide
-              easing="ease"
-              // pauseOnHover={true}
-              duration={5000}
-              // autoplay={false}
-            >
-              {hotels.map((hotel) => (
+      {filtered_hotels ? (
+        
+        <div className="filtered-hotels">
+          {Object.keys(filtered_hotels).map((available_hotel, index) => {
+            const _hotel = hotels.find((h) => h._id === available_hotel);
+            console.log(available_hotel, _hotel);
+            return (
+              <div className="filtered-hotels__item row" key={index}>
                 <div
-                  className="each-slide row flex"
-                  key={hotel._id}
-                  onClick={() => history.push(`/hotels/${hotel._id}`)}
+                  className="hotel row"
+                  onClick={() => history.push(`/hotels/${available_hotel}`)}
                 >
-                  <div className="col-6">
-                    <div
-                      style={{
-                        backgroundImage: `url(${hotel.image[0]})`,
-                        backgroundSize: "cover",
-                        height: "500px",
-                        padding: "20px",
-                      }}
-                    ></div>
+                  <div className="col-4">
+                    <img src={_hotel.image[0]} style={{ maxWidth: "300px" }} />
                   </div>
-                  <div className="col-6 hotel__description">
-                    <h2
-                      style={{
-                        padding: "0",
-                        color: "#ffa37b",
-                        marginBottom: "1rem",
-                      }}
-                    >
-                      {hotel.name}
-                    </h2>
-                    <div className="row flex justify-content-start mb-3">
-                      <Feather
-                        name="MapPin"
-                        style={{ marginRight: "0.5rem" }}
-                      />
-                      <span>{hotel.city}</span>
+                  <div className="col-8">
+                    <div className="row mb-2">
+                      <span
+                        style={{
+                          color: "#ff8939",
+                          fontWeight: "600",
+                          fontSize: "25px",
+                        }}
+                      >
+                        {_hotel.name}
+                      </span>
                     </div>
-                    <div>
+                    <div className="row mb-2">
+                      <span>{_hotel.address}</span>
+                    </div>
+                    <div className="row flex mb-2">
+                      <Feather name="Mail" className="mr-10" />
+                      <span>{_hotel.email}</span>
+                    </div>
+                    <div className="row flex mb-2">
+                      <Feather name="Phone" className="mr-10" />
+                      <span>{_hotel.phone}</span>
+                    </div>
+                    <div className="row">
                       <StarRatings
-                        rating={hotel.rate || 0}
+                        rating={_hotel.rate || 0}
                         starRatedColor="#ff8939"
                         starDimension="22px"
                         starSpacing="3px"
                         numberOfStars={5}
                         name="rating"
-                      />
+                      />{" "}
                     </div>
-                    <span>{hotel.description}</span>
                   </div>
                 </div>
-              ))}
-            </Slide>
+                <div className="rooms row">
+                  {filtered_hotels[available_hotel].map((room) => (
+                    <div
+                      key={room._id}
+                      className="room col-md-3 cursor_pointer"
+                      onClick={() =>
+                        history.push(
+                          `/hotels/${available_hotel}/rooms/${room._id}`
+                        )
+                      }
+                    >
+                      <img src={room.image[0]} />
+                      <div className="room__info">
+                        <h4 className="row md-3">{room.name}</h4>
+                        <div className="room__tag">{room.price}$</div>
+                        <div className="flex justify-content-between">
+                          <div></div>
+                          <div className="visit_button">
+                            <NavLink
+                              to={`/hotels/${available_hotel}/rooms/${room._id}`}
+                            >
+                              Đặt ngay
+                            </NavLink>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          }        
           )}
+                  </div>
+      ) : (
+        <div className="hotels">
+          <div className="section text-center">
+            <h2>Đặt phòng ngay</h2>
+            <span>
+              The River mang đến cho các bạn những lựa chọn phù hợp nhất để nghỉ
+              ngơi. Hệ thống của chúng tôi tập hợp nhiều khách sạn với đầy đủ
+              tiện nghi cũng như đa đạng về mức giá, dịch vụ. Hãy tận hưởng
+              những chuyến đi của bạn.
+            </span>
+            <div className="book_button" style={{ margin: "1rem auto" }}>
+              <NavLink to="/hotels">Xem thêm khách sạn</NavLink>
+            </div>
+          </div>
+          <div className="section">
+            {hotels && (
+              <Slide
+                easing="ease"
+                // pauseOnHover={true}
+                duration={5000}
+                // autoplay={false}
+              >
+                {hotels.map((hotel) => (
+                  <div
+                    className="each-slide row flex cursor_pointer"
+                    key={hotel._id}
+                    onClick={() => history.push(`/hotels/${hotel._id}`)}
+                  >
+                    <div className="col-6">
+                      <div
+                        style={{
+                          backgroundImage: `url(${hotel.image[0]})`,
+                          backgroundSize: "cover",
+                          height: "500px",
+                          padding: "20px",
+                        }}
+                      ></div>
+                    </div>
+                    <div className="col-6 hotel__description">
+                      <h2
+                        style={{
+                          padding: "0",
+                          color: "#ffa37b",
+                          marginBottom: "1rem",
+                        }}
+                      >
+                        {hotel.name}
+                      </h2>
+                      <div className="row flex justify-content-start mb-3">
+                        <Feather
+                          name="MapPin"
+                          style={{ marginRight: "0.5rem" }}
+                        />
+                        <span>{hotel.city}</span>
+                      </div>
+                      <div>
+                        <StarRatings
+                          rating={hotel.rate || 0}
+                          starRatedColor="#ff8939"
+                          starDimension="22px"
+                          starSpacing="3px"
+                          numberOfStars={5}
+                          name="rating"
+                        />
+                      </div>
+                      <span>{hotel.description}</span>
+                    </div>
+                  </div>
+                ))}
+              </Slide>
+            )}
+          </div>
         </div>
-      </div>
+      )}
+      {loading && <Spinner />}
     </div>
   );
 };

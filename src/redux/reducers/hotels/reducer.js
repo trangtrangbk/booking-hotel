@@ -2,7 +2,7 @@ import * as types from "./types";
 
 const initialState = {
   hotels: [],
-  count : 0,
+  count: 0,
   details: { count: 0, filter: "", limit: 0, page: 0, pages: 0 },
   sending: false,
 };
@@ -70,6 +70,12 @@ export const reducer = (state = initialState, action) => {
         sending: true,
       };
     case types.FETCH_LIST_HOTELS_SUCCESS:
+      if (!action.payload.loadmore)
+        return {
+          ...state,
+          hotels: action.payload.hotels,
+          sending: false,
+        };
       let _temp = [...state.hotels];
       const _id_list = _temp.map((t) => t._id);
       if (_id_list.length === 0) {
@@ -84,7 +90,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         hotels: _temp,
-        count : action.payload.count,
+        count: action.payload.count,
         details: action.payload.details,
         sending: false,
       };

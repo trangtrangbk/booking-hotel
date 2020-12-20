@@ -104,8 +104,8 @@ const Room = (props) => {
       .then((res) => history.push("/reservation"))
       .catch((err) => {
         NotificationManager.warning(
-          "You date order is not availabel. Please choose other day",
-          "Not availabel date",
+          "Ngày bạn chọn không còn trống, xin hãy chọn ngày khác",
+          "Ngày đã được đặt",
           3000
         );
       });

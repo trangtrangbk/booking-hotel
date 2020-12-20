@@ -8,19 +8,13 @@ import {
   Spinner,
   TextField,
 } from "../../../components";
-import { NavLink, useHistory } from "react-router-dom";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
 import { cityList } from "../../../utils/cityUtil";
+import { NavLink, useHistory } from "react-router-dom";
 const Hotels = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [city, setCity] = useState("Hà Nội");
   const { hotels, sending, count } = useSelector((store) => store.hotels);
   const [limit, set_limit] = useState(6);
+  const [city, set_city] = useState("");
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
@@ -30,78 +24,65 @@ const Hotels = () => {
           limit,
           offset: 0,
         },
+        filter: {
+          name: { $regex: search, $options: "i" },
+          city: { $regex: city, $options: "i" },
+        },
       })
     );
   }, []);
 
+  const onSearch = () => {
+    dispatch(
+      fetchListHotels({
+        setting: {
+          limit,
+          offset: 0,
+        },
+        filter: {
+          name: { $regex: search, $options: "i" },
+          city :{ $regex: city, $options: "i" },
+        },
+      }),
+      false
+    );
+  };
+
+  useEffect(() => {
+    onSearch()
+  },[city])
+
   return (
     <div className="main">
-      {/* filter */}
-      <div className="homepage">
-        <div className="bg"></div>
-
-        {/* welcome  */}
-        <div className="welcome">
-          <h1 className="row">The River System</h1>
-          <div className="row booking-form">
-            <div className="welcome__block">
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="mui-pickers-date"
-                  label="Check In"
-                  value={startDate}
-                  name="checkInFrom"
-                  format="dd/MM/yyyy"
-                  onChange={(date) => {
-                    setStartDate(date);
-                  }}
-                  KeyboardButtonProps={{
-                    "aria-label": "change date",
-                  }}
-                />
-              </MuiPickersUtilsProvider>
-            </div>
-            <div className="welcome__block">
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="mui-pickers-date"
-                  label="Check Out"
-                  value={endDate}
-                  name="checkInFrom"
-                  format="dd/MM/yyyy"
-                  onChange={(date) => {
-                    setEndDate(date);
-                  }}
-                  KeyboardButtonProps={{
-                    "aria-label": "change date",
-                  }}
-                />
-              </MuiPickersUtilsProvider>
-            </div>
-            <div className="welcome__block">
-              <label className="row">Địa điểm</label>
-              <Dropdown
-                onChange={(e) => setCity(e.value)}
-                defaultValue={{ value: city, label: city }}
-                options={cityList.map((c) => {
-                  return {
-                    value: c,
-                    label: c,
-                  };
-                })}
-              />{" "}
-            </div>
-            <div className="welcome__block" style={{ marginTop: "38px" }}>
-              <div className="book_button">
-                <a href="booking.html">Lọc</a>
-              </div>
-            </div>
+      <div className="section" style={{ padding: "20px" }}>
+        <div className="welcome__block flex">
+          <Dropdown
+            placeholder="Thành phố"
+            onChange={(e) => set_city(e.value)}
+            defaultValue={{ value: city, label: city }}
+            options={cityList.map((c) => {
+              return {
+                value: c,
+                label: c,
+              };
+            })}
+          />{" "}
+          <div className="col-12 search-form">
+            <TextField
+              value={search}
+              placeholder="Tìm kiếm"
+              onChange={(e) => setSearch(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <div className="toggle-password" onClick={onSearch}>
+                    <Feather name="Search" />
+                  </div>
+                ),
+              }}
+            />
           </div>
         </div>
       </div>
-
       <div className="section">
         <div className="row">
           <div className="col-md-12">

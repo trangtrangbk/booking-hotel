@@ -2,7 +2,7 @@ export const cityList = [
   "Tiền Giang",
   "Hưng Yên",
   "Hà Nội",
-  "TP Hồ Chí Minh",
+  "Hồ Chí Minh",
   "Cà Mau",
   "Đắc Lắc",
   "Nam Định",

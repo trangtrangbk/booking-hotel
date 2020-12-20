@@ -74,8 +74,8 @@ const Reservations = () => {
       service
         .get("/rooms", { params: { filter: { hotelId: hotels[0]._id } } })
         .then((res) => {
-          setRooms(res.data);
-          setFilterByRoom(res.data);
+          setRooms(res.data.rooms);
+          setFilterByRoom(res.data.rooms);
         })
         .catch((err) => {
           console.log(err);
@@ -175,7 +175,6 @@ const Reservations = () => {
   }, [tableData, searchText]);
 
   const filter1 = [
-    { value: "waiting", label: "Waiting" },
     { value: "confirmed", label: "Confirmed" },
     { value: "canceled", label: "Canceled" },
   ];
@@ -314,7 +313,7 @@ const Reservations = () => {
             </div>
           </>
         </div>
-        {selectedRow.status === "waiting" && (
+        {selectedRow.status === "confirmed" && (
           <div
             className="row justify-content-center"
             style={{ margin: "20px 0" }}
@@ -328,14 +327,6 @@ const Reservations = () => {
               }}
             >
               <strong>Hủy bỏ </strong>
-            </Button>
-            <Button
-              customClass="btn--block btn--primary"
-              style={{ width: "150px" }}
-              type="primary"
-              onClick={() => handleUpdateReservation({ status: "confirmed" })}
-            >
-              <strong>Xác nhận</strong>
             </Button>
           </div>
         )}

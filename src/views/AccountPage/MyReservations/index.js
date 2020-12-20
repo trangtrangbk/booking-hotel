@@ -67,7 +67,7 @@ const MyReservations = () => {
       service
         .get("/rooms")
         .then((res) => {
-          setRooms(res.data);
+          setRooms(res.data.rooms);
           setLoading(false);
         })
         .catch((err) => {

@@ -207,7 +207,6 @@ const ReservationData = ({ reservation, onNext }) => {
 const Payment = ({ reservation, onPrevious, onNext }) => {
   const [loading, setLoading] = useState(false);
   const paymentHandler = (details, data) => {
-    console.log(details, data);
     setLoading(true);
     service
       .post("/reservations", reservation)

@@ -8,7 +8,7 @@ const fetchListRooms = (params = {},oldRoom=[]) => async (dispatch) => {
     const rooms = await service.get("/rooms",{params});
     dispatch({ type: types.FETCH_LIST_ROOMS_SUCCESS, payload: {
         oldRoom : oldRoom,
-        newRoom :rooms.data
+        newRoom :rooms.data.rooms
     } });
   } catch (error) {
       console.log(error);

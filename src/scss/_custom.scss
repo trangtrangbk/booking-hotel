@@ -1803,6 +1803,21 @@ section {
 .main {
   min-height: calc(100vh - 300px);
 
+
+  .welcome {
+    &__block {
+      margin: 0 20px;
+      .dropdown {
+        border-radius: 0;
+        max-width: 250px;
+      }
+      .search-form {
+       input {
+        background: white;
+       }
+      }
+    }
+  }
   .homepage {
     position: relative;
     min-height: calc(100vh - 70px);
@@ -1851,10 +1866,6 @@ section {
       .booking-form {
         display: flex;
         justify-content: center;
-      }
-
-      &__block {
-        margin: 0 20px;
       }
 
       label {
@@ -2660,5 +2671,69 @@ $price-tag-dot-background: #fff;
         color: white !important;
       }
     }
+  }
+}
+
+.filtered-hotels {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 10px;
+  &__item {
+    margin: 20px 0;
+    padding: 20px;
+    border-bottom: 1px solid #e0e7ff;
+
+    .hotel {
+      box-shadow: 0px 9px 35px rgba(0, 0, 0, 0.09);
+      padding: 15px;
+    }
+  }
+}
+
+
+.rooms {
+  padding: 10px 40px;
+  .room {
+    position: relative;
+    box-shadow: 0px 9px 35px rgba(0, 0, 0, 0.09);
+    padding: 15px;
+    margin-left: 20px;
+    overflow: hidden;
+    margin: 20px 40px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    font-weight: 600;
+    img {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 15px;
+    }
+    &__tag{
+      position: absolute;
+      transform: rotate(-45deg);
+      top: 20px;
+      left: -31px;
+      background: #ffa37b;
+      color: white;
+      text-align: center;
+      width: 135px;
+      line-height: 30px;
+      height: 30px;
+    }
+  }
+}
+
+.sort {
+  justify-content: center;
+
+  button {
+    margin: 0 15px;
+    background: white;
+    color: #216ba5;
+    border-color: #216ba5;
+  }
+  .btn--selected {
+    background: chocolate;
+    color: white;
   }
 }

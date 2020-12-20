@@ -38,7 +38,7 @@ const Rooms = () => {
       service
         .get("/rooms", { params: { filter: { hotelId: hotels[0]._id } } })
         .then((res) => {
-          setRooms(res.data);
+          setRooms(res.data.rooms);
           setLoading(false);
         })
         .catch((err) => {

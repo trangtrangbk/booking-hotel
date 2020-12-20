@@ -19,6 +19,10 @@ const NAV_ITEMS = [
   {
     name: "Khách sạn",
     path: "/hotels",
+  },
+  {
+    name: "Phòng",
+    path: "/rooms",
   }
 ];
 

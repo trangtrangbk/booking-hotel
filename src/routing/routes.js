@@ -6,6 +6,7 @@ const Rooms = React.lazy(() => import("../views/Pages/Rooms"));
 const Room = React.lazy(() => import("../views/Pages/Room"));
 const Reservation = React.lazy(() => import("../views/Pages/Reservation"));
 const Rating = React.lazy(() => import("../views/Pages/Rating"));
+const RoomList = React.lazy(() => import("../views/Pages/RoomList"));
 
 const routes = [
   {
@@ -14,6 +15,13 @@ const routes = [
     path: "/",
     name: "Homepage",
     component: Dashboard,
+  },
+  {
+    id: 5,
+    exact: true,
+    path: "/rooms",
+    name: "RoomList",
+    component: RoomList,
   },
   {
     id: 1,

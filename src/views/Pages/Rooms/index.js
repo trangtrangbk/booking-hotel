@@ -14,7 +14,7 @@ const Rooms = (props) => {
   const { rooms, sending } = useSelector((store) => store.rooms);
   const [hotel, setHotel] = useState({});
   const { hotelId } = props.match.params;
-  const [limit, set_limit] = useState(2);
+  const [limit, set_limit] = useState(6);
   const dispatch = useDispatch();
   const history = useHistory();
   const [reviews, set_reviews] = useState([]);
