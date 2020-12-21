@@ -56,7 +56,7 @@ const Information = () => {
     return result.map((i) => i.imageUrl[0].downloadURL);
   };
 
-  const onLưu = (e) => {
+  const onSave = (e) => {
     e.preventDefault();
     set_loading(true);
     handleFireBaseUpload()
@@ -100,7 +100,7 @@ const Information = () => {
   return (
     <div className="tab-component">
       <div className="tab__content">
-        <form className="card profile_card" onSubmit={onLưu}>
+        <form className="card profile_card" onSubmit={onSave}>
           <div className="row">
             {avatar ? (
               <div className="uploadPictureContainer">

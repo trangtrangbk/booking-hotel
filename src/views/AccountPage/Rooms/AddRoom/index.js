@@ -95,6 +95,7 @@ const AddRoom = ({ show, hotelId, handleClose, onAddSuccess }) => {
         service
           .post("/rooms", params)
           .then((res) => {
+            setLoading(false);
             onAddSuccess(res.data);
             handleClose();
           })

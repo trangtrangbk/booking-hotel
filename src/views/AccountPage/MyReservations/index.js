@@ -146,13 +146,15 @@ const MyReservations = () => {
           <td>{moment(_item.checkOut).format("DD/MM/YYYY")}</td>
           <td>{diffDays(moment(_item.checkIn), moment(_item.checkOut))}</td>
           <td>
-            <SmallCard
+           {
+           _item.status==='canceled' && 
+           <SmallCard
               background={mappingStatus(_item.status).bg}
               color={mappingStatus(_item.status).color}
               style ={{margin: "auto"}}
             >
               <span className="status-label">{_item.status}</span>
-            </SmallCard>
+            </SmallCard>}
           </td>
           <td>{moment(_item.created).format("DD/MM/YYYY")}</td>
         </tr>

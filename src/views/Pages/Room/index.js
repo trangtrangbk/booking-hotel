@@ -13,17 +13,22 @@ import { mappingAmenity } from "../../../utils/amenities";
 import Pin from "../../../assets/icons/pin.svg";
 import { randomString } from "../../../utils/mathUtil";
 import NotificationManager from "react-notifications/lib/NotificationManager";
-import Calendar from './Calendar';
+import Calendar from "./Calendar";
 
 const Room = (props) => {
   let history = useHistory();
   const dispatch = useDispatch();
+  const { reservation } = useSelector((store) => store.reservations);
   const [hotel, setHotel] = useState({});
   const [room, setRoom] = useState({});
   const { hotelId, roomId } = props.match.params;
   const [loading, setLoading] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    reservation ? reservation.checkIn : new Date()
+  );
+  const [endDate, setEndDate] = useState(
+    reservation ? reservation.checkOut : new Date()
+  );
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
@@ -41,6 +46,8 @@ const Room = (props) => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setAddress(user.address);
+      setPhone(user.phone);
     }
   }, [user]);
   const fetchHotel = () => {
@@ -166,7 +173,7 @@ const Room = (props) => {
                   <div className="col-md-6 no-padding">
                     <label>Không gian</label>
                     <span>
-                    Diện tích: {room.area} m <sup>2</sup>
+                      Diện tích: {room.area} m <sup>2</sup>
                     </span>
                   </div>
                   <div className="col-md-6 no-padding">
@@ -188,7 +195,7 @@ const Room = (props) => {
               </div>
 
               <div className="col-md-5">
-                <Calendar room = {room}/>
+                <Calendar room={room} />
                 <form className="booking-form" onSubmit={handleSubmit}>
                   <div className="booking-form__head">Tạo đơn đặt phòng</div>
                   <div className="booking-form__main">
@@ -274,7 +281,7 @@ const Room = (props) => {
                               {room.price} $
                             </span>
                           </span>{" "}
-                          x {diffDays(startDate, endDate)}{" "}ngày
+                          x {diffDays(startDate, endDate)} ngày
                         </div>
                         <div>
                           = {room.price * diffDays(startDate, endDate)} $
@@ -287,7 +294,7 @@ const Room = (props) => {
                         className="book_button cursor_pointer"
                         type="submit"
                       >
-                        Đặt phòng 
+                        Đặt phòng
                       </button>
                     </div>
                   </div>

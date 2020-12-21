@@ -11,7 +11,7 @@ const Password = () => {
   const [new_pass, set_new_pass] = useState("");
   const [loading, set_loading] = useState(false);
   const dispatch = useDispatch();
-  const onLưu = (e) => {
+  const onSave = (e) => {
     e.preventDefault();
     set_loading(true);
     service
@@ -38,7 +38,7 @@ const Password = () => {
   return (
     <div className="tab-component">
       <div className="tab__content">
-        <form className="card profile_card" onSubmit={onLưu}>
+        <form className="card profile_card" onSubmit={onSave}>
           <div className="row">
             <label>Mật khẩu cũ</label>
             <TextField

@@ -138,7 +138,7 @@ const Dashboard = () => {
                 {stat.loading ? (
                   <span>Loading...</span>
                 ) : (
-                  Numeral(stat.ratings?.length).format("0")
+                  Numeral(stat.ratings?.length).format("0.0")
                 )}{" "}
               </div>
             </div>
@@ -156,7 +156,7 @@ const Dashboard = () => {
                 {stat.loading ? (
                   <span>Loading...</span>
                 ) : (
-                  Numeral(stat.revenue).format("0 $")
+                  Numeral(stat.revenue).format("1,0.0 $")
                 )}{" "}
               </div>
             </div>
@@ -166,7 +166,7 @@ const Dashboard = () => {
       <div className="row mb-5">
         <div
           className="col-md-5"
-          style={{ padding: "20px", height: "100%", overflow: "auto" }}
+          style={{ padding: "20px", height: "100%", overflow: "auto", maxHeight: "500px" }}
         >
           <h3 className="mb-3">Đánh giá</h3>
           {stat.loading ? (

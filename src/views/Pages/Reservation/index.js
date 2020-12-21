@@ -6,8 +6,6 @@ import service from "../../../service/service";
 import { Tick } from "react-crude-animated-tick";
 import { resetReservation } from "../../../redux/reducers/reservations/actions";
 import { useHistory } from "react-router-dom";
-import socketIOClient from "socket.io-client";
-const socket = socketIOClient("http://localhost:3006");
 
 const Reservation = () => {
   const { reservation } = useSelector((store) => store.reservations);
@@ -212,12 +210,6 @@ const Payment = ({ reservation, onPrevious, onNext }) => {
       .post("/reservations", reservation)
       .then((res) => {
         setLoading(false);
-        // socket.emit("push-notif", {
-        //   title : "You have a new reservation",
-        //   type : "new",
-        //   message : "A new reservation have been create. Please check and make a confirmation",
-        //   link : "http://localhost:3000/dashboard",
-        // })
         service
           .post("/reservations/mail", reservation)
           .then((res) => res)
@@ -246,13 +238,19 @@ const Payment = ({ reservation, onPrevious, onNext }) => {
           </strong>
         </span>
       </div>
-      <div className="payment">
-        <PaypalBtn
-          amount={(reservation.cost * (reservation.room.prepay || 0)) / 100}
-          currency={"USD"}
-          onSuccess={paymentHandler}
-        />
-      </div>
+      {reservation.room.prepay === 0 || !reservation.room.prepay ? (
+        <Button onClick={paymentHandler} style={{ width: "100px" }}>
+          Tạo đơn
+        </Button>
+      ) : (
+        <div className="payment">
+          <PaypalBtn
+            amount={(reservation.cost * (reservation.room.prepay || 0)) / 100}
+            currency={"USD"}
+            onSuccess={paymentHandler}
+          />
+        </div>
+      )}
       <div
         className="row justify-flex-start"
         style={{ maxWidth: "1300px", margin: "20px auto" }}

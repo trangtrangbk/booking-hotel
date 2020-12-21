@@ -96,6 +96,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
           .put(`/rooms/${room._id}`, params)
           .then((res) => {
             onEditSuccess(res.data);
+            setLoading(false);
             handleClose();
           })
           .catch((err) => {
@@ -111,10 +112,7 @@ const EditRoom = ({ room, show, hotelId, handleClose, onEditSuccess }) => {
   };
 
   const handleFireBaseUpload = async () => {
-    if (picture.length === 0) {
-      setMsg("Please fill all fields");
-      return;
-    }
+    
     let result = await Promise.all(
       picture.map((el) => {
         return new Promise((resolve, reject) => {

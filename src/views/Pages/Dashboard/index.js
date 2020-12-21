@@ -12,9 +12,9 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import service from "../../../service/service";
+import { setReservation } from "../../../redux/reducers/reservations/actions";
 
 const Dashboard = () => {
-
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [filtered_hotels, set_filtered_hotels] = useState(null);
@@ -26,6 +26,14 @@ const Dashboard = () => {
     dispatch(fetchListHotels());
   }, []);
 
+  useEffect(() => {
+    dispatch(
+      setReservation({
+        checkIn: startDate,
+        checkOut: endDate,
+      })
+    );
+  }, [startDate, endDate]);
   const onGetAvailable = () => {
     set_loading(true);
     service
@@ -34,7 +42,7 @@ const Dashboard = () => {
           setting: {
             checkIn: startDate,
             checkOut: endDate,
-          }
+          },
         },
       })
       .then((res) => {
@@ -91,7 +99,7 @@ const Dashboard = () => {
                   }}
                 />
               </MuiPickersUtilsProvider>
-            </div>            
+            </div>
             <div className="welcome__block" style={{ marginTop: "38px" }}>
               <div
                 className="book_button cursor_pointer"
@@ -105,7 +113,6 @@ const Dashboard = () => {
       </div>
       {/* hotels */}
       {filtered_hotels ? (
-        
         <div className="filtered-hotels">
           {Object.keys(filtered_hotels).map((available_hotel, index) => {
             const _hotel = hotels.find((h) => h._id === available_hotel);
@@ -185,9 +192,8 @@ const Dashboard = () => {
                 </div>
               </div>
             );
-          }        
-          )}
-                  </div>
+          })}
+        </div>
       ) : (
         <div className="hotels">
           <div className="section text-center">
