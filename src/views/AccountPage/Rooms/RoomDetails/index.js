@@ -220,17 +220,6 @@ const RoomDetails = ({ hotels, room, setView = () => {}, ...props }) => {
                 >
                   <strong>Hủy bỏ</strong>
                 </Button>
-                <Button
-                  customClass="btn--block btn--primary"
-                  style={{ width: "150px" }}
-                  type="primary"
-                  disabled={updating}
-                  onClick={() =>
-                    handleUpdateReservation({ status: "confirmed" })
-                  }
-                >
-                  <strong>Xác nhận</strong>
-                </Button>
               </div>
             )}
             <ReasonModal

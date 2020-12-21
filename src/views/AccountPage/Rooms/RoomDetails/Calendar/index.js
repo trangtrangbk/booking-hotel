@@ -35,18 +35,10 @@ const RoomCalendar = ({room_reservation}) => {
         localizer={localizer}
         eventPropGetter={(event, start, end, isSelected) => {
           let newStyle = {
-            backgroundColor: "lightblue",
+            backgroundColor: "#216ba5",
             color: "white",
             border: "none",
           };
-
-          if (event.status === "waiting") {
-            newStyle.backgroundColor = "#216ba5";
-          }
-          if (event.status === "confirmed") {
-            newStyle.backgroundColor = "#ffa37b";
-          }
-
           return {
             className: "",
             style: newStyle,
